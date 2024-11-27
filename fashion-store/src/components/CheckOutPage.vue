@@ -11,19 +11,19 @@
       <router-link>SHIPPING</router-link>
       <router-link>PAYMENT</router-link>
     </nav>
-    <div class="row flex justify-between items-start">
-      <form class="form w-full mb-10">
-        <div class="col">
+    <div class="row flex justify-between items-start gap-32">
+      <form class="form mb-10 pr-5 w-full">
+        <div class="">
           <div class="col-description mt-10 mb-2">
             <h3>CONTACT INFO</h3>
           </div>
-          <div class="details w-full">
+          <div class="details">
             <input type="email" name="email" placeholder="Email" />
 
             <div class="error"></div>
           </div>
           <div class="details">
-            <input type="text" name="number" placeholder="Phone" />
+            <input type="text" name="phone" placeholder="Phone" />
 
             <div class="error"></div>
           </div>
@@ -307,30 +307,34 @@
             </datalist>
           </div>
           <div class="details">
-            <input type="text" name="states" placeholder="State/Region" />
+            <input type="text" name="state" placeholder="State/Region" />
           </div>
           <div class="details">
             <input type="text" name="address" placeholder="Address" />
           </div>
-          <div class="details">
+          <div class="details flex gap-2">
             <input type="text" name="city" placeholder="City" />
             <input type="text" name="postal" placeholder="Postal Code" />
           </div>
-          <div class="details action">
-            <button>Shipping</button>
+          <div class="details action flex justify-end text-start">
+            <button class="w-1/2 bg-otherBgFour p-2 text-start px-4">Shipping</button>
           </div>
         </div>
       </form>
-      <div class="items-in-cart">
-        <div class="col w-[450px] max-h-[600px] overflow-y-auto border-2 border-primary p-10">
-          <div class="grid grid-cols-3 gap-7 items-start">
-            <div class="image w-full">
-              <img src="../assets/images/footer.png" alt="" class="h-[150px] w-[125px]" />
+      <div class="items-in-cart w-full pl-56 mb-10">
+        <div class="col w-full max-h-[550px] overflow-y-auto border-2 border-primary p-10">
+          <div
+            v-for="product in useStore.cart"
+            :key="product.id"
+            class="grid grid-cols-3 gap-7 items-start"
+          >
+            <div class="image w-full mb-5">
+              <img :src="product.images" :alt="product.title" class="h-[150px] w-[125px]" />
             </div>
-            <div class="spec flex flex-col">
-              <small class="name">name</small>
-              <small class="color">Colour</small>
-              <small> quantity</small>
+            <div class="spec flex flex-col gap-3">
+              <small class="name mt-2 mb-2">{{ product.category.name }}</small>
+              <small class="color mt-2">Colour</small>
+              <small class="mt-7">{{ product.quantity }}</small>
             </div>
             <div class="change">
               <button>Change</button>
@@ -349,6 +353,9 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
+import { piniaStore } from '@/stores/store'
+
+const useStore = piniaStore()
 </script>
 
 
@@ -356,20 +363,26 @@ import { onMounted, ref } from 'vue'
 
 
 <style scoped>
+.details {
+  width: 100%;
+}
 .details > input {
-  width: 60%;
-  margin-bottom: 12px;
-  padding: 6px;
+  width: 100%;
+  margin-bottom: 16px;
+  padding: 7px;
   background: transparent;
   outline: solid 2px #d7d7d7;
   transition: all 0.3s ease-in-out;
 }
 .details > input::placeholder {
-  padding: 20px;
+  padding: 16px;
 }
 .details > input:hover {
-  background: #f1f1f1;
-  border-color: #c5c5c5;
+  background: #dedcdc86;
+  outline-color: #d1d1d1;
+}
+.details > input:focus {
+  outline-color: #919090;
 }
 </style>
 
