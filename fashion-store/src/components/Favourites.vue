@@ -1,5 +1,4 @@
 <template>
-  <Nav />
   <main class="pages mx-14">
     <div class="title flex items-center gap-7 border-b border-[#999] mb-5 pb-3 pt-20 w-[65%]">
       <router-link :to="{ name: 'cart' }">
@@ -11,6 +10,10 @@
         </router-link>
       </span>
     </div>
+
+    <!-- transition -->
+    <Transition></Transition>
+
     <div class="flex justify-between gap-14">
       <div class="flex justify-center">
         <div class="row grid grid-cols-2 justify-center gap-10">
