@@ -9,12 +9,11 @@ import Footer from '@/components/Footer.vue'
 
 <template>
   <div class="pages">
-    <main class="px-14">
+    <main class="px-14 max-md:px-7">
       <Hero />
       <this-week />
       <Collections />
       <OurMission />
-
       <NewDesigns />
     </main>
 

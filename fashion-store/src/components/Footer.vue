@@ -1,6 +1,6 @@
 <template>
   <div class="footer w-full mt-56">
-    <div class="row p-24 flex justify-start items-center gap-[26rem]">
+    <div class="row p-24 flex justify-start items-center gap-[26rem] max-sm:p-10 max-sm:gap-10">
       <div class="col">
         <p class="text-[.65rem]">INFO</p>
         <ul class="mt-5">
@@ -21,11 +21,11 @@
           <Logo />
         </div>
         <div class="flex items-start justify-center gap-3">
-          <h1 class="text-8xl">
+          <h1 class="text-8xl max-md:text-6xl max-sm:text-5xl">
             <span>VR</span>
             <b>XIV <br />QR</b>
           </h1>
-          <p class="mt-3 text-[.75rem]">Near-field communication</p>
+          <p class="mt-3 text-[.75rem] max-sm:text-[.6rem]">Near-field communication</p>
           <!-- / -->
         </div>
       </div>

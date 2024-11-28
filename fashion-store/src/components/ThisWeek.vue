@@ -1,13 +1,13 @@
 <template>
   <section class="new_week w-full">
     <div class="title flex justify-between items-end">
-      <h1 class="text-6xl">
+      <h1 class="text-6xl max-md:text-4xl">
         <b>
           NEW <br />
           THIS WEEK
         </b>
       </h1>
-      <button class="see-all translate-x-5">See All</button>
+      <button class="see-all translate-x-3 max-md:translate-x-0">See All</button>
     </div>
     <div class="container mt-7 mb-5">
       <div v-if="useStore.isLoading" class="carousel">
@@ -224,7 +224,7 @@
 
       <!-- carousel -->
 
-      <div class="btns flex justify-center items-center gap-5 mt-10">
+      <div class="btns flex justify-center items-center gap-5 mt-10 max-md:hidden">
         <button class="btn border border-gray-400 p-2" @click="scrollPrevious">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -319,6 +319,13 @@ onMounted(() => {
   z-index: 1;
   flex: 0 0 100%;
 }
+
+@media (max-width: 768px) {
+  .card {
+    width: 300px;
+  }
+}
+
 .card-preview {
   transition: all 0.4s ease-out;
 }

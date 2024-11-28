@@ -3,39 +3,40 @@
     class="nav-bar fixed right-0 left-0 top-0 w-full z-10"
     :class="isScrolling ? 'nav-active' : ''"
   >
-    <header class="flex justify-between items-center text-center px-14 pt-7 pb-7">
-      <nav class="flex justify-center gap-12 items-center text-center">
-        <!-- menu svg-->
-        <div
-          class="menu hover:bg-[#ddd] hover:scale-105 p-1 rounded-full transition-all"
-          @click="toggleMenu"
-        >
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-            <g id="SVGRepo_iconCarrier">
-              <path
-                d="M4 6H20M4 12H14M4 18H9"
-                stroke="none"
-                class="stroke-[#1e1e1e] hover:stroke-black stroke-width-[1] hover:stroke-width-[3] transition-all"
-                stroke-width="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></path>
-            </g>
-          </svg>
-        </div>
-
+    <header
+      class="w-full flex justify-between items-center text-center px-14 pt-7 pb-7 max-md:px-5"
+    >
+      <!-- menu svg-->
+      <div
+        class="menu hover:bg-[#ddd] hover:scale-105 p-1 rounded-full transition-all"
+        @click="toggleMenu"
+      >
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M4 6H20M4 12H14M4 18H9"
+              stroke="none"
+              class="stroke-[#1e1e1e] hover:stroke-black stroke-width-[1] hover:stroke-width-[3] transition-all"
+              stroke-width="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </g>
+        </svg>
+      </div>
+      <nav class="flex justify-center gap-12 items-center text-center max-md:hidden">
         <RouterLink :to="{ name: 'home' }">Home</RouterLink>
         <RouterLink :to="{ name: 'collections' }">Collections</RouterLink>
         <RouterLink :to="{ name: 'new' }">New</RouterLink>
       </nav>
       <div class="logo"><Logo /></div>
       <nav>
-        <ul class="flex justify-center items-center text-center gap-10">
+        <ul class="flex justify-center items-center text-center gap-10 max-md:gap-2">
           <router-link :to="{ name: 'favourite' }">
             <li
-              class="heart bg-bgColorSecondary h-[50px] w-[50px] flex justify-center items-center rounded-full shadow-inner-[#000]"
+              class="heart bg-bgColorSecondary h-[50px] w-[50px] flex justify-center items-center rounded-full shadow-inner-[#000] max-md:hidden"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -57,7 +58,7 @@
           <router-link :to="{ name: 'cart' }">
             <li class="cart-spread flex items-center justify-center text-center">
               <span
-                class="cart-text text-textPrimaryTwo bg-bgColorSecondary w-[90px] h-[50px] flex justify-center items-center rounded-[1.5rem] translate-x-1"
+                class="cart-text text-textPrimaryTwo bg-bgColorSecondary w-[90px] h-[50px] flex justify-center items-center rounded-[1.5rem] translate-x-1 max-md:hidden"
               >
                 Cart
               </span>
@@ -179,6 +180,15 @@ const isMenuClosed = () => {
   box-shadow: 0px 2px 4px #ccc;
 }
 
+@media (max-width: 768px) {
+  .nav-bar {
+    width: 100%;
+  }
+  .nav-bar.nav-active {
+    background: transparent;
+    box-shadow: none;
+  }
+}
 /* svgs configure */
 .menu > svg {
   width: 38px;

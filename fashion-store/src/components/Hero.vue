@@ -1,31 +1,35 @@
 <template>
-  <main>
+  <main class="">
     <ul>
       <li>MEN</li>
       <li>WOMEN</li>
       <li>KIDS</li>
     </ul>
     <div class="search-container mt-3 relative">
-      <label for="search" class="search-icon">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-          <g id="SVGRepo_iconCarrier">
-            <path
-              d="M20 20L15.8033 15.8033M18 10.5C18 6.35786 14.6421 3 10.5 3C6.35786 3 3 6.35786 3 10.5C3 14.6421 6.35786 18 10.5 18C14.6421 18 18 14.6421 18 10.5Z"
-              stroke="#1e1e1e"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-          </g>
-        </svg>
-      </label>
+      <svg
+        class="absolute w-6 h-6 left-4 top-[50%] translate-y-[-50%] stroke-[#1e1e1e]"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            d="M20 20L15.8033 15.8033M18 10.5C18 6.35786 14.6421 3 10.5 3C6.35786 3 3 6.35786 3 10.5C3 14.6421 6.35786 18 10.5 18C14.6421 18 18 14.6421 18 10.5Z"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </g>
+      </svg>
+
       <input
         type="text"
         name="search"
         autocorrect="on"
-        class="input-feild p-2 text-sm w-[400px] h-[50px] border bg-[#d9d9d9]"
+        class="input-feild bg-[#ddd] p-2 text-sm w-1/2 h-[50px] rounded hover:bg-[#cccccc92] hover:border-2 hover:border-[#999] focus:outline-[#777] transition max-md:w-full"
       />
       <label for="search" class="search-text">
         <span> Search </span>
@@ -69,16 +73,19 @@
         </div>
       </div>
       <div v-else>
-        <div v-if="useStore.isReady" class="row flex justify-center gap-5 w-full">
+        <div
+          v-if="useStore.isReady"
+          class="row flex justify-center gap-5 w-full max-md:flex-col-reverse max-md:gap-1"
+        >
           <div class="col">
-            <h1 class="text-6xl">
+            <h1 class="text-6xl max-md:hidden">
               <b>
                 NEW <br />
                 COLLECTION
               </b>
             </h1>
-            <p>Summer <br />2024</p>
-            <div class="flex items-center gap-2 mt-52">
+            <p class="max-md:hidden">Summer <br />2024</p>
+            <div class="flex items-center gap-2 mt-52 max-md:mt-10">
               <button class="go-to-shop w-full p-2 bg-[#d9d9d9] text-start gap-5">
                 <span>Go To Shop</span>
                 <svg
@@ -105,7 +112,7 @@
                   </g>
                 </svg>
               </button>
-              <div class="btns flex justify-center items-center gap-2">
+              <div class="btns flex justify-center items-center gap-2 max-md:hidden">
                 <button class="border border-gray-400 p-2 cursor-default">
                   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -155,7 +162,11 @@
                 v-for="product in useStore.products.slice(0, 2)"
                 :key="product.id"
               >
-                <img :src="product.images" :alt="product.title" class="w-full h-[425px] shadow" />
+                <img
+                  :src="product.images"
+                  :alt="product.title"
+                  class="w-full h-[425px] max-md:h-[300px] shadow"
+                />
               </article>
             </div>
           </div>
@@ -175,20 +186,12 @@ import { piniaStore } from '@/stores/store'
 const useStore = piniaStore()
 </script>
 
-<style>
-.search-icon {
-  position: absolute;
-  transform: translate(10px, 50%);
-}
-.search-icon > svg {
-  width: 25px;
-  width: 25px;
-}
-
+<style >
 .search-text {
   position: absolute;
   transform: translate(-80px, 50%);
 }
+
 .search-text > span {
   color: #8a8a8a;
 }

@@ -36,4 +36,13 @@ body {
 section {
   margin-top: 10rem;
 }
+
+@media (max-width: 768px) {
+  .pages {
+    margin-top: 5rem;
+  }
+  section {
+    margin-top: 6rem;
+  }
+}
 </style>

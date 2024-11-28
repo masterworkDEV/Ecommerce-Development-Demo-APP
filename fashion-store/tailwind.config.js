@@ -8,7 +8,7 @@ export default {
       textPrimaryTwo: '#fff'
     },
     borderColor: {
-      primary: '#d7d7d7'
+      primary: '#ccc'
     },
     backgroundColor: {
       bgColorPrimary: '#f1f1f1',
@@ -18,16 +18,6 @@ export default {
       otherBgThree: '#a3a3a3',
       otherBgFour: '#ddd',
       checkOutBlue: '#1DA1F2'
-    },
-    screens: {
-      mobileSmall: '375px',
-      mobile: '576px',
-
-      mobileBig: '768px',
-
-      tablet: '992px',
-
-      laptop: '1200px'
     }
   },
   plugins: []

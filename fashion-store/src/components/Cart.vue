@@ -1,7 +1,7 @@
 <template>
-  <main class="pages mx-14">
+  <main class="pages mx-14 max-md:mx-7">
     <div
-      class="title flex justify-start items-center gap-7 border-b border-[#999] mb-5 pb-3 pt-20 w-[65%]"
+      class="title flex justify-start items-center gap-7 border-b border-[#999] mb-5 pb-3 pt-20 w-[65%] max-md:w-full max-md:border-none"
     >
       <h4 class="text-[.9rem]"><b>SHOPPING BAG</b></h4>
       <span class="favourite">
@@ -11,14 +11,20 @@
       </span>
     </div>
 
-    <div class="flex items-start justify-between max-mobile:flex-col max-mobile:gap-16 pb-10">
-      <div class="row grid grid-cols-2 justify-center gap-10 max-mobile:grid-cols-1">
-        <div class="col w-[400px]" v-for="product in useStore.cart" :key="product.id">
+    <div
+      class="flex items-start justify-between max-md:justify-center max-md:flex-col max-md:gap-16 pb-10"
+    >
+      <div class="row grid grid-cols-2 justify-center place-items-center gap-10 max-md:grid-cols-1">
+        <div
+          class="col w-[400px] max-md:w-[325px]"
+          v-for="product in useStore.cart"
+          :key="product.id"
+        >
           <div class="preview flex items-start justify-center text-center gap-5 relative">
             <img
               :src="product.images"
               :alt="product.title"
-              class="w-[325px] h-[350px] border-2 border-primary"
+              class="w-[325px] h-[350px] border-2 border-primary max-md:w-[300px]"
             />
             <div class="preview-side w-10">
               <button
@@ -124,7 +130,7 @@
       </div>
 
       <!-- row-ends -->
-      <div class="col border border-[#999] w-[325px] h-[390px] p-10">
+      <div class="col border border-[#999] w-[325px] h-[390px] max-md:w-[300px] p-10">
         <h3 class="pt-7 pb-5"><b>ORDER SUMMARY</b></h3>
         <div class="subtotal flex justify-between mb-2">
           <small> <b> Subtotal</b></small>
