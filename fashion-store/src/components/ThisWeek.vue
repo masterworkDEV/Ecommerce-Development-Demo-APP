@@ -9,7 +9,7 @@
       </h1>
       <button class="see-all translate-x-3 max-md:translate-x-0">See All</button>
     </div>
-    <div class="container mt-7 mb-5">
+    <div class="carousel-container mt-7 mb-5">
       <div v-if="useStore.isLoading" class="carousel">
         <div class="card w-full">
           <div class="movie--isloading">
@@ -146,18 +146,40 @@
       </div>
       <div v-else>
         <div class="carousel" v-if="useStore.isReady">
-          <article v-for="product in productSlides" :key="product.id" class="card">
+          <article
+            v-for="(product, index) in useStore.products.slice(2, 14)"
+            :key="index"
+            class="card"
+          >
             <div
               :style="{
                 transform: `translateX(-${slideIndex * 100}%)`
               }"
               class="card-preview relative"
             >
-              <div
-                @click="useStore.useAddToFavourite(product)"
-                class="favourite absolute right-0 bottom-0 bg-white p-3"
-              >
-                <svg viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg">
+              <div @click="useStore.useAddToFavourite(product.id)" class="favourite p-3">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  v-if="product.liked"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5C13 20.5 14 19.7294 15.0383 18.9109C17.9806 16.5914 22 14 22 9.1371C22 4.27416 16.4998 0.825464 12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371Z"
+                      fill="#e95950"
+                    ></path>
+                  </g>
+                </svg>
+                <svg
+                  v-else
+                  viewBox="0 0 24 24"
+                  class="fill-black"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                   <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                   <g id="SVGRepo_iconCarrier">
@@ -174,7 +196,7 @@
               />
               <button
                 @click="useStore.useAddToCart(product)"
-                class="add-to-cart p-[.6rem] flex bg-[#d9d9d9] justify-center items-center absolute bottom-0 left-[50%] translate-x-[-50%] opacity-70 hover:opacity-100"
+                class="add-to-cart p-[.6rem] flex bg-[#d9d9d9] justify-center items-center absolute bottom-0 left-[50%] translate-x-[-50%] opacity-70"
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -266,10 +288,6 @@ import { computed, onMounted, ref } from 'vue'
 const useStore = piniaStore()
 const slideIndex = ref(0)
 
-const productSlides = computed(() => {
-  return useStore.products.slice(6, 18)
-})
-
 const scrollNext = () => {
   const productLists = document.querySelector('.carousel')
   const buttonDirection = slideIndex.value + 1
@@ -289,21 +307,24 @@ const watchScrollPosition = () => {
   const scrollBtns = document.querySelectorAll('.btn')
   const scrollMax = productLists.scrollWidth * productLists.scrollLeft
   scrollBtns[0].style.background = productLists.scrollLeft <= 0 ? '#f1f1f1' : '#ddd'
-  scrollBtns[1].style.background = scrollMax > productLists.left ? '#f1f1f1' : '#ddd'
+  scrollBtns[1].style.background = scrollMax >= 0 ? '#f1f1f1' : '#ddd'
 }
 onMounted(() => {
   const productLists = document.querySelector('.carousel')
   productLists.addEventListener('scroll', watchScrollPosition)
 })
+
+// const isLiked = ref(false)
+const likeCount = ref(0)
 </script>
 
 <style scoped>
 /* new week */
-.new_week > .container {
+.new_week > .carousel-container {
   max-width: 3000px;
   width: 100%;
 }
-.new_week .container .carousel {
+.new_week .carousel-container .carousel {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 35px;
@@ -328,20 +349,25 @@ onMounted(() => {
 
 .card-preview {
   transition: all 0.4s ease-out;
+  overflow: hidden;
 }
+
 .card-preview:hover {
-  box-shadow: 0px 3px 9px #ccc;
   scale: 1.05;
+  box-shadow: 0px 3px 9px #ccc;
+  transform: translateY(-50px);
   transition: all 0.3s ease-in-out;
 }
 .card-preview > .favourite {
   display: none;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: #fff;
 }
 .card-preview:hover .favourite {
   display: block;
-  &:hover {
-    background: black;
-  }
+  animation: fave-animated 0.3s ease;
 }
 .card-preview > .favourite > svg {
   width: 20px;
@@ -350,9 +376,22 @@ onMounted(() => {
   fill: #000;
   transition: all ease-out 0.3s;
 }
-.favourite:hover > svg {
-  fill: #fff;
+
+@keyframes fave-animated {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
 }
+
+.card-preview:hover > .add-to-cart {
+  opacity: 1;
+}
+
 .btns .btn {
   transition: all 0.3s ease-out;
 }

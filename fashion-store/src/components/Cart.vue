@@ -225,9 +225,8 @@ const checkOutNow = () => {
   if (Object.values(useStore.cart).length < 1) {
     alert('cannot check out when store is empty, buy some products!')
     router.push('/')
-  } else if (Object.values(useStore.cart).length > 1 && !agreeToTermAndConditions.value) {
+  } else if (!agreeToTermAndConditions.value) {
     alert('Agree to terms and condition please')
-    return false
   } else {
     router.push('/check-out')
     return (useStore.navState = false)

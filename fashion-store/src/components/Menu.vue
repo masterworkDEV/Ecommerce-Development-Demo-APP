@@ -1,19 +1,23 @@
 <template>
   <div v-if="props.menuSate">
-    <div class="menu bg-bgColorPrimary w-full h-[70%] fixed top-0 left-0 right-0 z-40 shadow-2xl">
+    <div class="over-lay fixed w-full h-full bg-[rgba(255,255,255,0.5)] z-10"></div>
+
+    <div
+      class="menu bg-bgColorPrimary w-full h-[70%] fixed top-0 left-0 right-0 z-40 max-xl:h-[40%] shadow-2xl max-md:h-[50%] max-sm:h-[60%]"
+    >
       <button
         @click="emits('closeMenu')"
-        class="cancel-button cursor-default absolute right-5 top-2 p-3 rounded-full hover:bg-otherBgFour"
+        class="cursor-default absolute right-5 top-2 w-12 h-12 flex justify-center items-center max-sm:w-10 max-sm:h-10 bg-inputBg hover:bg-[#d7d7d7]"
       >
         <svg
-          fill="#1e1e1e"
-          stroke="#1e1e1e"
+          class="w-2/4 h-2/4 fill-gray-700 stroke-gray-400 hover:stroke-gray-900 hover:fill-gray-950 transition-all"
+          fill="none"
+          stroke="none"
           viewBox="0 0 32 32"
-          class="hover:fill-[#000] hover:stroke-[#000] transition-all"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_bgCarrier" stroke-width="1"></g>
           <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
           <g id="SVGRepo_iconCarrier">
             <title>times</title>
@@ -24,38 +28,83 @@
         </svg>
       </button>
       <!-- router links -->
-      <header class="flex justify-start gap-48">
+      <header class="grid grid-cols-5 text-start max-md:grid-cols-3">
         <nav>
           <ul>
             <li>
-              <router-link class="text-white" :to="{ name: 'home' }"> Home </router-link>
+              <router-link
+                @click="emits('closeMenu')"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all"
+                :to="{ name: 'home' }"
+              >
+                Home
+              </router-link>
             </li>
             <li>
-              <router-link class="text-white" :to="{ name: 'about' }"> About</router-link>
+              <router-link
+                @click="emits('closeMenu')"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all"
+                :to="{ name: 'about' }"
+              >
+                About</router-link
+              >
             </li>
             <li>
-              <router-link class="text-white" :to="{ name: 'collections' }">
+              <router-link
+                @click="emits('closeMenu')"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all"
+                :to="{ name: 'collections' }"
+              >
                 Collections
               </router-link>
             </li>
             <li>
-              <router-link class="text-white" :to="{ name: 'deals' }"> Deals </router-link>
+              <router-link
+                @click="emits('closeMenu')"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all"
+                :to="{ name: 'deals' }"
+              >
+                Deals
+              </router-link>
             </li>
           </ul>
         </nav>
         <nav>
           <ul>
             <li>
-              <router-link class="text-white" :to="{ name: 'settings' }">Settings </router-link>
+              <router-link
+                @click="emits('closeMenu')"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all"
+                :to="{ name: 'settings' }"
+                >Settings
+              </router-link>
             </li>
             <li>
-              <router-link class="text-white" :to="{ name: 'cart' }"> Cart </router-link>
+              <router-link
+                @click="emits('closeMenu')"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all"
+                :to="{ name: 'cart' }"
+              >
+                Cart
+              </router-link>
             </li>
             <li>
-              <router-link class="text-white" :to="{ name: 'favourite' }"> Favourite </router-link>
+              <router-link
+                @click="emits('closeMenu')"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all"
+                :to="{ name: 'favourite' }"
+              >
+                Favourite
+              </router-link>
             </li>
             <li>
-              <router-link class="text-white" :to="{ name: 'contact' }"> Contact</router-link>
+              <router-link
+                @click="emits('closeMenu')"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all"
+                :to="{ name: 'contact' }"
+              >
+                Contact</router-link
+              >
             </li>
           </ul>
         </nav>
@@ -80,20 +129,21 @@ nav ul {
   display: flex;
   flex-direction: column;
   text-align: start;
-  margin: 60px 60px;
+  margin: 60px 40px auto;
   border-radius: 0.1rem;
-  font-weight: 700;
-  transition: all 0.14s ease-in-out;
+  transition: all 0.025s ease;
   cursor: default;
 }
 nav ul > li {
-  padding: 30px;
+  padding: 25px;
 }
+
 nav > ul > li > a {
   padding: 15px;
-}
-nav ul li > a:hover {
-  background: #d7d7d7;
-  color: #1e1e1e;
+  font-weight: 600;
+
+  &:hover {
+    background: #d7d7d7;
+  }
 }
 </style>

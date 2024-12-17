@@ -1,31 +1,71 @@
 <template>
   <div class="footer w-full mt-56">
-    <div class="row p-24 flex justify-start items-center gap-[26rem] max-sm:p-10 max-sm:gap-10">
+    <div
+      class="row flex justify-between items-center pt-20 px-24 max-md:px-4 max-md:justify-center max-md:gap-5"
+    >
       <div class="col">
-        <p class="text-[.65rem]">INFO</p>
+        <p class="text-smallerText max-sm:text-smallestText">INFO</p>
         <ul class="mt-5">
-          <li><a href="#" class="text-[.75rem]">PRICING</a></li>
-          <li><a href="#" class="text-[.75rem]">ABOUT</a></li>
-          <li><a href="#" class="text-[.75rem]">CONTACT</a></li>
+          <li>
+            <a
+              href="#"
+              class="text-tabletText max-md:text-mobileText max-sm:text-smallerText hover:underline transition-all"
+              >PRICING</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="text-tabletText max-md:text-mobileText max-sm:text-smallerText hover:underline transition-all"
+              >ABOUT</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="text-tabletText max-md:text-mobileText max-sm:text-smallerText hover:underline transition-all"
+              >CONTACT</a
+            >
+          </li>
         </ul>
-        <p class="mt-16 text-[.65rem]">LAGUAGES</p>
+        <p class="mt-16 text-smallerText">LAGUAGES</p>
         <ul class="mt-5">
-          <li><a href="#" class="text-[.75rem]">ENG</a></li>
-          <li><a href="#" class="text-[.75rem]">ESP</a></li>
-          <li><a href="#" class="text-[.75rem]">SVE</a></li>
+          <li>
+            <a
+              href="#"
+              class="text-tabletText max-md:text-mobileText max-sm:text-smallerText hover:underline transition-all"
+              >ENG</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="text-tabletText max-md:text-mobileText max-sm:text-smallerText hover:underline transition-all"
+              >ESP</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="text-tabletText max-md:text-mobileText max-sm:text-smallerText hover:underline transition-all"
+              >SVE</a
+            >
+          </li>
         </ul>
       </div>
-      <div class="col">
-        <p class="text-[.65rem]">TECHNOLOGIES</p>
+      <div class="col mr-80 max-xl:mr-52 max-lg:mr-10 max-md:mr-0">
+        <p class="text-smallerText max-md:text-smallestText">TECHNOLOGIES</p>
         <div class="mt-10">
           <Logo />
         </div>
         <div class="flex items-start justify-center gap-3">
-          <h1 class="text-8xl max-md:text-6xl max-sm:text-5xl">
+          <h1 class="text-8xl max-lg:text-6xl max-sm:text-5xl max-smaller:text-4xl">
             <span>VR</span>
             <b>XIV <br />QR</b>
           </h1>
-          <p class="mt-3 text-[.75rem] max-sm:text-[.6rem]">Near-field communication</p>
+          <p class="mt-3 text-tabletText max-md:smallerText max-sm:text-smallestText">
+            Near-field communication
+          </p>
           <!-- / -->
         </div>
       </div>

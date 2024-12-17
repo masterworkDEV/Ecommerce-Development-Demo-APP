@@ -9,19 +9,23 @@ export const piniaStore = defineStore('counter', () => {
 
   // products display on page;
   const products = ref([])
+
   const { state, isReady, isLoading } = useAsyncState(
     axios
       .get('https://api.escuelajs.co/api/v1/products')
       .then(({ data }) => {
-        products.value = data || []
-        console.log('Fetched data:', data)
+        products.value = data.map((product) => ({ ...product, liked: false }))
+        console.log(products.value)
       })
       .catch((error) => console.log(`Something went wrong ${err}`))
   )
 
-  const cart = ref([])
-  const favourite = ref([])
+  // cart function
 
+  // state
+  const cart = ref([])
+
+  // methods
   const useAddToCart = (product) => {
     let checkAvailablity = cart.value.find((item) => item.title === product.title)
     if (checkAvailablity) {
@@ -37,14 +41,20 @@ export const piniaStore = defineStore('counter', () => {
     }))
   }
 
-  const useAddToFavourite = (product) => {
-    let checkAvailablity = favourite.value.find((item) => item.id === product.id)
-    if (checkAvailablity) {
-      alert('You already liked this product')
-      return false
-    } else {
-      return favourite.value.push({ ...product, quantity: 1 })
-    }
+  // function favourite
+  const favourite = ref([])
+
+  const useAddToFavourite = (id) => {
+    const checkAvailablity = products.value.find((inventory) => {
+      if (inventory.id === id) {
+        if ((inventory.liked = !inventory.liked)) {
+          return favourite.value.push({ ...inventory })
+        } else {
+          return (favourite.value = favourite.value.filter((item) => item.id != inventory.id))
+        }
+      }
+    })
+    return checkAvailablity
   }
 
   return {

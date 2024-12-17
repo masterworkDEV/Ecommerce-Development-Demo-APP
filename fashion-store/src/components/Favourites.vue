@@ -16,7 +16,7 @@
 
     <div class="flex justify-between gap-14">
       <div class="flex justify-center">
-        <div class="row grid grid-cols-2 justify-center gap-10">
+        <div class="row grid grid-cols-2 justify-center gap-10 max-md:grid-cols-1">
           <div v-for="fave in useStore.favourite" :key="fave.id" class="col">
             <div class="preview flex justify-center text-center gap-5 relative">
               <img

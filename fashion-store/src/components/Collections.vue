@@ -67,7 +67,7 @@
         </div>
         <div v-else>
           <div
-            class="w-full row flex justify-center items-center gap-10 max-md:gap-3"
+            class="w-full row flex justify-center items-center gap-10 max-lg:gap-5 max-md:gap-3"
             v-if="useStore.isReady"
           >
             <article
@@ -79,7 +79,7 @@
                 <img
                   :src="product.images"
                   :alt="product.title"
-                  class="w-[400px] h-[400px] border border-[#d9d9d9] max-md:w-[225px] max-md:h-[300px] max-sm:w-[110px] ma-smx:h-[200px]"
+                  class="w-[400px] h-[400px] border border-[#d9d9d9] max-lg:w-[220px] max-lg:h-[300px] max-md:w-[200px] max-md:h-[300px] max-sm:w-[110px] ma-smx:h-[200px]"
                 />
                 <button
                   @click="useStore.useAddToCart(product)"

@@ -1,13 +1,23 @@
 <template>
   <main class="">
     <ul>
-      <li>MEN</li>
-      <li>WOMEN</li>
-      <li>KIDS</li>
+      <li class="max-xl:text-sm text-textPrimary">MEN</li>
+      <li class="max-xl:text-sm text-textPrimary">WOMEN</li>
+      <li class="max-xl:text-sm text-textPrimary">KIDS</li>
     </ul>
     <div class="search-container mt-3 relative">
+      <input
+        type="text"
+        name="search"
+        autocorrect="on"
+        maxlength="50"
+        minlength="3"
+        placeholder="Search"
+        autofocus="on"
+        class="input-field bg-inputBg p-3 placeholder:pl-80 text-[1rem] w-[30%] max-xl:w-[40%] h-[50px] rounded max-md:w-full"
+      />
       <svg
-        class="absolute w-6 h-6 left-4 top-[50%] translate-y-[-50%] stroke-[#1e1e1e]"
+        class="icon absolute w-6 h-6 left-4 top-[50%] translate-y-[-50%] stroke-[#1e1e1e]"
         viewBox="0 0 24 24"
         fill="none"
         stroke="none"
@@ -24,16 +34,6 @@
           ></path>
         </g>
       </svg>
-
-      <input
-        type="text"
-        name="search"
-        autocorrect="on"
-        class="input-feild bg-[#ddd] p-2 text-sm w-1/2 h-[50px] rounded hover:bg-[#cccccc92] hover:border-2 hover:border-[#999] focus:outline-[#777] transition max-md:w-full"
-      />
-      <label for="search" class="search-text">
-        <span> Search </span>
-      </label>
     </div>
     <div class="new-collection mt-24">
       <div v-if="useStore.isLoading" class="w-full">
@@ -75,10 +75,10 @@
       <div v-else>
         <div
           v-if="useStore.isReady"
-          class="row flex justify-center gap-5 w-full max-md:flex-col-reverse max-md:gap-1"
+          class="row flex justify-center gap-5 w-full max-lg:gap-3 max-md:flex-col-reverse max-md:gap-1"
         >
           <div class="col">
-            <h1 class="text-6xl max-md:hidden">
+            <h1 class="text-6xl max-xl:text-5xl max-md:hidden">
               <b>
                 NEW <br />
                 COLLECTION
@@ -86,7 +86,7 @@
             </h1>
             <p class="max-md:hidden">Summer <br />2024</p>
             <div class="flex items-center gap-2 mt-52 max-md:mt-10">
-              <button class="go-to-shop w-full p-2 bg-[#d9d9d9] text-start gap-5">
+              <button class="go-to-shop w-full p-2 max-lg:p-1 bg-[#d9d9d9] text-start gap-5">
                 <span>Go To Shop</span>
                 <svg
                   fill="#000000"
@@ -113,7 +113,7 @@
                 </svg>
               </button>
               <div class="btns flex justify-center items-center gap-2 max-md:hidden">
-                <button class="border border-gray-400 p-2 cursor-default">
+                <button class="border border-gray-400 p-2 max-lg:p-1 cursor-default">
                   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g
@@ -132,7 +132,7 @@
                     </g>
                   </svg>
                 </button>
-                <button class="border border-gray-400 p-2 cursor-default">
+                <button class="border border-gray-400 p-2 max-lg:p-1 cursor-default">
                   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g
@@ -155,17 +155,17 @@
             </div>
           </div>
 
-          <div class="w-full">
-            <div class="w-full flex gap-10">
+          <div class="col">
+            <div class="w-full flex gap-10 max-lg:gap-5">
               <article
-                class="w-full"
+                class="w-full max-md:h-[300px] max-lg:h-[375px] max-xl:h-[395px h-[425px] ]"
                 v-for="product in useStore.products.slice(0, 2)"
                 :key="product.id"
               >
                 <img
                   :src="product.images"
                   :alt="product.title"
-                  class="w-full h-[425px] max-md:h-[300px] shadow"
+                  class="w-full max-lg:h-full shadow"
                 />
               </article>
             </div>
@@ -210,5 +210,21 @@ const useStore = piniaStore()
 .btns svg {
   width: 25px;
   height: 25px;
+}
+
+.input-field {
+  transition: all 0.5s ease;
+}
+.input-field:focus {
+  outline: #333;
+}
+.search-container:hover .icon {
+  scale: 0;
+  opacity: 0;
+}
+
+.search-container:hover .search-text {
+  scale: 0;
+  opacity: 0;
 }
 </style>
