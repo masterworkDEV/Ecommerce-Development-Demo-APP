@@ -30,39 +30,9 @@
       <div class="row flex justify-center items-center gap-10">
         <div v-if="useStore.isLoading" class="w-full">
           <div class="row flex justify-center gap-10">
-            <div class="col w-full">
-              <div class="movie--isloading">
-                <div class="loading-image h-[375px]"></div>
-                <div class="loading-content">
-                  <div class="loading-text-container">
-                    <div class="loading-main-text"></div>
-                    <div class="loading-sub-text"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col w-full">
-              <div class="movie--isloading">
-                <div class="loading-image h-[375px]"></div>
-                <div class="loading-content">
-                  <div class="loading-text-container">
-                    <div class="loading-main-text"></div>
-                    <div class="loading-sub-text"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col w-full">
-              <div class="movie--isloading">
-                <div class="loading-image h-[375px]"></div>
-                <div class="loading-content">
-                  <div class="loading-text-container">
-                    <div class="loading-main-text"></div>
-                    <div class="loading-sub-text"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <LoadingCard />
+            <LoadingCard />
+            <LoadingCard />
           </div>
         </div>
         <div v-else>
@@ -166,6 +136,7 @@
 
 <script setup>
 import { piniaStore } from '@/stores/store'
+import LoadingCard from './LoadingCard.vue'
 const useStore = piniaStore()
 </script>
 

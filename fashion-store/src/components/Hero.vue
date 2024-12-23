@@ -1,75 +1,30 @@
 <template>
-  <main class="">
+  <main>
     <ul>
       <li class="max-xl:text-sm text-textPrimary">MEN</li>
       <li class="max-xl:text-sm text-textPrimary">WOMEN</li>
       <li class="max-xl:text-sm text-textPrimary">KIDS</li>
     </ul>
-    <div class="search-container mt-3 relative">
+    <!-- <SearchItem @submit-search.prevent="handleSubmit" /> -->
+    <form @submit.prevent="searchProduct">
       <input
         type="text"
         name="search"
         autocorrect="on"
         maxlength="50"
         minlength="3"
+        role="search"
         placeholder="Search"
         autofocus="on"
+        v-model="search"
+        @change="(e) => setSearch(e)"
         class="input-field bg-inputBg p-3 placeholder:pl-80 text-[1rem] w-[30%] max-xl:w-[40%] h-[50px] rounded max-md:w-full"
       />
-      <svg
-        class="icon absolute w-6 h-6 left-4 top-[50%] translate-y-[-50%] stroke-[#1e1e1e]"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-        <g id="SVGRepo_iconCarrier">
-          <path
-            d="M20 20L15.8033 15.8033M18 10.5C18 6.35786 14.6421 3 10.5 3C6.35786 3 3 6.35786 3 10.5C3 14.6421 6.35786 18 10.5 18C14.6421 18 18 14.6421 18 10.5Z"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></path>
-        </g>
-      </svg>
-    </div>
+    </form>
     <div class="new-collection mt-24">
       <div v-if="useStore.isLoading" class="w-full">
-        <div class="row flex justify-center gap-5">
-          <div class="col w-full">
-            <div class="movie--isloading">
-              <div class="loading-image h-[365px]"></div>
-              <div class="loading-content">
-                <div class="loading-text-container">
-                  <div class="loading-main-text w-[80%]"></div>
-                  <div class="loading-sub-text w-[60%]"></div>
-                </div>
-                <div class="buttons flex gap-5">
-                  <div class="loading-btn"></div>
-                  <div class="loading-btn"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col w-full">
-            <div class="movie--isloading">
-              <div class="loading-image h-[400px]"></div>
-              <div class="loading-content">
-                <div class="loading-text-container"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col w-full">
-            <div class="movie--isloading">
-              <div class="loading-image h-[400px]"></div>
-              <div class="loading-content">
-                <div class="loading-text-container"></div>
-              </div>
-            </div>
-          </div>
+        <div class="row grid grid-cols-3 gap-10 w-full">
+          <LoadingCard v-for="card in Array(3)" :key="card" />
         </div>
       </div>
       <div v-else>
@@ -159,7 +114,9 @@
             <div class="w-full flex gap-10 max-lg:gap-5">
               <article
                 class="w-full max-md:h-[300px] max-lg:h-[375px] max-xl:h-[395px h-[425px] ]"
-                v-for="product in useStore.products.slice(0, 2)"
+                v-for="product in products.filter((item) =>
+                  item.title.toLowerCase().includes(search.toLowerCase())
+                )"
                 :key="product.id"
               >
                 <img
@@ -182,8 +139,17 @@
 
 <script setup>
 import { piniaStore } from '@/stores/store'
+import SearchItem from './SearchItem.vue'
+import LoadingCard from './LoadingCard.vue'
+import { computed, ref } from 'vue'
 
 const useStore = piniaStore()
+const search = ref('')
+const products = computed(() => useStore.products.slice(0, 2))
+
+const setSearch = (e) => {
+  return e.target.value
+}
 </script>
 
 <style >

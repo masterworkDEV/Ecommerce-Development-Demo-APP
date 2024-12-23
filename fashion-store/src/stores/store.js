@@ -1,9 +1,28 @@
 import { defineStore } from 'pinia'
-import { ref, onMounted, reactive, computed } from 'vue'
+import { ref, onMounted, reactive, computed, watch } from 'vue'
 import { useAsyncState } from '@vueuse/core'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+
 import axios from 'axios'
 
 export const piniaStore = defineStore('counter', () => {
+  const verifiedUser = ref(false)
+  const displayVerifiedUser = ref(null)
+
+  const auth = ref(null)
+  onMounted(() => {
+    auth.value = getAuth()
+    onAuthStateChanged(auth.value, (currentUser) => {
+      if (currentUser) {
+        verifiedUser.value = true
+        displayVerifiedUser.value = currentUser
+      } else {
+        verifiedUser.value = false
+        displayVerifiedUser.value = null
+      }
+    })
+  })
+
   // toggle header
   const navState = ref(true)
 
@@ -25,13 +44,12 @@ export const piniaStore = defineStore('counter', () => {
   // state
   const cart = ref([])
 
-  // methods
   const useAddToCart = (product) => {
     let checkAvailablity = cart.value.find((item) => item.title === product.title)
     if (checkAvailablity) {
       return checkAvailablity.quantity++
     } else {
-      return cart.value.push({ ...product, quantity: 1 })
+      cart.value.push({ ...product, quantity: 1 })
     }
   }
 
@@ -58,6 +76,9 @@ export const piniaStore = defineStore('counter', () => {
   }
 
   return {
+    auth,
+    verifiedUser,
+    displayVerifiedUser,
     navState,
     isLoading,
     products,

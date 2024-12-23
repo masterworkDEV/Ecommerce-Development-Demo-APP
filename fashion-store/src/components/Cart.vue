@@ -162,7 +162,7 @@
             <label class="text-[.75rem]">I agree to the Terms and Condition</label>
           </div>
           <button
-            class="action w-full flex justify-center text-center bg-otherBgFour p-3 mt-3 text-sm"
+            class="action w-full flex justify-center text-center bg-inputBg p-3 mt-3 text-sm"
             :class="
               agreeToTermAndConditions
                 ? 'checked text-textPrimaryTwo cursor-default'
@@ -174,6 +174,12 @@
           </button>
         </div>
       </div>
+    </div>
+    <div
+      v-if="agreementModal"
+      class="not-agreeing-to-our-terms-modal fixed top-10 left-[50%] right-0 translate-x-[-50%] w-80 bg-transparentBLK text-white text-center z-30 p-2 rounded-full"
+    >
+      <p>Agree to terms and Conditions</p>
     </div>
   </main>
 </template>
@@ -187,6 +193,7 @@ import { useRouter } from 'vue-router'
 const useStore = piniaStore()
 const router = useRouter()
 const agreeToTermAndConditions = ref(false)
+const agreementModal = ref(false)
 
 // states
 const subtotal = ref(null)
@@ -219,17 +226,19 @@ const calculateTotalAmount = computed(() => {
 })
 totalAmount.value = computed(() => calculateTotalAmount.value)
 
-// checkout validations
-
+// checkout funcion
 const checkOutNow = () => {
   if (Object.values(useStore.cart).length < 1) {
     alert('cannot check out when store is empty, buy some products!')
     router.push('/')
   } else if (!agreeToTermAndConditions.value) {
-    alert('Agree to terms and condition please')
+    agreementModal.value = true
+
+    setTimeout(() => {
+      agreementModal.value = false
+    }, 2000)
   } else {
     router.push('/check-out')
-    return (useStore.navState = false)
   }
 }
 </script>

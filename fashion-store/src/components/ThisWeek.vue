@@ -1,148 +1,26 @@
 <template>
-  <section class="new_week w-full">
-    <div class="title flex justify-between items-end">
+  <section>
+    <span class="flex justify-between items-end">
       <h1 class="text-6xl max-md:text-4xl">
         <b>
           NEW <br />
           THIS WEEK
         </b>
       </h1>
-      <button class="see-all translate-x-3 max-md:translate-x-0">See All</button>
-    </div>
+      <router-link :to="{ name: 'collections' }">See All</router-link>
+    </span>
     <div class="carousel-container mt-7 mb-5">
       <div v-if="useStore.isLoading" class="carousel">
-        <div class="card w-full">
-          <div class="movie--isloading">
-            <div class="loading-image h-[325px]"></div>
-            <div class="loading-content">
-              <div class="loading-text-container">
-                <div class="loading-main-text"></div>
-                <div class="loading-sub-text"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card w-full">
-          <div class="movie--isloading">
-            <div class="loading-image h-[325px]"></div>
-            <div class="loading-content">
-              <div class="loading-text-container">
-                <div class="loading-main-text"></div>
-                <div class="loading-sub-text"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card w-full">
-          <div class="movie--isloading">
-            <div class="loading-image h-[325px]"></div>
-            <div class="loading-content">
-              <div class="loading-text-container">
-                <div class="loading-main-text"></div>
-                <div class="loading-sub-text"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card w-full">
-          <div class="movie--isloading">
-            <div class="loading-image h-[325px]"></div>
-            <div class="loading-content">
-              <div class="loading-text-container">
-                <div class="loading-main-text"></div>
-                <div class="loading-sub-text"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card w-full">
-          <div class="movie--isloading">
-            <div class="loading-image h-[325px]"></div>
-            <div class="loading-content">
-              <div class="loading-text-container">
-                <div class="loading-main-text"></div>
-                <div class="loading-sub-text"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card w-full">
-          <div class="movie--isloading">
-            <div class="loading-image h-[325px]"></div>
-            <div class="loading-content">
-              <div class="loading-text-container">
-                <div class="loading-main-text"></div>
-                <div class="loading-sub-text"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card w-full">
-          <div class="movie--isloading">
-            <div class="loading-image h-[325px]"></div>
-            <div class="loading-content">
-              <div class="loading-text-container">
-                <div class="loading-main-text"></div>
-                <div class="loading-sub-text"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card w-full">
-          <div class="movie--isloading">
-            <div class="loading-image h-[325px]"></div>
-            <div class="loading-content">
-              <div class="loading-text-container">
-                <div class="loading-main-text"></div>
-                <div class="loading-sub-text"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card w-full">
-          <div class="movie--isloading">
-            <div class="loading-image h-[325px]"></div>
-            <div class="loading-content">
-              <div class="loading-text-container">
-                <div class="loading-main-text"></div>
-                <div class="loading-sub-text"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card w-full">
-          <div class="movie--isloading">
-            <div class="loading-image h-[325px]"></div>
-            <div class="loading-content">
-              <div class="loading-text-container">
-                <div class="loading-main-text"></div>
-                <div class="loading-sub-text"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card w-full">
-          <div class="movie--isloading">
-            <div class="loading-image h-[325px]"></div>
-            <div class="loading-content">
-              <div class="loading-text-container">
-                <div class="loading-main-text"></div>
-                <div class="loading-sub-text"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card w-full">
-          <div class="movie--isloading">
-            <div class="loading-image h-[325px]"></div>
-            <div class="loading-content">
-              <div class="loading-text-container">
-                <div class="loading-main-text"></div>
-                <div class="loading-sub-text"></div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <LoadingCard />
+        <LoadingCard />
+        <LoadingCard />
+        <LoadingCard />
+        <LoadingCard />
+        <LoadingCard />
+        <LoadingCard />
+        <LoadingCard />
+        <LoadingCard />
+        <LoadingCard />
       </div>
       <div v-else>
         <div class="carousel" v-if="useStore.isReady">
@@ -159,27 +37,32 @@
             >
               <div @click="useStore.useAddToFavourite(product.id)" class="favourite p-3">
                 <svg
+                  v-if="product.liked"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  v-if="product.liked"
                 >
                   <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke="#c91818"
+                    stroke-width="0.768"
+                  >
+                    <path
+                      d="M2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5C13 20.5 14 19.7294 15.0383 18.9109C17.9806 16.5914 22 14 22 9.1371C22 4.27416 16.4998 0.825464 12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371Z"
+                      fill="#c91818"
+                    ></path>
+                  </g>
                   <g id="SVGRepo_iconCarrier">
                     <path
                       d="M2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5C13 20.5 14 19.7294 15.0383 18.9109C17.9806 16.5914 22 14 22 9.1371C22 4.27416 16.4998 0.825464 12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371Z"
-                      fill="#e95950"
+                      fill="#c91818"
                     ></path>
                   </g>
                 </svg>
-                <svg
-                  v-else
-                  viewBox="0 0 24 24"
-                  class="fill-black"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+                <svg v-else viewBox="0 0 24 24" fill="#000" xmlns="http://www.w3.org/2000/svg">
                   <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                   <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                   <g id="SVGRepo_iconCarrier">
@@ -192,7 +75,7 @@
               <img
                 :src="product.images"
                 :alt="product.category.name"
-                class="w-[325px] h-[325px] border-2 border-[#e1e1e1]"
+                class="w-[325px] h-[325px] border-2 border-primary"
               />
               <button
                 @click="useStore.useAddToCart(product)"
@@ -285,6 +168,8 @@
 <script setup>
 import { piniaStore } from '@/stores/store'
 import { computed, onMounted, ref } from 'vue'
+import LoadingCard from './LoadingCard.vue'
+
 const useStore = piniaStore()
 const slideIndex = ref(0)
 
@@ -309,28 +194,29 @@ const watchScrollPosition = () => {
   scrollBtns[0].style.background = productLists.scrollLeft <= 0 ? '#f1f1f1' : '#ddd'
   scrollBtns[1].style.background = scrollMax >= 0 ? '#f1f1f1' : '#ddd'
 }
+
 onMounted(() => {
   const productLists = document.querySelector('.carousel')
   productLists.addEventListener('scroll', watchScrollPosition)
 })
 
-// const isLiked = ref(false)
 const likeCount = ref(0)
 </script>
 
-<style scoped>
-/* new week */
-.new_week > .carousel-container {
+<style>
+.carousel-container {
   max-width: 3000px;
   width: 100%;
 }
-.new_week .carousel-container .carousel {
+
+.carousel-container .carousel {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 35px;
   overflow-x: auto;
   transition: transform 0.3s ease;
 }
+
 .carousel::-webkit-scrollbar {
   display: none;
 }
@@ -351,12 +237,10 @@ const likeCount = ref(0)
   transition: all 0.4s ease-out;
   overflow: hidden;
 }
-
 .card-preview:hover {
-  scale: 1.05;
   box-shadow: 0px 3px 9px #ccc;
-  transform: translateY(-50px);
-  transition: all 0.3s ease-in-out;
+  transform: translateY(-20px);
+  transition: all 0.2s ease-in-out;
 }
 .card-preview > .favourite {
   display: none;
@@ -369,17 +253,10 @@ const likeCount = ref(0)
   display: block;
   animation: fave-animated 0.3s ease;
 }
-.card-preview > .favourite > svg {
-  width: 20px;
-  height: 20px;
-  rotate: -45deg;
-  fill: #000;
-  transition: all ease-out 0.3s;
-}
 
 @keyframes fave-animated {
   from {
-    transform: translateY(10px);
+    transform: translateX(40px);
     opacity: 0;
   }
   to {
@@ -388,10 +265,37 @@ const likeCount = ref(0)
   }
 }
 
+.card-preview > .favourite > svg {
+  width: 20px;
+  height: 20px;
+  rotate: -45deg;
+  fill: #000;
+  transition: all ease-out 0.3s;
+  animation: fave-svg-animated 0.25s ease-in-out;
+}
+
+@keyframes fave-svg-animated {
+  0% {
+    scale: 0.5;
+  }
+  25% {
+    scale: 0.9;
+  }
+  50% {
+    scale: 1.1;
+  }
+  75% {
+    scale: 1.3;
+  }
+  100% {
+    scale: 1;
+  }
+}
+/* ends */
+
 .card-preview:hover > .add-to-cart {
   opacity: 1;
 }
-
 .btns .btn {
   transition: all 0.3s ease-out;
 }

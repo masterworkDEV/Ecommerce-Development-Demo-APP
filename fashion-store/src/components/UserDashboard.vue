@@ -1,6 +1,6 @@
 <template>
   <RouterView v-slot="{ Component }">
-    <Transition name="fade">
+    <Transition name="slide">
       <component :is="Component" />
     </Transition>
   </RouterView>
@@ -11,13 +11,13 @@
 </script>
 
 <style>
-.fade-enter-active,
-.fade-leave-active {
+.slide-enter-active,
+.slide-leave-active {
   transition: all 0.5s ease;
 }
-.fade-enter-from,
-.fade-leave-to {
+.slide-enter-from,
+.slide-leave-to {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateX(30px);
 }
 </style>

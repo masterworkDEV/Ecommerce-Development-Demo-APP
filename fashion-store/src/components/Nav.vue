@@ -131,21 +131,34 @@
                 ></path>
               </g>
             </svg>
+
             <div
               v-if="checkUser"
               class="user-state bg-bgColorPrimary w-[200px] h-[120px] p-5 absolute top-16 right-0 rounded-sm shadow-2xl border border-[#fafafa]"
             >
-              <div class="login">
-                <a href="/auth/login">
-                  <button class="bg-bgColorSecondary text-textPrimaryTwo w-full p-2 rounded">
-                    Login
-                  </button>
-                </a>
+              <div class="verified" v-if="useStore.verifiedUser">
+                <p>{{ useStore.displayVerifiedUser.email }}</p>
+
+                <button
+                  class="bg-bgColorSecondary text-textPrimaryTwo w-full p-2 rounded"
+                  @click="logoutUser"
+                >
+                  Log Out
+                </button>
               </div>
-              <div class="sign-up mt-3">
-                <router-link :to="{ name: 'sign-up' }">
-                  <h1 class="text-black underline text-lg">Sign-up</h1>
-                </router-link>
+              <div class="unverified" v-else>
+                <div class="login">
+                  <a href="/auth/login">
+                    <button class="bg-bgColorSecondary text-textPrimaryTwo w-full p-2 rounded">
+                      Login
+                    </button>
+                  </a>
+                </div>
+                <div class="sign-up mt-3">
+                  <router-link :to="{ name: 'sign-up' }">
+                    <h1 class="text-black underline text-lg">Sign-up</h1>
+                  </router-link>
+                </div>
               </div>
             </div>
           </div>
@@ -159,11 +172,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import Logo from './Logo.vue'
 import MenuModal from './Menu.vue'
 import { useRouter } from 'vue-router'
 import { useRoute } from 'vue-router'
+import { piniaStore } from '@/stores/store'
+import { getAuth, signOut } from 'firebase/auth'
+
+const useStore = piniaStore()
 
 const checkUser = ref(null)
 const isLoginModal = ref(false)
@@ -194,6 +211,17 @@ const toggleMenu = () => {
 
 const isMenuClosed = () => {
   menuState.value = null
+}
+
+const logoutUser = async () => {
+  await signOut(useStore.auth)
+    .then((data) => {
+      console.log(data)
+      router.push('/auth/login')
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 </script>
 

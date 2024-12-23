@@ -21,9 +21,10 @@
           Unlock a world of convineience and tailored experiences by logging in today. <br />Your
           journey begins here.
         </p>
-        <form class="w-full mt-10 flex flex-col gap-5">
+        <form class="w-full mt-10 flex flex-col gap-5" @submit.prevent="handleSignIn">
           <div class="details">
             <input
+              v-model="email"
               type="text"
               name="email"
               placeholder="E-mail"
@@ -32,6 +33,7 @@
           </div>
           <div class="details">
             <input
+              v-model="password"
               type="password"
               name="password"
               placeholder="password"
@@ -41,10 +43,13 @@
           <p class="underline text-sm">Forgot your password?</p>
           <div class="details-action mt-5">
             <button class="p-3 bg-bgColorSecondary rounded text-white max-sm:w-full">
-              Sign In
+              {{ isLoading ? 'Loading...' : 'Sign In' }}
             </button>
           </div>
-          <p class="text-sm">New customer ? <span class="underline">Create anaccount</span></p>
+          <p class="text-sm">
+            <b>New customer ?</b>
+            <router-link :to="{ name: 'sign-up' }" class="underline">Create anaccount</router-link>
+          </p>
         </form>
       </div>
 
@@ -59,6 +64,34 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const email = ref('')
+const password = ref('')
+const isLoading = ref(false)
+
+const handleSignIn = async () => {
+  isLoading.value = true
+  const auth = await getAuth()
+  signInWithEmailAndPassword(auth, email.value, password.value)
+    .then((data) => {
+      isLoading.value = false
+      router.push('/')
+      alert(`Welcome back ${data.user.email}`)
+    })
+    .catch((error) => {
+      isLoading.value = false
+      const errorBlock = {
+        invalidEmail: 'auth/invalid-email',
+        userNotFound: 'auth/user-not-found',
+        wrongPassword: 'auth/invalid-credential'
+      }
+      console.log(error.code)
+    })
+}
 </script>
 
 <style scoped>
