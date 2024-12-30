@@ -1,5 +1,5 @@
 <template>
-  <div class="pages w-full px-14 max-sm:px-7">
+  <section class="pages w-full px-14 max-sm:px-7">
     <ul class="flex items-center gap-3">
       <li class="text-sm underline">
         <a href="/">
@@ -31,7 +31,6 @@
               placeholder="E-mail"
               class="w-full p-3 bg-inputBg text-[1rem] rounded"
             />
-            <small v-if="erroMSG">{{ message }}</small>
           </div>
           <div class="details">
             <input
@@ -43,7 +42,6 @@
               class="w-full p-3 bg-inputBg text-[1rem] rounded"
             />
           </div>
-          <small v-if="erroMSG">{{ message }}</small>
 
           <div class="details">
             <input
@@ -55,7 +53,6 @@
               class="w-full p-3 bg-inputBg text-[1rem] rounded"
             />
           </div>
-          <small v-if="erroMSG">{{ message }}</small>
 
           <div class="details-action mt-5">
             <button
@@ -101,7 +98,7 @@
         />
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup>
@@ -155,8 +152,6 @@ const validateForm = () => {
   }
   return
 }
-
-console.log(email.value, password.value, confirmPassword.value)
 
 const handleSubmit = () => {
   erroMSG.value = false

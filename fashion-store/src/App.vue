@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav v-if="useStore.navState" />
+    <Header v-if="useStore.navState" />
     <VerifiedUser v-if="useStore.verifiedUser" />
     <GuestUser v-else />
   </div>
@@ -9,7 +9,7 @@
 
 <script setup>
 import { piniaStore } from './stores/store'
-import Nav from './components/Nav.vue'
+import Header from './components/Header/Header.vue'
 import VerifiedUser from './components/UserDashboard.vue'
 import GuestUser from './components/GuestUser.vue'
 

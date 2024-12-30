@@ -29,14 +29,15 @@ export const piniaStore = defineStore('counter', () => {
   // products display on page;
   const products = ref([])
 
+  const API_URL = 'https://api.escuelajs.co/api/v1/products'
   const { state, isReady, isLoading } = useAsyncState(
     axios
-      .get('https://api.escuelajs.co/api/v1/products')
+      .get(API_URL)
       .then(({ data }) => {
         products.value = data.map((product) => ({ ...product, liked: false }))
         console.log(products.value)
       })
-      .catch((error) => console.log(`Something went wrong ${err}`))
+      .catch((error) => console.log(error))
   )
 
   // cart function

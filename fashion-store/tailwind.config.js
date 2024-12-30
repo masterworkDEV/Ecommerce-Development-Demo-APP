@@ -1,14 +1,23 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,vue,jsx,tsx}'],
+
   theme: {
+    fontFamily: {
+      primary: ' "Ubuntu", serif'
+    },
     extend: {
       fontSize: {
-        computerText: '1rem',
-        tabletText: '.75rem',
-        mobileText: '.65rem',
-        smallerText: '.6rem',
-        smallestText: '.5rem'
+        h1: '3rem',
+        h2: '2.5rem',
+        h3: '2rem',
+        h4: '1.75rem',
+        h5: '1.5rem',
+        normal: '1rem',
+        small: '.75rem',
+        smaller: '.65rem',
+        smallest: '.6rem',
+        xSmall: '.5rem'
       },
       colors: {
         textPrimary: '#1e1e1e',

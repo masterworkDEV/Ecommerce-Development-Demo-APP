@@ -34,7 +34,7 @@
             <li>
               <router-link
                 @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-primary"
                 :to="{ name: 'home' }"
               >
                 Home
@@ -43,7 +43,7 @@
             <li>
               <router-link
                 @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-primary"
                 :to="{ name: 'about' }"
               >
                 About</router-link
@@ -52,7 +52,7 @@
             <li>
               <router-link
                 @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-primary"
                 :to="{ name: 'collections' }"
               >
                 Collections
@@ -61,7 +61,7 @@
             <li>
               <router-link
                 @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-primary"
                 :to="{ name: 'deals' }"
               >
                 Deals
@@ -74,7 +74,7 @@
             <li>
               <router-link
                 @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-primary"
                 :to="{ name: 'settings' }"
                 >Settings
               </router-link>
@@ -82,7 +82,7 @@
             <li>
               <router-link
                 @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-primary"
                 :to="{ name: 'cart' }"
               >
                 Cart
@@ -91,7 +91,7 @@
             <li>
               <router-link
                 @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-primary"
                 :to="{ name: 'favourite' }"
               >
                 Favourite
@@ -100,7 +100,7 @@
             <li>
               <router-link
                 @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-primary"
                 :to="{ name: 'contact' }"
               >
                 Contact</router-link

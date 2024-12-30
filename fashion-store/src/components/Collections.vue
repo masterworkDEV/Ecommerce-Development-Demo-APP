@@ -28,11 +28,9 @@
     </div>
     <div class="collections-container">
       <div class="row flex justify-center items-center gap-10">
-        <div v-if="useStore.isLoading" class="w-full">
+        <div v-if="useStore.isLoading">
           <div class="row flex justify-center gap-10">
-            <LoadingCard />
-            <LoadingCard />
-            <LoadingCard />
+            <p>Loading please wait....</p>
           </div>
         </div>
         <div v-else>
@@ -141,8 +139,6 @@ const useStore = piniaStore()
 </script>
 
 <style >
-/* collections */
-
 .add-to-cart svg {
   width: 25px;
   height: 25px;

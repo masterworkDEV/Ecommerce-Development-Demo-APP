@@ -13,7 +13,7 @@
           @click="toggleMenu"
         >
           <svg
-            class="w-12 h-12 max-xl:w-9 max-xl:h-9 max-md:w-7 max-md:h-7"
+            class="w-10 h-10 max-xl:w-8 max-xl:h-8 max-md:w-7 max-md:h-7"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -166,14 +166,14 @@
       </nav>
     </header>
 
-    <!--quick link modals -->
+    <!--menu modals -->
     <MenuModal :menu-sate="menuState" @close-menu="isMenuClosed" />
   </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from 'vue'
-import Logo from './Logo.vue'
+import Logo from '../Logo.vue'
 import MenuModal from './Menu.vue'
 import { useRouter } from 'vue-router'
 import { useRoute } from 'vue-router'
@@ -181,12 +181,8 @@ import { piniaStore } from '@/stores/store'
 import { getAuth, signOut } from 'firebase/auth'
 
 const useStore = piniaStore()
-
 const checkUser = ref(null)
-const isLoginModal = ref(false)
-const isMenuToggled = ref(false)
 const router = useRouter()
-const route = useRoute()
 
 const isScrolling = ref(false)
 window.addEventListener('scroll', () => {
@@ -216,7 +212,6 @@ const isMenuClosed = () => {
 const logoutUser = async () => {
   await signOut(useStore.auth)
     .then((data) => {
-      console.log(data)
       router.push('/auth/login')
     })
     .catch((error) => {
@@ -225,7 +220,7 @@ const logoutUser = async () => {
 }
 </script>
 
-<style  scoped>
+<style  >
 .nav-bar.nav-active {
   background: #f1f1f1;
   transition: all 0.5s;
@@ -245,6 +240,10 @@ const logoutUser = async () => {
 .routes > .link {
   transition: 0.5s ease;
   position: relative;
+  font-weight: 550;
+  font-family: 'Rubik Vinyl', serif;
+  font-style: normal;
+  font-optical-sizing: auto;
 }
 
 .link:hover {
@@ -255,7 +254,6 @@ const logoutUser = async () => {
   position: absolute;
   width: 0px;
   height: 2px;
-
   background: black;
   transition: 0.2s ease;
 }

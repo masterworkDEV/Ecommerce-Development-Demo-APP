@@ -100,7 +100,7 @@
 
 <script setup>
 import { piniaStore } from '@/stores/store'
-import Nav from './Nav.vue'
+
 const useStore = piniaStore()
 
 const removeFromFavourite = (fave) => {

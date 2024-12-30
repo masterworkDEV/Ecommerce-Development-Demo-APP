@@ -84,10 +84,12 @@
                   <input
                     type="text"
                     class="bg-transparent border border-[#999] w-8 h-8 flex justify-center text-center items-center"
-                    :value="product.quantity"
+                    :value="product.quantity < 1 ? (product.quantity = 1) : product.quantity"
                   />
                   <button
-                    @click.prevent="product.quantity--"
+                    @click.prevent="
+                      product.quantity < 1 ? (product.quantity = 1) : product.quantity--
+                    "
                     class="minus border border-[#999] text-center w-8 h-8 flex justify-center items-center"
                   >
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -204,10 +206,15 @@ const totalAmount = ref(0)
 
 // get total banlance of items in cart;
 const getTotal = computed(() => {
-  const total = Object.entries(useStore.cart).reduce((total, product) => {
+  const totalString = Object.entries(useStore.cart).reduce((total, product) => {
     return total + product[1].price * product[1].quantity
   }, 0)
-  return total
+  const sumTotal = parseFloat(totalString)
+  if (isNaN(sumTotal)) {
+    alert(`Error this isn't a number`)
+  } else {
+    return sumTotal.toFixed(2)
+  }
 })
 
 // total amount of items
@@ -215,14 +222,24 @@ subtotal.value = computed(() => getTotal.value)
 
 const calculateShippingRate = computed(() => {
   const shippingCost = getTotal.value / 90
-  return shippingCost
+  const totalShipingCost = parseFloat(shippingCost)
+  if (isNaN(totalShipingCost)) {
+    console.log(`Error, this has to be number ${totalShipingCost}`)
+  } else {
+    return totalShipingCost.toFixed(2)
+  }
 })
 // total shipping cost for items in cart
 shippingTotal.value = computed(() => calculateShippingRate.value)
 
 const calculateTotalAmount = computed(() => {
   const total = getTotal.value + calculateShippingRate.value
-  return total.toFixed(2)
+  const totalPrice = parseFloat(total)
+  if (isNaN(totalPrice)) {
+    alert(`Error, this isn't a number${totalPrice}`)
+  } else {
+    return totalPrice.toFixed(2)
+  }
 })
 totalAmount.value = computed(() => calculateTotalAmount.value)
 

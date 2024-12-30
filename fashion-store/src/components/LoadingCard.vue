@@ -23,8 +23,8 @@
 }
 
 .movie--isloading .loading-image {
-  min-width: 280px;
-  min-height: 280px;
+  min-width: 250px;
+  min-height: 250px;
   background-image: -webkit-linear-gradient(left, #ececec 0px, #f4f4f4 40px, #ececec 80px);
   background-image: -o-linear-gradient(left, #ececec 0px, #f4f4f4 40px, #ececec 80px);
   background-image: linear-gradient(90deg, #ececec 0px, #f4f4f4 40px, #ececec 80px);

@@ -27,16 +27,16 @@ const router = createRouter({
         {
           path: '/cart',
           name: 'cart',
-          component: () => import('../components/Cart.vue')
+          component: () => import('../components/Cart/Cart.vue')
         },
         {
           path: '/favourite',
           name: 'favourite',
-          component: () => import('../components/Favourites.vue')
+          component: () => import('../components/Favourite/Favourites.vue')
         },
         {
           path: '/auth/',
-          component: () => import('../components/authenticate.vue'),
+          component: () => import('../components/Authentication/authenticate.vue'),
           children: [
             {
               path: 'login',
@@ -44,7 +44,7 @@ const router = createRouter({
               meta: {
                 transition: 'slide-left'
               },
-              component: () => import('../components/Login.vue')
+              component: () => import('../components/Authentication/Login.vue')
             },
             {
               path: 'sign-up',
@@ -52,7 +52,7 @@ const router = createRouter({
               meta: {
                 transition: 'slide-right'
               },
-              component: () => import('../components/SignUp.vue')
+              component: () => import('../components/Authentication/SignUp.vue')
             }
           ]
         }
@@ -92,12 +92,12 @@ const router = createRouter({
         {
           path: '/cart',
           name: 'cart',
-          component: () => import('../components/Cart.vue')
+          component: () => import('../components/Cart/Cart.vue')
         },
         {
           path: '/favourite',
           name: 'favourite',
-          component: () => import('../components/Favourites.vue')
+          component: () => import('../components/Favourite/Favourites.vue')
         },
         {
           path: '/settings',
@@ -107,7 +107,7 @@ const router = createRouter({
         {
           path: '/check-out',
           name: 'check-out',
-          component: () => import('../components/CheckOutPage.vue')
+          component: () => import('../components/Cart/CheckOutPage.vue')
         }
       ]
     }
