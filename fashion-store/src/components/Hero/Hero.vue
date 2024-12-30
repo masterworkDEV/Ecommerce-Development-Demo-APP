@@ -1,8 +1,8 @@
 <template>
   <ul>
-    <li class="max-xl:text-sm text-textPrimary">MEN</li>
-    <li class="max-xl:text-sm text-textPrimary">WOMEN</li>
-    <li class="max-xl:text-sm text-textPrimary">KIDS</li>
+    <li class="max-xl:text-sm text-textPrimary font-text max-sm:text-small">MEN</li>
+    <li class="max-xl:text-sm text-textPrimary font-text max-sm:text-small">WOMEN</li>
+    <li class="max-xl:text-sm text-textPrimary font-text max-sm:text-small">KIDS</li>
   </ul>
   <SearchItem
     :search-value="parentInputValue"

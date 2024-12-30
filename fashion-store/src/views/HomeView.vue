@@ -1,11 +1,14 @@
 
 <template>
-  <div class="pages px-14 max-md:px-7">
-    <Hero />
-    <ThisWeek />
-    <Collections />
-    <OurMission />
-    <NewDesigns />
+  <div class="home">
+    <main class="pages px-14 max-md:px-7">
+      <Hero />
+      <ThisWeek />
+      <Collections />
+      <OurMission />
+      <NewDesigns />
+    </main>
+
     <Footer />
   </div>
 </template>

@@ -16,16 +16,18 @@
         class="row flex justify-center gap-5 w-full max-lg:gap-3 max-md:flex-col-reverse max-md:gap-1"
       >
         <div class="col">
-          <h1 class="text-6xl max-xl:text-5xl max-md:hidden">
+          <h1 class="text-6xl max-xl:text-5xl max-md:hidden font-text">
             <b>
               NEW <br />
               COLLECTION
             </b>
           </h1>
           <p class="max-md:hidden">Summer <br />2024</p>
-          <div class="flex items-center gap-2 mt-52 max-md:mt-10">
+          <div class="flex items-center gap-2 mt-36 max-md:mt-10">
             <button class="go-to-shop w-full p-2 max-lg:p-1 bg-[#d9d9d9] text-start gap-5">
-              <span>Go To Shop</span>
+              <span class="font-text text-sm">
+                <b>Go To Shop</b>
+              </span>
               <svg
                 fill="#000000"
                 height="none"
@@ -88,7 +90,7 @@
         <div class="col">
           <div class="w-full flex gap-10 max-lg:gap-5">
             <article
-              class="w-full max-md:h-[300px] max-lg:h-[375px] max-xl:h-[395px h-[425px] ]"
+              class="w-full max-md:h-[300px] max-lg:h-[375px] max-xl:h-[395px]"
               v-for="product in props.products"
               :key="product.id"
             >

@@ -4,7 +4,10 @@ export default {
 
   theme: {
     fontFamily: {
-      primary: ' "Ubuntu", serif'
+      primary: ' "Ubuntu", serif',
+      secondary: '"Noto Sans", serif',
+      poppings: 'Poppins", serif',
+      text: '"Domine", serif'
     },
     extend: {
       fontSize: {

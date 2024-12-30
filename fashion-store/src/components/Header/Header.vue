@@ -35,17 +35,21 @@
         <div class="routes flex gap-10 max-xl:gap-7 max-lg:gap-5 max-md:hidden">
           <RouterLink
             :to="{ name: 'home' }"
-            class="link max-lg:text-sm"
+            class="link max-lg:text-sm font-text"
             activeClass="border-indigo-500"
           >
             Home
             <div class="routes-overlay"></div>
           </RouterLink>
-          <RouterLink :to="{ name: 'collections' }" class="link max-lg:text-sm" name="links">
+          <RouterLink
+            :to="{ name: 'collections' }"
+            class="link max-lg:text-sm font-text"
+            name="links"
+          >
             Collections
             <div class="routes-overlay"></div>
           </RouterLink>
-          <RouterLink :to="{ name: 'new' }" class="link max-lg:text-sm" name="links">
+          <RouterLink :to="{ name: 'new' }" class="link max-lg:text-sm font-text" name="links">
             New
             <div class="routes-overlay"></div>
           </RouterLink>
@@ -241,7 +245,6 @@ const logoutUser = async () => {
   transition: 0.5s ease;
   position: relative;
   font-weight: 550;
-  font-family: 'Rubik Vinyl', serif;
   font-style: normal;
   font-optical-sizing: auto;
 }

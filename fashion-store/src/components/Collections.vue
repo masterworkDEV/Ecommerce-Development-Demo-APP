@@ -1,6 +1,6 @@
 <template>
   <section class="collections w-full">
-    <h1 class="text-6xl max-md:text-5xl max-sm:text-4xl">
+    <h1 class="text-6xl max-md:text-5xl max-sm:text-4xl font-text">
       <b>
         XIV <br />
         COLLECTIONS
@@ -11,18 +11,18 @@
     <div
       class="options flex justify-between items-end mt-5 mb-10 border-b border-[#ccc] p-2 max-md:mb-7 max-md:p-0"
     >
-      <div class="categories flex gap-10">
-        <button>(ALL)</button>
-        <button>MEN</button>
-        <button>WOMEN</button>
-        <button>KIDS</button>
+      <div class="categories flex gap-10 max-sm:gap-5">
+        <button class="font-text text-sm">(ALL)</button>
+        <button class="font-text text-sm">MEN</button>
+        <button class="font-text text-sm">WOMEN</button>
+        <button class="font-text text-sm">KIDS</button>
       </div>
       <div class="filters-sorts flex items-center gap-20 max-md:hidden">
-        <div>Filters(+)</div>
+        <button class="font-text text-sm">Filters(+)</button>
         <div>
-          <span>Sorts(-)</span>
-          <p>Less to More</p>
-          <p>More to Less</p>
+          <span class="font-text text-sm">Sorts(-)</span>
+          <p class="font-text text-sm">Less to More</p>
+          <p class="font-text text-sm">More to Less</p>
         </div>
       </div>
     </div>
@@ -35,7 +35,7 @@
         </div>
         <div v-else>
           <div
-            class="w-full row flex justify-center items-center gap-10 max-lg:gap-5 max-md:gap-3"
+            class="w-full grid grid-cols-3 items-center gap-10 max-lg:gap-5 max-md:gap-3"
             v-if="useStore.isReady"
           >
             <article

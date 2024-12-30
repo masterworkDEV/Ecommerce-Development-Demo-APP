@@ -44,6 +44,7 @@
         </svg>
       </div>
       <img
+        @dblclick="useStore.useAddToFavourite(product.id)"
         :src="product.images"
         :alt="product.category.name"
         class="w-[325px] h-[325px] border-2 border-primary"
@@ -76,18 +77,24 @@
       <div class="row flex justify-between items-end">
         <div class="spec">
           <div class="category-spread flex text-center items-centert mb-1 mt-3 gap-2">
-            <p class="text-sm capitalize text-[#5e5e5e]">{{ product.category.name }}</p>
+            <p class="text-sm capitalize text-[#5e5e5e] max-sm:text-small font-text">
+              {{ product.category.name }}
+            </p>
             <form class="flex items-center">
               <input type="checkbox" class="w-3 h-3" />
               <small>+2</small>
             </form>
           </div>
           <div class="title">
-            <h3>{{ product.title.substring(0, 22) }}</h3>
+            <h3 class="font-text max-sm:text-sm">
+              <b>{{ product.title.substring(0, 22) }}</b>
+            </h3>
           </div>
         </div>
         <div class="price">
-          <h3>${{ product.price }}</h3>
+          <h3 class="font-text max-sm:text-sm">
+            <b>${{ product.price }}</b>
+          </h3>
         </div>
       </div>
     </div>

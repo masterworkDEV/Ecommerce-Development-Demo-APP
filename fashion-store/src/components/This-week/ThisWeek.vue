@@ -1,13 +1,15 @@
 <template>
   <section>
-    <span class="flex justify-between items-end">
-      <h1 class="text-6xl max-md:text-4xl">
+    <span class="flex justify-between items-end text-start max-sm:items-center">
+      <h1 class="text-h1 max-md:text-h2 font-text">
         <b>
           NEW <br />
           THIS WEEK
         </b>
       </h1>
-      <router-link :to="{ name: 'collections' }">See All</router-link>
+      <router-link :to="{ name: 'collections' }" class="font-text text-normal max-sm:text-sm"
+        >See All</router-link
+      >
     </span>
     <div class="carousel-container mt-7 mb-5">
       <div v-if="useStore.isLoading" class="carousel">
@@ -18,7 +20,7 @@
           <Carousel :slide-index="slideIndex" />
         </div>
         <div v-else class="carousel">
-          <h1>Error cannot display data</h1>
+          <p>Error cannot display data</p>
         </div>
       </div>
 

@@ -1,14 +1,14 @@
 <template>
   <div class="pages w-full px-14 max-sm:px-7">
     <ul class="flex items-center gap-3">
-      <li class="text-sm underline">
+      <li class="text-sm underline font-primary">
         <a href="/">
           <b>Home</b>
         </a>
       </li>
       >
-      <li class="text-sm">
-        <a href="/login">
+      <li class="text-sm font-primary">
+        <a href="/auth/login">
           <b>Account</b>
         </a>
       </li>
@@ -16,8 +16,8 @@
 
     <div class="mt-14 flex justify-center gap-10">
       <div class="w-2/4 max-sm:w-full">
-        <h2 class="text-4xl text-textPrimary"><b>Login</b></h2>
-        <p class="w-full text-otherTextOne">
+        <h2 class="text-4xl text-textPrimary font-primary"><b>Login</b></h2>
+        <p class="w-full text-otherTextOne font-text mt-2 max-sm:text-sm tracking-wide leading-6">
           Unlock a world of convineience and tailored experiences by logging in today. <br />Your
           journey begins here.
         </p>
@@ -40,15 +40,17 @@
               class="w-full p-3 bg-inputBg text-[1rem] rounded"
             />
           </div>
-          <p class="underline text-sm">Forgot your password?</p>
+          <p class="underline text-sm font-text">Forgot your password?</p>
           <div class="details-action mt-5">
             <button class="p-3 bg-bgColorSecondary rounded text-white max-sm:w-full">
               {{ isLoading ? 'Loading...' : 'Sign In' }}
             </button>
           </div>
-          <p class="text-sm">
+          <p class="text-sm font-text">
             <b>New customer ?</b>
-            <router-link :to="{ name: 'sign-up' }" class="underline">Create anaccount</router-link>
+            <router-link :to="{ name: 'sign-up' }" class="underline font-text"
+              >Create anaccount</router-link
+            >
           </p>
         </form>
       </div>

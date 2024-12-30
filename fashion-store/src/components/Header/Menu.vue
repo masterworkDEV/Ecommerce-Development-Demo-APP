@@ -1,13 +1,13 @@
 <template>
   <div v-if="props.menuSate">
-    <div class="over-lay fixed w-full h-full bg-[rgba(255,255,255,0.5)] z-10"></div>
+    <div class="over-lay fixed w-full h-full bg-[rgba(2,1,1,0.5)] z-10"></div>
 
     <div
       class="menu bg-bgColorPrimary w-full h-[70%] fixed top-0 left-0 right-0 z-40 max-xl:h-[40%] shadow-2xl max-md:h-[50%] max-sm:h-[60%]"
     >
       <button
         @click="emits('closeMenu')"
-        class="cursor-default absolute right-5 top-2 w-12 h-12 flex justify-center items-center max-sm:w-10 max-sm:h-10 bg-inputBg hover:bg-[#d7d7d7]"
+        class="cursor-default absolute right-5 top-5 w-12 h-12 flex justify-center items-center max-sm:w-10 max-sm:h-10 bg-inputBg hover:bg-[#d7d7d7]"
       >
         <svg
           class="w-2/4 h-2/4 fill-gray-700 stroke-gray-400 hover:stroke-gray-900 hover:fill-gray-950 transition-all"
@@ -34,7 +34,7 @@
             <li>
               <router-link
                 @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-primary"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-text"
                 :to="{ name: 'home' }"
               >
                 Home
@@ -43,7 +43,7 @@
             <li>
               <router-link
                 @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-primary"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-text"
                 :to="{ name: 'about' }"
               >
                 About</router-link
@@ -52,7 +52,7 @@
             <li>
               <router-link
                 @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-primary"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-text"
                 :to="{ name: 'collections' }"
               >
                 Collections
@@ -61,7 +61,7 @@
             <li>
               <router-link
                 @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-primary"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-text"
                 :to="{ name: 'deals' }"
               >
                 Deals
@@ -74,7 +74,7 @@
             <li>
               <router-link
                 @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-primary"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-text"
                 :to="{ name: 'settings' }"
                 >Settings
               </router-link>
@@ -82,7 +82,7 @@
             <li>
               <router-link
                 @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-primary"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-text"
                 :to="{ name: 'cart' }"
               >
                 Cart
@@ -91,7 +91,7 @@
             <li>
               <router-link
                 @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-primary"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-text"
                 :to="{ name: 'favourite' }"
               >
                 Favourite
@@ -100,7 +100,7 @@
             <li>
               <router-link
                 @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-primary"
+                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-text"
                 :to="{ name: 'contact' }"
               >
                 Contact</router-link
