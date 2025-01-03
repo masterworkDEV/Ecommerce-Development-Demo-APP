@@ -102,6 +102,7 @@
 </template>
 
 <script setup>
+import { useDraggable } from '@vueuse/core'
 import { ref, onMounted } from 'vue'
 import { piniaStore } from '@/stores/store'
 const useStore = piniaStore()

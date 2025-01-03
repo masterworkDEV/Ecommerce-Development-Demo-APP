@@ -1,5 +1,5 @@
 <template>
-  <div class="logo relative">
+  <div class="logo relative flex justify-center items-center">
     <svg
       class="fill-black w-12 h-12 max-xl:w-9 max-xl:h-9 max-md:w-7 max-md:h-7"
       viewBox="-2.4 -2.4 28.80 28.80"

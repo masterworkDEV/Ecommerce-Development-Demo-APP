@@ -4,16 +4,16 @@
     :class="isScrolling ? 'nav-active' : ''"
   >
     <header
-      class="w-full flex justify-between items-center text-center px-14 max-xl:px-12 max-lg:px-10 pt-7 pb-7 max-md:px-4 max-md:pt-4"
+      class="w-full flex justify-between items-center text-center pt-7 pb-7 px-14 max-xl:px-12 max-lg:px-10  max-md:px-5 max-md:pt-4"
     >
       <!-- menu svg-->
       <nav class="flex justify-center gap-10 items-center text-center max-lg:gap-5">
         <div
-          class="menu hover:bg-[#ddd] hover:scale-105 p-1 rounded-full transition-all"
+          class="menu hover:bg-[#ddd] hover:scale-105 rounded-full transition-all"
           @click="toggleMenu"
         >
           <svg
-            class="w-10 h-10 max-xl:w-8 max-xl:h-8 max-md:w-7 max-md:h-7"
+            class="w-10 h-10 max-xl:w-8 max-xl:h-8"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -32,10 +32,12 @@
             </g>
           </svg>
         </div>
-        <div class="routes flex gap-10 max-xl:gap-7 max-lg:gap-5 max-md:hidden">
+        <div
+          class="routes flex justify-center items-center gap-10 max-xl:gap-7 max-lg:gap-5 max-md:hidden"
+        >
           <RouterLink
             :to="{ name: 'home' }"
-            class="link max-lg:text-sm font-text"
+            class="link max-lg:text-sm font-text text-normal"
             activeClass="border-indigo-500"
           >
             Home
@@ -43,19 +45,23 @@
           </RouterLink>
           <RouterLink
             :to="{ name: 'collections' }"
-            class="link max-lg:text-sm font-text"
+            class="link max-lg:text-sm font-text text-normal"
             name="links"
           >
             Collections
             <div class="routes-overlay"></div>
           </RouterLink>
-          <RouterLink :to="{ name: 'new' }" class="link max-lg:text-sm font-text" name="links">
+          <RouterLink
+            :to="{ name: 'new' }"
+            class="link max-lg:text-sm font-text text-normal"
+            name="links"
+          >
             New
             <div class="routes-overlay"></div>
           </RouterLink>
         </div>
       </nav>
-      <div class="logo"><Logo /></div>
+      <Logo />
 
       <nav>
         <div class="flex justify-center items-center text-center gap-10 max-md:gap-2">
@@ -171,7 +177,9 @@
     </header>
 
     <!--menu modals -->
-    <MenuModal :menu-sate="menuState" @close-menu="isMenuClosed" />
+    <transition name="slides">
+      <MenuModal :menu-sate="menuState" @close-menu="isMenuClosed" />
+    </transition>
   </div>
 </template>
 
@@ -263,5 +271,15 @@ const logoutUser = async () => {
 .link:hover > .routes-overlay {
   width: 50px;
   height: 2px;
+}
+
+.slides-enter-active,
+.slides-leave-active {
+  transition: 1 ease all;
+}
+.slides-enter-from,
+.slides-leave-to {
+  transform: translateY(-50px);
+  opacity: 0;
 }
 </style>

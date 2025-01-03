@@ -1,7 +1,7 @@
 
 <template>
   <div class="home">
-    <main class="pages px-14 max-md:px-7">
+    <main class="pages px-14 max-md:px-5">
       <Hero />
       <ThisWeek />
       <Collections />

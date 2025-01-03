@@ -5,11 +5,11 @@
     <li class="max-xl:text-sm text-textPrimary font-text max-sm:text-small">KIDS</li>
   </ul>
   <SearchItem
-    :search-value="parentInputValue"
-    @setChange="updateParentInputValue"
+    :search-value="searchValue"
+    @setChange="updateSearchValue"
     @setSubmit="updateSubmit"
   />
-  <NewCollection :products="products" :search-value="parentInputValue" />
+  <NewCollection :products="products" :search-value="searchValue" />
 </template>
 
 <script setup>
@@ -19,18 +19,18 @@ import SearchItem from './SearchItem.vue'
 import NewCollection from './NewCollection.vue'
 
 const useStore = piniaStore()
-const parentInputValue = ref('')
+const searchValue = ref('')
 const products = computed(() =>
   useStore.products
     .slice(3, 5)
-    .filter((item) => item.title.toLowerCase().includes(parentInputValue.value.toLowerCase()))
+    .filter((item) => item.title.toLowerCase().includes(searchValue.value.toLowerCase()))
 )
 
 const clearInput = () => {
-  parentInputValue.value = ''
+  searchValue.value = ''
 }
-const updateParentInputValue = (value) => {
-  parentInputValue.value = value
+const updateSearchValue = (value) => {
+  searchValue.value = value
 }
 </script>
 

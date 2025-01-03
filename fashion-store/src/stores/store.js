@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref, onMounted, reactive, computed, watch } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { useAsyncState } from '@vueuse/core'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
@@ -48,16 +48,15 @@ export const piniaStore = defineStore('counter', () => {
   const useAddToCart = (product) => {
     let checkAvailablity = cart.value.find((item) => item.title === product.title)
     if (checkAvailablity) {
+      alert('Product is already in cart')
       return checkAvailablity.quantity++
     } else {
       cart.value.push({ ...product, quantity: 1 })
     }
   }
 
-  const useDelProductFromCart = (product) => {
-    return (cart.value = cart.value.filter((item) => {
-      return item.title != product.title
-    }))
+  const useDelProductFromCart = (id) => {
+    cart.value = cart.value.filter((item) => item.id !== id)
   }
 
   // function favourite

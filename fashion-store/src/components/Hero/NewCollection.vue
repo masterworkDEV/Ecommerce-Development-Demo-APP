@@ -15,7 +15,7 @@
         v-if="useStore.isReady"
         class="row flex justify-center gap-5 w-full max-lg:gap-3 max-md:flex-col-reverse max-md:gap-1"
       >
-        <div class="col">
+        <div class="col relative">
           <h1 class="text-6xl max-xl:text-5xl max-md:hidden font-text">
             <b>
               NEW <br />
@@ -23,12 +23,19 @@
             </b>
           </h1>
           <p class="max-md:hidden">Summer <br />2024</p>
-          <div class="flex items-center gap-2 mt-36 max-md:mt-10">
-            <button class="go-to-shop w-full p-2 max-lg:p-1 bg-[#d9d9d9] text-start gap-5">
+
+          <div
+            class="absolute right-0 left-0 bottom-0 flex items-center gap-2 max-md:translate-y-[50px]"
+          >
+            <router-link
+              :to="{ name: 'collections' }"
+              class="flex justify-between w-full p-2 max-lg:p-1 bg-inputBg text-start gap-5"
+            >
               <span class="font-text text-sm">
                 <b>Go To Shop</b>
               </span>
               <svg
+                class="w-2/4 h-5"
                 fill="#000000"
                 height="none"
                 width="none"
@@ -51,7 +58,8 @@
                   </g>
                 </g>
               </svg>
-            </button>
+            </router-link>
+
             <div class="btns flex justify-center items-center gap-2 max-md:hidden">
               <button class="border border-gray-400 p-2 max-lg:p-1 cursor-default">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -88,9 +96,9 @@
         </div>
 
         <div class="col">
-          <div class="w-full flex gap-10 max-lg:gap-5">
+          <div class="flex items-center justify-center gap-10 max-lg:gap-5">
             <article
-              class="w-full max-md:h-[300px] max-lg:h-[375px] max-xl:h-[395px]"
+              class="w-full max-sm:h-60 max-md:h-[300px] max-lg:h-[375px] max-xl:h-[395px]"
               v-for="product in props.products"
               :key="product.id"
             >

@@ -2,11 +2,11 @@
   <main class="pages mx-14">
     <div class="title flex items-center gap-7 border-b border-[#999] mb-5 pb-3 pt-20 w-[65%]">
       <router-link :to="{ name: 'cart' }">
-        <p class="text-[.9rem]"><b>SHOPPING BAG</b></p>
+        <p class="text-small font-text max-md:text-smaller"><b>SHOPPING BAG</b></p>
       </router-link>
       <span class="favourite">
         <router-link :to="{ name: 'favourite' }">
-          <small class="text-[.7rem]">FAVORITES</small>
+          <p class="text-small font-text max-md:text-smaller">FAVORITES</p>
         </router-link>
       </span>
     </div>
@@ -50,12 +50,13 @@
               <div class="preview-side w-10">
                 <button
                   @click="removeFromFavourite(fave)"
-                  class="delete flex justify-start items-center text-center"
+                  class="del bg-otherBgFour rounded-md p-2 flex justify-start items-center text-center"
                 >
                   <svg
                     viewBox="0 0 64 64"
                     xmlns="http://www.w3.org/2000/svg"
                     stroke-width="2"
+                    class="w-5 h-5"
                     stroke="#000000"
                     fill="none"
                   >

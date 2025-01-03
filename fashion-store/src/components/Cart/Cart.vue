@@ -1,34 +1,35 @@
 <template>
-  <main class="pages mx-14 max-md:mx-7">
+  <main class="pages px-14 max-md:px-5">
     <div
-      class="title flex justify-start items-center gap-7 border-b border-[#999] mb-5 pb-3 pt-20 w-[65%] max-md:w-full max-md:border-none"
+      class="title flex justify-start items-center gap-7 border-b border-primary mb-5 pb-3 pt-20 w-[65%] max-md:w-full max-md:border-none"
     >
-      <h4 class="text-[.9rem]"><b>SHOPPING BAG</b></h4>
+      <h4 class="text-normal max-md:text-smaller font-text"><b>SHOPPING BAG</b></h4>
       <span class="favourite">
         <router-link :to="{ name: 'favourite' }">
-          <small class="text-[.7rem]">FAVORITES</small>
+          <p class="text-normal max-md:text-smaller font-text">FAVORITES</p>
         </router-link>
       </span>
     </div>
-
+    <h3 v-if="!Object.values(useStore.cart).length" class="text-h4 text-center max-md:text-h5 m-10">
+      There is no product in cart!!
+    </h3>
     <div
-      class="flex items-start justify-between max-md:justify-center max-md:flex-col max-md:gap-16 pb-10"
+      v-else
+      class="w-full flex justify-between items-start max-md:flex-col max-md:justify-center"
     >
-      <div class="row grid grid-cols-2 justify-center place-items-center gap-10 max-md:grid-cols-1">
-        <div
-          class="col w-[400px] max-md:w-[325px]"
-          v-for="product in useStore.cart"
-          :key="product.id"
-        >
-          <div class="preview flex items-start justify-center text-center gap-5 relative">
+      <div
+        class="grid grid-cols-2 place-content-center place-items-center gap-10 max-md:grid-cols-1 text-center"
+      >
+        <div class="w-full max-md:w-full" v-for="product in useStore.cart" :key="product.id">
+          <div class="w-full flex items-start justify-center text-center gap-5 relative">
             <img
               :src="product.images"
               :alt="product.title"
-              class="w-[325px] h-[350px] border-2 border-primary max-md:w-[300px]"
+              class="w-full h-[350px] border-2 border-primary"
             />
             <div class="preview-side w-10">
               <button
-                @click="useStore.useDelProductFromCart(product)"
+                @click="useStore.useDelProductFromCart(product.id)"
                 class="delete flex justify-start items-center text-center"
               >
                 <svg
@@ -51,105 +52,108 @@
                 <h4 class="text-start pt-20 mb-3 uppercase"><b>m</b></h4>
               </span>
               <div class="bg-cyan-400 w-8 h-8 pt-5"></div>
-              <form>
-                <div class="flex flex-col justify-start items-start text-start pt-5">
-                  <button
-                    @click.prevent="product.quantity++"
-                    class="plus border border-[#999] w-8 h-8 flex justify-center text-center items-center"
-                  >
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                      <g
-                        id="SVGRepo_tracerCarrier"
+
+              <div class="flex flex-col justify-start items-start text-start pt-5">
+                <button
+                  @click.prevent="product.quantity++"
+                  class="plus border border-[#999] w-8 h-8 flex justify-center text-center items-center"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <rect width="30" height="30" fill="none"></rect>
+                      <path
+                        d="M12 6V18"
+                        stroke="#000000"
                         stroke-linecap="round"
                         stroke-linejoin="round"
-                      ></g>
-                      <g id="SVGRepo_iconCarrier">
-                        <rect width="30" height="30" fill="none"></rect>
-                        <path
-                          d="M12 6V18"
-                          stroke="#000000"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        ></path>
-                        <path
-                          d="M6 12H18"
-                          stroke="#000000"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        ></path>
-                      </g>
-                    </svg>
-                  </button>
-                  <input
-                    type="text"
-                    class="bg-transparent border border-[#999] w-8 h-8 flex justify-center text-center items-center"
-                    :value="product.quantity < 1 ? (product.quantity = 1) : product.quantity"
-                  />
-                  <button
-                    @click.prevent="
-                      product.quantity < 1 ? (product.quantity = 1) : product.quantity--
-                    "
-                    class="minus border border-[#999] text-center w-8 h-8 flex justify-center items-center"
-                  >
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                      <g
-                        id="SVGRepo_tracerCarrier"
+                      ></path>
+                      <path
+                        d="M6 12H18"
+                        stroke="#000000"
                         stroke-linecap="round"
                         stroke-linejoin="round"
-                      ></g>
-                      <g id="SVGRepo_iconCarrier">
-                        <rect width="30" height="30" fill="none"></rect>
-                        <path
-                          d="M6 12H18"
-                          stroke="#000000"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        ></path>
-                      </g>
-                    </svg>
-                  </button>
-                </div>
-              </form>
+                      ></path>
+                    </g>
+                  </svg>
+                </button>
+                <input
+                  type="text"
+                  class="bg-transparent border border-[#999] w-8 h-8 flex justify-center text-center items-center"
+                  :value="product.quantity < 1 ? (product.quantity = 1) : product.quantity"
+                />
+                <button
+                  @click.prevent="
+                    product.quantity < 1 ? (product.quantity = 1) : product.quantity--
+                  "
+                  class="minus border border-[#999] text-center w-8 h-8 flex justify-center items-center"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <rect width="30" height="30" fill="none"></rect>
+                      <path
+                        d="M6 12H18"
+                        stroke="#000000"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </g>
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
-          <div class="card-bottom flex justify-start items-end gap-48">
-            <div class="name-type">
-              <p class="mb-2 mt-2 text-[.85rem]">{{ product.category.name }}</p>
-              <h6 class="text-sm">
+          <div class="flex justify-between items-end text-start">
+            <div>
+              <p class="mb-2 mt-2 text-p font-text max-md:text-smaller">
+                {{ product.category.name }}
+              </p>
+              <h6 class="text-sm font-text max-md:text-p">
                 <b> {{ product.title }}</b>
               </h6>
             </div>
-            <div class="price">
+            <div class="price font-text max-md:text-smaller">
               <h6 class="mr-14">
                 <b>${{ product.price * product.quantity }} </b>
               </h6>
             </div>
           </div>
         </div>
-        <!--  -->
       </div>
 
       <!-- row-ends -->
-      <div class="col border border-[#999] w-[325px] h-[390px] max-md:w-[300px] p-10">
-        <h3 class="pt-7 pb-5"><b>ORDER SUMMARY</b></h3>
+      <div class="col border border-[#999] w-80 h-[27rem] max-md:w-60 max-mad:h-96 p-10">
+        <h3 class="pt-5 pb-5 text-h5 max-md:text-normal font-secondary"><b>ORDER SUMMARY</b></h3>
         <div class="subtotal flex justify-between mb-2">
-          <small> <b> Subtotal</b></small>
-          <small
-            ><b>${{ subtotal }}</b></small
-          >
+          <p class="font-secondary text-normal max-md:text-small"><b> Subtotal</b></p>
+          <p class="font-secondary max-md:text-small">
+            <b>${{ subtotal }}</b>
+          </p>
         </div>
         <div class="shopping flex justify-between border-b-2 border-[#ddd] mb-5 pb-6">
-          <small> <b>Shipping</b> </small>
-          <small
-            ><b>${{ shippingTotal ? shippingTotal : 0 }}</b></small
-          >
+          <p class="font-secondary max-md:text-small"><b>Shipping</b></p>
+          <p class="font-secondary max-md:text-small">
+            <b>${{ shippingTotal ? shippingTotal : 0 }}</b>
+          </p>
         </div>
         <div class="shopping flex justify-between mb-7 mt-7">
-          <h3><b>TOTAL</b><small>(TAX INCL)</small></h3>
           <h3>
-            $<b>{{ totalAmount }}</b>
+            <b class="font-secondary max-md:text-small">TOTAL</b>
+            <p class="font-secondary max-md:text-small">(TAX INCL)</p>
+          </h3>
+          <h3>
+            $<b class="font-secondary max-md:text-small">{{ totalAmount }}</b>
           </h3>
         </div>
 
@@ -158,13 +162,15 @@
             <input
               type="checkbox"
               name="checkbox"
-              class="w-[16px] h-[16px]"
+              class="w-7 h-7 max-md:w-5 max-md:h-5"
               v-model="agreeToTermAndConditions"
             />
-            <label class="text-[.75rem]">I agree to the Terms and Condition</label>
+            <label class="font-secondary text-small max-md:text-smaller"
+              >I agree to the Terms and Condition</label
+            >
           </div>
           <button
-            class="action w-full flex justify-center text-center bg-inputBg p-3 mt-3 text-sm"
+            class="action w-full flex justify-center text-center bg-inputBg p-3 mt-3 text-sm font-secondary"
             :class="
               agreeToTermAndConditions
                 ? 'checked text-textPrimaryTwo cursor-default'
@@ -245,10 +251,7 @@ totalAmount.value = computed(() => calculateTotalAmount.value)
 
 // checkout funcion
 const checkOutNow = () => {
-  if (Object.values(useStore.cart).length < 1) {
-    alert('cannot check out when store is empty, buy some products!')
-    router.push('/')
-  } else if (!agreeToTermAndConditions.value) {
+  if (!agreeToTermAndConditions.value) {
     agreementModal.value = true
 
     setTimeout(() => {
@@ -260,7 +263,7 @@ const checkOutNow = () => {
 }
 </script>
 
-<style scoped>
+<style >
 svg {
   width: 20px;
   height: 20px;
