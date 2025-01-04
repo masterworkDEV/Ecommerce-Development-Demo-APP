@@ -15,7 +15,7 @@
     </h3>
     <div
       v-else
-      class="w-full flex justify-between items-start max-md:flex-col max-md:justify-center"
+      class="w-full flex justify-center items-start gap-12 max-md:grid max-md:grid-cols-1 max-md:place-content-center p-5"
     >
       <div
         class="grid grid-cols-2 place-content-center place-items-center gap-10 max-md:grid-cols-1 text-center"
@@ -133,7 +133,7 @@
       </div>
 
       <!-- row-ends -->
-      <div class="col border border-[#999] w-80 h-[27rem] max-md:w-60 max-mad:h-96 p-10">
+      <div class="col border border-[#999] p-10 max-md:p-5">
         <h3 class="pt-5 pb-5 text-h5 max-md:text-normal font-secondary"><b>ORDER SUMMARY</b></h3>
         <div class="subtotal flex justify-between mb-2">
           <p class="font-secondary text-normal max-md:text-small"><b> Subtotal</b></p>

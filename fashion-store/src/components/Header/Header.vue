@@ -4,7 +4,7 @@
     :class="isScrolling ? 'nav-active' : ''"
   >
     <header
-      class="w-full flex justify-between items-center text-center pt-7 pb-7 px-14 max-xl:px-12 max-lg:px-10  max-md:px-5 max-md:pt-4"
+      class="w-full flex justify-between items-center text-center pt-7 pb-7 px-14 max-xl:px-12 max-lg:px-10 max-md:px-5 max-md:pt-4"
     >
       <!-- menu svg-->
       <nav class="flex justify-center gap-10 items-center text-center max-lg:gap-5">
@@ -96,8 +96,14 @@
                 Cart
               </span>
               <div
-                class="cart-icon border-[.4rem] border-black w-[50px] h-[50px] max-xl:h-[40px] max-xl:w-[40px] rounded-full flex items-center justify-center text-center max-md:border-[.3rem] max-md:w-[38px] max-md:h-[38px]"
+                class="cart-icon relative border-[.4rem] border-black w-[50px] h-[50px] max-xl:h-[40px] max-xl:w-[40px] rounded-full flex items-center justify-center text-center max-md:border-[.3rem] max-md:w-[38px] max-md:h-[38px]"
               >
+                <p
+                  class="cart-count top-2 left-0 absolute w-4 h-2 bg-red-500 rounded-full flex items-center justify-center text-white p-3"
+                  v-if="cartCount"
+                >
+                  {{ cartCount }}
+                </p>
                 <svg
                   viewBox="0 0 24 24"
                   class="fill-black w-2/4 h-2/4"
@@ -184,17 +190,24 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import Logo from '../Logo.vue'
 import MenuModal from './Menu.vue'
 import { useRouter } from 'vue-router'
 import { useRoute } from 'vue-router'
 import { piniaStore } from '@/stores/store'
 import { getAuth, signOut } from 'firebase/auth'
+import { object } from 'yup'
 
 const useStore = piniaStore()
 const checkUser = ref(null)
 const router = useRouter()
+
+const cartCount = computed(() => {
+  return Object.values(useStore.cart).reduce((acc, currenValue) => {
+    return acc + currenValue.quantity
+  }, 0)
+})
 
 const isScrolling = ref(false)
 window.addEventListener('scroll', () => {
