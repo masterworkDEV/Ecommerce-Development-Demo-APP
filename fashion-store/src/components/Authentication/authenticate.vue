@@ -16,7 +16,7 @@
 }
 .slide-left-enter-from,
 .slide-left-leave-to {
-  transform: translateX(1000px);
+  transform: translateX(200px);
   opacity: 0;
 }
 
@@ -26,7 +26,7 @@
 }
 .slide-right-enter-from,
 .slide-right-leave-to {
-  transform: translateX(-1000px);
+  transform: translateX(-200px);
   opacity: 0;
 }
 </style>

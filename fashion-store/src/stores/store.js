@@ -30,6 +30,8 @@ export const piniaStore = defineStore('counter', () => {
   const products = ref([])
 
   const API_URL = 'https://api.escuelajs.co/api/v1/products'
+
+  console.log(API_URL)
   const { state, isReady, isLoading } = useAsyncState(
     axios
       .get(API_URL)

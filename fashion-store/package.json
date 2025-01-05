@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vue-cli-service build --mode production",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "format": "prettier --write src/"
@@ -13,6 +13,7 @@
   "dependencies": {
     "@vueuse/core": "^11.1.0",
     "axios": "^1.7.7",
+    "dotenv-cli": "^8.0.0",
     "firebase": "^11.1.0",
     "pinia": "^2.1.7",
     "vee-validate": "^4.14.7",

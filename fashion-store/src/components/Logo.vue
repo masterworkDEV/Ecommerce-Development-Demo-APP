@@ -1,7 +1,7 @@
 <template>
-  <div class="logo relative flex justify-center items-center">
+  <div class="flex justify-center items-center">
     <svg
-      class="fill-black w-12 h-12 max-xl:w-9 max-xl:h-9 max-md:w-7 max-md:h-7"
+      class="fill-black w-12 h-12 max-xl:w-9 max-xl:h-9 max-md:w-8 max-md:h-8 max-md:ml-12"
       viewBox="-2.4 -2.4 28.80 28.80"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

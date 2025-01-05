@@ -1,18 +1,6 @@
 <template>
   <main class="pages mx-14">
-    <div class="title flex items-center gap-7 border-b border-[#999] mb-5 pb-3 pt-20 w-[65%]">
-      <router-link :to="{ name: 'cart' }">
-        <p class="text-small font-text max-md:text-smaller"><b>SHOPPING BAG</b></p>
-      </router-link>
-      <span class="favourite">
-        <router-link :to="{ name: 'favourite' }">
-          <p class="text-small font-text max-md:text-smaller">FAVORITES</p>
-        </router-link>
-      </span>
-    </div>
-
     <!-- transition -->
-    <Transition></Transition>
 
     <div class="flex justify-between gap-14">
       <div class="flex justify-center">

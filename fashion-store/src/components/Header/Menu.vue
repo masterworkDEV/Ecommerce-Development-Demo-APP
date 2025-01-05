@@ -1,149 +1,59 @@
 <template>
-  <div v-if="props.menuSate">
-    <div class="over-lay fixed w-full h-full bg-[rgba(2,1,1,0.5)] z-10"></div>
-
+  <div>
     <div
-      class="menu bg-bgColorPrimary w-full h-[70%] fixed top-0 left-0 right-0 z-40 max-xl:h-[40%] shadow-2xl max-md:h-[50%] max-sm:h-[60%]"
-    >
-      <button
-        @click="emits('closeMenu')"
-        class="cursor-default absolute right-5 top-5 w-12 h-12 flex justify-center items-center max-sm:w-10 max-sm:h-10 bg-inputBg hover:bg-[#d7d7d7]"
-      >
-        <svg
-          class="w-2/4 h-2/4 fill-gray-700 stroke-gray-400 hover:stroke-gray-900 hover:fill-gray-950 transition-all"
-          fill="none"
-          stroke="none"
-          viewBox="0 0 32 32"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g id="SVGRepo_bgCarrier" stroke-width="1"></g>
-          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-          <g id="SVGRepo_iconCarrier">
-            <title>times</title>
-            <path
-              d="M17.062 16l9.37-9.37c0.136-0.136 0.219-0.323 0.219-0.53 0-0.415-0.336-0.751-0.751-0.751-0.208 0-0.395 0.084-0.531 0.22v0l-9.369 9.369-9.37-9.369c-0.135-0.131-0.319-0.212-0.522-0.212-0.414 0-0.75 0.336-0.75 0.75 0 0.203 0.081 0.387 0.212 0.522l9.368 9.369-9.369 9.369c-0.136 0.136-0.22 0.324-0.22 0.531 0 0.415 0.336 0.751 0.751 0.751 0.207 0 0.394-0.084 0.53-0.219v0l9.37-9.37 9.369 9.37c0.136 0.136 0.324 0.22 0.531 0.22 0.415 0 0.751-0.336 0.751-0.751 0-0.207-0.084-0.395-0.22-0.531v0z"
-            ></path>
-          </g>
-        </svg>
-      </button>
-      <!-- router links -->
-      <header class="grid grid-cols-5 text-start max-md:grid-cols-3">
-        <nav>
-          <ul>
-            <li>
-              <router-link
-                @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-text"
-                :to="{ name: 'home' }"
-              >
-                Home
-              </router-link>
-            </li>
-            <li>
-              <router-link
-                @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-text"
-                :to="{ name: 'about' }"
-              >
-                About</router-link
-              >
-            </li>
-            <li>
-              <router-link
-                @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-text"
-                :to="{ name: 'collections' }"
-              >
-                Collections
-              </router-link>
-            </li>
-            <li>
-              <router-link
-                @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-text"
-                :to="{ name: 'deals' }"
-              >
-                Deals
-              </router-link>
-            </li>
-          </ul>
+      v-if="props.menuState"
+      class="fixed top-0 right-0 left-0 bottom-0 h-full w-full bg-transparentBLK z-0"
+    ></div>
+    <transition name="slide-fade">
+      <div class="menu" :class="props.menuState ? 'active' : 'leave-active'">
+        <button @click="emits('closeMenu')" class="text-white">close</button>
+        <nav class="nav">
+          <router-link :to="{ name: 'home' }">Home</router-link>
+          <router-link :to="{ name: 'about' }">About</router-link>
+          <router-link :to="{ name: 'contact' }">Contact</router-link>
+          <router-link :to="{ name: 'collections' }">Collections</router-link>
         </nav>
-        <nav>
-          <ul>
-            <li>
-              <router-link
-                @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-text"
-                :to="{ name: 'settings' }"
-                >Settings
-              </router-link>
-            </li>
-            <li>
-              <router-link
-                @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-text"
-                :to="{ name: 'cart' }"
-              >
-                Cart
-              </router-link>
-            </li>
-            <li>
-              <router-link
-                @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-text"
-                :to="{ name: 'favourite' }"
-              >
-                Favourite
-              </router-link>
-            </li>
-            <li>
-              <router-link
-                @click="emits('closeMenu')"
-                class="text-textPrimary text-sm max-lg:text-tabletText hover:text-black transition-all font-text"
-                :to="{ name: 'contact' }"
-              >
-                Contact</router-link
-              >
-            </li>
-          </ul>
-        </nav>
-      </header>
-    </div>
+      </div>
+    </transition>
   </div>
 </template>
 
 <script setup>
+const emits = defineEmits(['closeMenu'])
 const props = defineProps({
-  menuSate: {
-    type: null,
-    required: true
+  menuState: {
+    type: Boolean
   }
 })
-
-const emits = defineEmits(['closeMenu'])
 </script>
 
-<style scoped>
-nav ul {
-  display: flex;
-  flex-direction: column;
-  text-align: start;
-  margin: 60px 40px auto;
-  border-radius: 0.1rem;
-  transition: all 0.025s ease;
-  cursor: default;
-}
-nav ul > li {
-  padding: 25px;
+<style >
+.menu {
+  position: fixed;
+  width: 100%;
+  height: 0%;
+  background: #f1f1f1;
+  box-shadow: 0px 2px 3px #fafafa;
+  top: -20%;
+  left: 0;
+  right: 0;
+  z-index: 9;
+  transform: translateX(-5000px);
+
+  transition: height 0.22s cubic-bezier(1, 0.92, 0.65, 1);
 }
 
-nav > ul > li > a {
-  padding: 15px;
-  font-weight: 600;
+.nav > a {
+  color: #000;
+}
 
-  &:hover {
-    background: #d7d7d7;
-  }
+.menu.active {
+  height: 65%;
+  top: 0;
+  transform: translateX(0px);
+}
+.menu.leave-active {
+  transition: all 1s;
+  opacity: 0.7;
 }
 </style>

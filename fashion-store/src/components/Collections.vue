@@ -1,6 +1,6 @@
 <template>
   <section class="collections w-full">
-    <h1 class="text-6xl max-md:text-5xl max-sm:text-4xl font-text">
+    <h1 class="text-h1 max-md:text-h3 font-text">
       <b>
         XIV <br />
         COLLECTIONS
@@ -9,20 +9,20 @@
       </b>
     </h1>
     <div
-      class="options flex justify-between items-end mt-5 mb-10 border-b border-[#ccc] p-2 max-md:mb-7 max-md:p-0"
+      class="flex justify-between items-end mb-3 border-b border-[#ccc] p-2 max-md:mb-7 max-md:p-0"
     >
       <div class="categories flex gap-10 max-sm:gap-5">
-        <button class="font-text text-sm">(ALL)</button>
-        <button class="font-text text-sm">MEN</button>
-        <button class="font-text text-sm">WOMEN</button>
-        <button class="font-text text-sm">KIDS</button>
+        <button class="font-text text-sm max-md:text-smaller">(ALL)</button>
+        <button class="font-text text-sm max-md:text-smaller">MEN</button>
+        <button class="font-text text-sm max-md:text-smaller">WOMEN</button>
+        <button class="font-text text-sm max-md:text-smaller">KIDS</button>
       </div>
       <div class="filters-sorts flex items-center gap-20 max-md:hidden">
-        <button class="font-text text-sm">Filters(+)</button>
+        <button class="font-text text-sm max-md:text-smaller">Filters(+)</button>
         <div>
-          <span class="font-text text-sm">Sorts(-)</span>
-          <p class="font-text text-sm">Less to More</p>
-          <p class="font-text text-sm">More to Less</p>
+          <span class="font-text text-sm max-md:text-smaller">Sorts(-)</span>
+          <p class="font-text text-sm max-md:text-smaller">Less to More</p>
+          <p class="font-text text-sm max-md:text-smaller">More to Less</p>
         </div>
       </div>
     </div>
@@ -92,13 +92,15 @@
                     <div class="title">
                       <h3 class="max-sm:text-[.7rem]">
                         <b>
-                          {{ product.title.substring(0, 22) }}
+                          {{ product.title.substring(7, 35) }}
                         </b>
                       </h3>
                     </div>
                   </div>
                   <div class="price max-md:hidden">
-                    <h3>${{ product.price.toFixed(2) }}</h3>
+                    <h3>
+                      <b> ${{ product.price.toFixed(2) }} </b>
+                    </h3>
                   </div>
                 </div>
               </div>
@@ -110,7 +112,9 @@
         </div>
       </div>
       <div class="action flex flex-col justify-center items-center mt-10 mb-3">
-        <button class="text-[#5e5e5e]">More</button>
+        <router-link :to="{ name: 'collections' }" class="text-gray-600 max-md:text-small"
+          >More</router-link
+        >
         <svg
           viewBox="0 0 1024 1024"
           class="icon"
@@ -121,10 +125,7 @@
           <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
           <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
           <g id="SVGRepo_iconCarrier">
-            <path
-              d="M903.232 256l56.768 50.432L512 768 64 306.432 120.768 256 512 659.072z"
-              fill="#000000"
-            ></path>
+            <path d="M903.232 256l56.768 50.432L512 768 64 306.432 120.768 256 512 659.072z"></path>
           </g>
         </svg>
       </div>
@@ -150,7 +151,6 @@ const useStore = piniaStore()
   animation: up-down 1s ease-out infinite;
   animation-delay: 0.7s;
 }
-
 @keyframes up-down {
   from {
     transform: translateY(0px);
@@ -159,6 +159,13 @@ const useStore = piniaStore()
   to {
     transform: translateY(30px);
     opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .action svg {
+    width: 14px;
+    height: 14px;
   }
 }
 </style>

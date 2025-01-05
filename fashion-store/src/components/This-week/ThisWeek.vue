@@ -1,13 +1,13 @@
 <template>
   <section>
-    <span class="flex justify-between items-end text-start max-sm:items-center">
-      <h1 class="text-h1 max-md:text-h2 font-text">
+    <span class="flex justify-between items-center text-start">
+      <h1 class="text-h1 max-md:text-h3 font-text">
         <b>
           NEW <br />
           THIS WEEK
         </b>
       </h1>
-      <router-link :to="{ name: 'collections' }" class="font-text text-normal max-sm:text-sm"
+      <router-link :to="{ name: 'collections' }" class="font-text text-sm max-sm:text-small mt-14"
         >See All</router-link
       >
     </span>

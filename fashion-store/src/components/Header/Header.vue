@@ -8,8 +8,8 @@
     >
       <!-- menu svg-->
       <nav class="flex justify-center gap-10 items-center text-center max-lg:gap-5">
-        <div
-          class="menu hover:bg-[#ddd] hover:scale-105 rounded-full transition-all"
+        <button
+          class="hover:bg-[#ddd] hover:scale-105 rounded-full transition-all"
           @click="toggleMenu"
         >
           <svg
@@ -31,7 +31,7 @@
               ></path>
             </g>
           </svg>
-        </div>
+        </button>
         <div
           class="routes flex justify-center items-center gap-10 max-xl:gap-7 max-lg:gap-5 max-md:hidden"
         >
@@ -183,18 +183,16 @@
     </header>
 
     <!--menu modals -->
-    <transition name="slides">
-      <MenuModal :menu-sate="menuState" @close-menu="isMenuClosed" />
-    </transition>
+    <Menu :menu-state="menuState" @close-menu="updateMenuState" />
   </div>
 </template>
 
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import Logo from '../Logo.vue'
-import MenuModal from './Menu.vue'
+import Menu from './Menu.vue'
 import { useRouter } from 'vue-router'
-import { useRoute } from 'vue-router'
+
 import { piniaStore } from '@/stores/store'
 import { getAuth, signOut } from 'firebase/auth'
 import { object } from 'yup'
@@ -225,15 +223,16 @@ const isProfileToggled = () => {
 
 // menu
 
-const menuState = ref(null)
+const menuState = ref(false)
 const toggleMenu = () => {
-  menuState.value = !menuState.value
+  menuState.value = true
 }
 
-const isMenuClosed = () => {
-  menuState.value = null
+const updateMenuState = () => {
+  menuState.value = false
 }
 
+// logout
 const logoutUser = async () => {
   await signOut(useStore.auth)
     .then((data) => {

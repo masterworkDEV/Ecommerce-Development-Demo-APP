@@ -23,17 +23,6 @@ const router = createRouter({
           name: 'new',
           component: () => import('../views/New.vue')
         },
-
-        {
-          path: '/cart',
-          name: 'cart',
-          component: () => import('../components/Cart/Cart.vue')
-        },
-        {
-          path: '/favourite',
-          name: 'favourite',
-          component: () => import('../components/Favourite/Favourites.vue')
-        },
         {
           path: '/auth/',
           component: () => import('../components/Authentication/authenticate.vue'),
@@ -42,7 +31,7 @@ const router = createRouter({
               path: 'login',
               name: 'login',
               meta: {
-                transition: 'slide-left'
+                transition: 'left'
               },
               component: () => import('../components/Authentication/Login.vue')
             },
@@ -50,16 +39,38 @@ const router = createRouter({
               path: 'sign-up',
               name: 'sign-up',
               meta: {
-                transition: 'slide-right'
+                transition: 'right'
               },
               component: () => import('../components/Authentication/SignUp.vue')
+            }
+          ]
+        },
+        {
+          path: '/store/',
+          component: () => import('../components/navigate-store/Store.vue'),
+          children: [
+            {
+              path: 'cart',
+              name: 'cart',
+              meta: {
+                transition: 'left'
+              },
+              component: () => import('../components/navigate-store/Cart/Cart.vue')
+            },
+            {
+              path: 'favourite',
+              name: 'favourite',
+              meta: {
+                transition: 'right'
+              },
+              component: () => import('../components/navigate-store/Favourite/Favourites.vue')
             }
           ]
         }
       ]
     },
 
-    //  protected routes or Users only
+    //  logged in Users only
     {
       path: '/user-dashboard',
       component: () => import('../components/UserDashboard.vue'),
@@ -90,14 +101,26 @@ const router = createRouter({
           component: () => import('../views/Deals.vue')
         },
         {
-          path: '/cart',
-          name: 'cart',
-          component: () => import('../components/Cart/Cart.vue')
-        },
-        {
-          path: '/favourite',
-          name: 'favourite',
-          component: () => import('../components/Favourite/Favourites.vue')
+          path: '/store/',
+          component: () => import('../components/navigate-store/Store.vue'),
+          children: [
+            {
+              path: 'cart',
+              name: 'cart',
+              meta: {
+                transition: 'left'
+              },
+              component: () => import('../components/navigate-store/Cart/Cart.vue')
+            },
+            {
+              path: 'favourite',
+              name: 'favourite',
+              meta: {
+                transition: 'right'
+              },
+              component: () => import('../components/navigate-store/Favourite/Favourites.vue')
+            }
+          ]
         },
         {
           path: '/settings',
@@ -107,7 +130,7 @@ const router = createRouter({
         {
           path: '/check-out',
           name: 'check-out',
-          component: () => import('../components/Cart/CheckOutPage.vue')
+          component: () => import('../components/navigate-store/Cart/CheckOutPage.vue')
         }
       ]
     }

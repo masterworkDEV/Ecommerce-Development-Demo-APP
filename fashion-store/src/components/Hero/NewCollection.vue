@@ -16,7 +16,7 @@
         class="row flex justify-center gap-5 w-full max-lg:gap-3 max-md:flex-col-reverse max-md:gap-1"
       >
         <div class="col relative">
-          <h1 class="text-6xl max-xl:text-5xl max-md:hidden font-text">
+          <h1 class="text-6xl max-xl:text-h1 max-md:hidden font-text">
             <b>
               NEW <br />
               COLLECTION
@@ -29,13 +29,13 @@
           >
             <router-link
               :to="{ name: 'collections' }"
-              class="flex justify-between w-full p-2 max-lg:p-1 bg-inputBg text-start gap-5"
+              class="shop flex items-center w-full bg-inputBg text-start gap-5 p-2"
             >
-              <span class="font-text text-sm">
+              <span class="font-text text-sm w-full">
                 <b>Go To Shop</b>
               </span>
               <svg
-                class="w-2/4 h-5"
+                class="w-full h-6 translate-x-10 transition-all"
                 fill="#000000"
                 height="none"
                 width="none"
@@ -131,3 +131,11 @@ const props = defineProps({
 })
 const inputValue = ref(props.searchValue)
 </script>
+<style>
+.shop:hover {
+  background: #ccc;
+}
+.shop:hover svg {
+  transform: translateX(60px);
+}
+</style>

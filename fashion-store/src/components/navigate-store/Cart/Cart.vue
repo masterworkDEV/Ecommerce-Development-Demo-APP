@@ -1,15 +1,5 @@
 <template>
   <main class="pages px-14 max-md:px-5">
-    <div
-      class="title flex justify-start items-center gap-7 border-b border-primary mb-5 pb-3 pt-20 w-[65%] max-md:w-full max-md:border-none"
-    >
-      <h4 class="text-normal max-md:text-smaller font-text"><b>SHOPPING BAG</b></h4>
-      <span class="favourite">
-        <router-link :to="{ name: 'favourite' }">
-          <p class="text-normal max-md:text-smaller font-text">FAVORITES</p>
-        </router-link>
-      </span>
-    </div>
     <h3 v-if="!Object.values(useStore.cart).length" class="text-h4 text-center max-md:text-h5 m-10">
       There is no product in cart!!
     </h3>
@@ -263,12 +253,7 @@ const checkOutNow = () => {
 }
 </script>
 
-<style >
-svg {
-  width: 20px;
-  height: 20px;
-}
-
+<style>
 .checked {
   background: blue;
 }

@@ -1,6 +1,6 @@
 <template>
   <main class="pages px-14 max-md:px-5">
-    <span class="justify-center items-center hidden max-md:flex">
+    <span class="justify-center items-center text-center hidden max-md:flex">
       <router-link class="font-text text-small">
         <b> Home </b>
       </router-link>
@@ -13,43 +13,87 @@
       <b> PRODUCTS </b>
     </h2>
     <SearchItem :search-value="search" @setChange="updateSearchValue" />
-    <span>
-      <h4 class="mt-4 mb-2">Filters</h4>
-    </span>
-    <div
-      class="btn-list flex overflow-x-auto overflow-y-hidden justify-start items-center gap-5 w-full"
-    >
-      <button
-        v-for="btn in buttonList.slice(0, 6)"
-        :key="btn.id"
-        class="border border-gray-500 p-2 w-full font-text text-small uppercase"
+
+    <div class="filter mt-5 mb-2 cursor-pointer flex items-center w-32">
+      <b class="text-normal max-md:text-sm">Filters</b>
+      <svg
+        class="w-8 h-8 max-md:w-6 max-md:h-6 transition-all"
+        viewBox="0 0 32 32"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        fill="#000000"
       >
-        <pre>{{ btn.name }}</pre>
-      </button>
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+        <g id="SVGRepo_iconCarrier">
+          <g id="icomoon-ignore"></g>
+          <path
+            d="M19.159 16.767l0.754-0.754-6.035-6.035-0.754 0.754 5.281 5.281-5.256 5.256 0.754 0.754 3.013-3.013z"
+          ></path>
+        </g>
+      </svg>
+    </div>
+    <div class="flex flex-wrap gap-2 overflow-x-auto">
+      <div class="btn flex text-center gap-2">
+        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
+          NEW
+        </button>
+        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
+          SHIRTS
+        </button>
+        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
+          POLO SHIRTS
+        </button>
+        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
+          SHOES
+        </button>
+        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
+          CAPS
+        </button>
+        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
+          BAGS
+        </button>
+      </div>
+      <div class="btn flex text-center gap-2">
+        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
+          BEST SELLERS
+        </button>
+        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
+          T-SHIRTS
+        </button>
+        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
+          JEANS
+        </button>
+        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
+          HOODIES
+        </button>
+        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
+          GLASSES
+        </button>
+        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
+          FURNITURE
+        </button>
+      </div>
     </div>
     <div
-      class="btn-list flex overflow-x-auto overflow-y-hidden justify-start items-center gap-5 w-full mt-1"
-    >
-      <button
-        v-for="btn in buttonList.slice(6, 11)"
-        :key="btn.id"
-        @click="handleFilter(btn.id)"
-        class="border border-gray-500 p-2 w-full font-text text-small uppercase"
-      >
-        <pre>{{ btn.name }}</pre>
-      </button>
-    </div>
-    <div
-      class="row mt-10 max-md:mt-5 grid grid-cols-3 place-items-center place-content-center gap-10 max-md:grid-cols-2"
+      class="row mt-14 max-md:mt-5 grid grid-cols-3 place-items-center place-content-center gap-10 max-md:grid-cols-2 max-md:gap-5"
     >
       <article
-        class="w-full max-md:h-[300px] max-lg:h-[375px] max-xl:h-[395px]"
+        class="w-full max-md:h-[275px] max-lg:h-[375px] max-xl:h-[395px]"
         v-for="product in products"
         :key="product.id"
       >
         <img :src="product.images" :alt="product.title" class="h-3/4 w-full object-cover" />
-        <p>{{ product.category.name }}</p>
-        <h3>{{ product.title }}</h3>
+        <p class="mb-1 text-sm max-md:text-smaller font-text">{{ product.category.name }}</p>
+        <div class="flex justify-between items-center">
+          <h3 class="text-normal max-md:text-small font-text">
+            <b>{{ product.title.substring(0, 20) }}</b>
+          </h3>
+          <h3 class="text-normal max-md:text-small font-text">
+            <b>${{ product.price }}</b>
+          </h3>
+        </div>
       </article>
     </div>
   </main>
@@ -102,4 +146,8 @@ const products = computed(() => {
 })
 </script>
 
-<style></style>
+<style>
+.filter:hover > svg {
+  transform: translateX(10px);
+}
+</style>
