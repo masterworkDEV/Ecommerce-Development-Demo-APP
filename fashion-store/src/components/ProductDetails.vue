@@ -1,10 +1,50 @@
 <template>
   <div>
     <header class="mx-14 max-md:mx-5 fixed top-5 right-0 left-0">
-      <nav class="flex justify-between items-center gap-2">
-        <router-link @click="backToCollections" :to="{ name: 'collections' }">Back</router-link>
+      <nav class="flex justify-between items-center">
+        <router-link @click="backToCollections" :to="{ name: 'collections' }">
+          <svg
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="#000000"
+            class="w-10 h-8 max-md:h-6"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+              <title></title>
+              <g id="Complete">
+                <g id="arrow-left">
+                  <g>
+                    <polyline
+                      data-name="Right"
+                      fill="none"
+                      id="Right-2"
+                      points="7.6 7 2.5 12 7.6 17"
+                      stroke="#000000"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    ></polyline>
+                    <line
+                      fill="none"
+                      stroke="#000000"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      x1="21.5"
+                      x2="4.8"
+                      y1="12"
+                      y2="12"
+                    ></line>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </router-link>
 
-        <div class="flex items-center">
+        <div class="flex items-center gap-1">
           <router-link :to="{ name: 'cart' }">
             <div class="flex items-center justify-end text-center">
               <span
@@ -44,7 +84,6 @@
           <div
             @click="isProfileToggled"
             class="user relative bg-bgColorSecondary w-[50px] h-[50px] max-xl:h-[45px] max-xl:w-[45px] rounded-full flex items-center justify-center"
-            :class="isScrolling ? 'nav-active' : ''"
           >
             <svg
               viewBox="0 0 24 24"
@@ -101,10 +140,22 @@
     <main class="pages px-14 max-md:px-0">
       <p v-if="isLoading">Loading please wait...</p>
       <pre v-else-if="isError">{{ isError }}</pre>
-      <div v-else class="max-md:h-3/4 max-md:w-full">
-        <img :src="product.images" :alt="product.title" class="h-full w-full object-cover" />
-        <div class="row mt-10 w-full h-full flex" v-for="image in product.images">
-          <img :src="image" :alt="product.title" class="w-1/4 h-1/4" />
+      <div v-else class="max-md:h-full max-md:w-full">
+        <img
+          :src="product.images[currentImage]"
+          :alt="product.title"
+          class="h-full w-full object-cover"
+        />
+        <div class="mt-10 w-full h-full flex justify-start pl-5 gap-5 overflow-x-auto">
+          <img
+            v-for="(image, index) in product.images"
+            :key="image"
+            :src="image"
+            :alt="product.title"
+            class="image-row"
+            :class="index === currentImage && 'active'"
+            @click="handleImageClicks(index)"
+          />
         </div>
       </div>
     </main>
@@ -123,6 +174,10 @@ const API_URL = `https://api.escuelajs.co/api/v1/products`
 const product = ref({})
 const isLoading = ref(true)
 const isError = ref(false)
+const currentImage = ref(0)
+const handleImageClicks = (image) => {
+  currentImage.value = image
+}
 
 onMounted(() => {
   useStore.navState = false
@@ -147,4 +202,12 @@ const backToCollections = () => {
 </script>
 
 <style scoped>
+.image-row {
+  width: 30%;
+  height: 40%;
+  opacity: 0.7;
+}
+.image-row.active {
+  opacity: 1;
+}
 </style>

@@ -4,11 +4,7 @@
     <li class="max-xl:text-sm text-textPrimary font-text max-sm:text-small">WOMEN</li>
     <li class="max-xl:text-sm text-textPrimary font-text max-sm:text-small">KIDS</li>
   </ul>
-  <SearchItem
-    :search-value="searchValue"
-    @setChange="updateSearchValue"
-    @setSubmit="updateSubmit"
-  />
+  <SearchItem :search-value="searchValue" @setChange="updateSearchValue" />
   <NewCollection :products="products" :search-value="searchValue" />
 </template>
 

@@ -1,12 +1,10 @@
 <template>
   <main class="pages px-14 max-md:px-5 pb-10">
     <span class="justify-center items-center text-center hidden max-md:flex">
-      <router-link class="font-text text-small">
-        <b> Home </b>
-      </router-link>
+      <router-link class="font-text text-small" :to="{ name: 'home' }"> Home </router-link>
       /
-      <router-link class="font-text text-small">
-        <b> products </b>
+      <router-link class="font-text text-small" :to="{ name: 'collections' }">
+        products
       </router-link>
     </span>
     <h2 class="flex justify-start text-h2 max-xl:text-h3 max-md:text-normal max-md:justify-center">
@@ -104,8 +102,38 @@
       </button>
     </template>
     <div class="flex justify-center gap-5 pt-10">
-      <button @click="handlePreviousPage">Previous</button>
-      <button @click="handleNextPage">Next</button>
+      <button @click="handlePreviousPage">
+        <svg
+          viewBox="0 0 1024 1024"
+          class="icon w-10 h-8 max-md:h-5"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="#000000"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M768 903.232l-50.432 56.768L256 512l461.568-448 50.432 56.768L364.928 512z"
+            ></path>
+          </g>
+        </svg>
+      </button>
+      <button @click="handleNextPage">
+        <svg
+          viewBox="0 0 1024 1024"
+          class="icon w-10 h-8 max-md:h-5"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="#000000"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path d="M256 120.768L306.432 64 768 512l-461.568 448L256 903.232 659.072 512z"></path>
+          </g>
+        </svg>
+      </button>
     </div>
   </main>
 </template>
@@ -159,6 +187,9 @@ const products = computed(() => {
     .filter((item) => item.title.toLowerCase().includes(search.value.toLowerCase()))
     .slice(startFrom, endAt)
 })
+const totalPages = computed(() => {
+  return Math.ceil(products.value.length / itemsPerPage.value)
+})
 
 const handlePreviousPage = () => {
   if (initialPage.value === 1) {
@@ -178,7 +209,10 @@ const handleNextPage = () => {
 }
 </script>
 
-<style>
+<style scoped>
+.router-link-active {
+  font-weight: 900;
+}
 .filter:hover > svg {
   transform: translateX(10px);
 }

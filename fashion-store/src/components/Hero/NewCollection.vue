@@ -3,11 +3,6 @@
     <div v-if="useStore.isLoading" class="w-full">
       <div class="row grid grid-cols-3 gap-10 w-full">
         <LoadingCard v-for="card in Array(3)" :key="card" class="max-md:hidden" />
-        <LoadingCard
-          v-for="load in Array(1)"
-          :key="load"
-          class="h-20 w-20 max-2xl:hidden max-md:flex"
-        />
       </div>
     </div>
     <div v-else>
@@ -62,7 +57,13 @@
 
             <div class="btns flex justify-center items-center gap-2 max-md:hidden">
               <button class="border border-gray-400 p-2 max-lg:p-1 cursor-default">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  height="none"
+                  width="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                   <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                   <g id="SVGRepo_iconCarrier">
