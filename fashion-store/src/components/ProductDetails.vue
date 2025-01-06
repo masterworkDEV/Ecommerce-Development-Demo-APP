@@ -57,9 +57,8 @@
               >
                 <p
                   class="cart-count top-2 left-0 absolute w-4 h-2 bg-red-500 rounded-full flex items-center justify-center text-white p-3"
-                  v-if="cartCount"
                 >
-                  {{ cartCount }}
+                  {{ 0 }}
                 </p>
                 <svg
                   viewBox="0 0 24 24"
@@ -82,7 +81,6 @@
           </router-link>
 
           <div
-            @click="isProfileToggled"
             class="user relative bg-bgColorSecondary w-[50px] h-[50px] max-xl:h-[45px] max-xl:w-[45px] rounded-full flex items-center justify-center"
           >
             <svg
@@ -105,30 +103,26 @@
             </svg>
 
             <div
-              v-if="checkUser"
-              class="user-state bg-bgColorPrimary w-[200px] h-[120px] p-5 absolute top-16 right-0 rounded-sm shadow-2xl border border-[#fafafa]"
+              class="user-state hidden bg-bgColorPrimary w-[200px] h-[120px] p-5 absolute top-16 right-0 rounded-sm shadow-2xl border border-[#fafafa]"
             >
               <div class="verified" v-if="useStore.verifiedUser">
                 <p>{{ useStore.displayVerifiedUser.email }}</p>
 
-                <button
-                  class="bg-bgColorSecondary text-textPrimaryTwo w-full p-2 rounded"
-                  @click="logoutUser"
-                >
+                <button class="bg-bgColorSecondary text-textPrimaryTwo w-full p-2 rounded">
                   Log Out
                 </button>
               </div>
               <div class="unverified" v-else>
                 <div class="login">
-                  <a href="/auth/login">
+                  <router-link :to="{ name: 'login' }">
                     <button class="bg-bgColorSecondary text-textPrimaryTwo w-full p-2 rounded">
                       Login
                     </button>
-                  </a>
+                  </router-link>
                 </div>
                 <div class="sign-up mt-3">
                   <router-link :to="{ name: 'sign-up' }">
-                    <h1 class="text-black underline text-lg">Sign-up</h1>
+                    <h3 class="text-black underline text-lg">Sign-up</h3>
                   </router-link>
                 </div>
               </div>
