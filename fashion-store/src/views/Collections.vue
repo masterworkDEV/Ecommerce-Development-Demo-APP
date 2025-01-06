@@ -1,12 +1,12 @@
 <template>
-  <main class="pages px-14 max-md:px-5">
+  <main class="pages px-14 max-md:px-5 pb-10">
     <span class="justify-center items-center text-center hidden max-md:flex">
       <router-link class="font-text text-small">
         <b> Home </b>
       </router-link>
       /
       <router-link class="font-text text-small">
-        <b> Products </b>
+        <b> products </b>
       </router-link>
     </span>
     <h2 class="flex justify-start text-h2 max-xl:text-h3 max-md:text-normal max-md:justify-center">
@@ -81,10 +81,12 @@
     >
       <article
         class="w-full max-md:h-[275px] max-lg:h-[375px] max-xl:h-[395px]"
-        v-for="product in products"
+        v-for="(product, index) in products"
         :key="product.id"
       >
-        <img :src="product.images" :alt="product.title" class="h-3/4 w-full object-cover" />
+        <router-link :to="{ name: 'product-details', params: { productID: product.id } }">
+          <img :src="product.images" :alt="product.title" class="h-3/4 w-full object-cover" />
+        </router-link>
         <p class="mb-1 text-sm max-md:text-smaller font-text">{{ product.category.name }}</p>
         <div class="flex justify-between items-center">
           <h3 class="text-normal max-md:text-small font-text">
@@ -95,6 +97,15 @@
           </h3>
         </div>
       </article>
+    </div>
+    <template v-for="page in totalPages" :key="page">
+      <button @click="initialPage = page" :class="{ active: initialPage === page }">
+        {{ page }}
+      </button>
+    </template>
+    <div class="flex justify-center gap-5 pt-10">
+      <button @click="handlePreviousPage">Previous</button>
+      <button @click="handleNextPage">Next</button>
     </div>
   </main>
 </template>
@@ -137,13 +148,34 @@ const handleFilter = (id) => {
     }
   })
 }
+
+// display data per page ****pagination****
+const initialPage = ref(1)
+const itemsPerPage = ref(10)
 const products = computed(() => {
-  return useStore.products.slice(0, 50).filter((item) => {
-    if (item.title) {
-      return item.title.toLowerCase().includes(search.value.toLowerCase())
-    }
-  })
+  const startFrom = (initialPage.value - 1) * itemsPerPage.value
+  const endAt = startFrom + itemsPerPage.value
+  return useStore.products
+    .filter((item) => item.title.toLowerCase().includes(search.value.toLowerCase()))
+    .slice(startFrom, endAt)
 })
+
+const handlePreviousPage = () => {
+  if (initialPage.value === 1) {
+    alert('this is the start if the start of the page')
+    return false
+  } else {
+    return initialPage.value--
+  }
+}
+const handleNextPage = () => {
+  if (Math.ceil(products.value.length / itemsPerPage.value === 0)) {
+    alert("you've gotten to the end of the page")
+    return false
+  } else {
+    return initialPage.value++
+  }
+}
 </script>
 
 <style>

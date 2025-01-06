@@ -24,6 +24,11 @@ const router = createRouter({
           component: () => import('../views/New.vue')
         },
         {
+          path: '/product-details/:productID?',
+          name: 'product-details',
+          component: () => import('../components/ProductDetails.vue')
+        },
+        {
           path: '/auth/',
           component: () => import('../components/Authentication/authenticate.vue'),
           children: [

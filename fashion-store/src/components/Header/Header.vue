@@ -96,7 +96,7 @@
                 Cart
               </span>
               <div
-                class="cart-icon relative border-[.4rem] border-black w-[50px] h-[50px] max-xl:h-[40px] max-xl:w-[40px] rounded-full flex items-center justify-center text-center max-md:border-[.3rem] max-md:w-[38px] max-md:h-[38px]"
+                class="cart-icon relative border-[.4rem] border-black w-[50px] h-[50px] max-xl:h-[45px] max-xl:w-[45px] rounded-full flex items-center justify-center text-center max-md:border-[.3rem]"
               >
                 <p
                   class="cart-count top-2 left-0 absolute w-4 h-2 bg-red-500 rounded-full flex items-center justify-center text-white p-3"
@@ -126,7 +126,7 @@
 
           <div
             @click="isProfileToggled"
-            class="user relative bg-bgColorSecondary w-[50px] h-[50px] max-xl:h-[40px] max-xl:w-[40px] rounded-full flex items-center justify-center max-md:w-[38px] max-md:h-[38px]"
+            class="user relative bg-bgColorSecondary w-[50px] h-[50px] max-xl:h-[45px] max-xl:w-[45px] rounded-full flex items-center justify-center"
             :class="isScrolling ? 'nav-active' : ''"
           >
             <svg
