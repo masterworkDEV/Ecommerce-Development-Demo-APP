@@ -74,28 +74,38 @@
         </button>
       </div>
     </div>
-    <div
-      class="row mt-14 max-md:mt-5 grid grid-cols-3 place-items-center place-content-center gap-10 max-md:grid-cols-2 max-md:gap-5"
-    >
-      <article
-        class="w-full max-md:h-[275px] max-lg:h-[375px] max-xl:h-[395px]"
-        v-for="(product, index) in products"
-        :key="product.id"
-      >
-        <router-link :to="{ name: 'product-details', params: { productID: product.id } }">
-          <img :src="product.images" :alt="product.title" class="h-3/4 w-full object-cover" />
-        </router-link>
-        <p class="mb-1 text-sm max-md:text-smaller font-text">{{ product.category.name }}</p>
-        <div class="flex justify-between items-center">
-          <h3 class="text-normal max-md:text-small font-text">
-            <b>{{ product.title.substring(0, 20) }}</b>
-          </h3>
-          <h3 class="text-normal max-md:text-small font-text">
-            <b>${{ product.price }}</b>
-          </h3>
-        </div>
-      </article>
+    <div class="loading" v-if="useStore.isLoading">
+      <p>Loading please wait....</p>
     </div>
+
+    <template v-else>
+      <div
+        v-if="useStore.isReady"
+        class="row mt-14 max-md:mt-5 grid grid-cols-3 place-items-center place-content-center gap-10 max-md:grid-cols-2 max-md:gap-5"
+      >
+        <article
+          class="w-full max-md:h-[275px] max-lg:h-[375px] max-xl:h-[395px]"
+          v-for="(product, index) in products"
+          :key="product.id"
+        >
+          <router-link :to="{ name: 'product-details', params: { productID: product.id } }">
+            <img :src="product.images" :alt="product.title" class="h-3/4 w-full object-cover" />
+          </router-link>
+          <p class="mb-1 text-sm max-md:text-smaller font-text">{{ product.category.name }}</p>
+          <div class="flex justify-between items-center">
+            <h3 class="text-normal max-md:text-small font-text">
+              <b>{{ product.title.substring(0, 20) }}</b>
+            </h3>
+            <h3 class="text-normal max-md:text-small font-text">
+              <b>${{ product.price }}</b>
+            </h3>
+          </div>
+        </article>
+      </div>
+      <div v-else class="error h-96 w-full flex justify-center text-center items-center">
+        <p>Something went wrong</p>
+      </div>
+    </template>
     <template v-for="page in totalPages" :key="page">
       <button @click="initialPage = page" :class="{ active: initialPage === page }">
         {{ page }}
@@ -105,10 +115,11 @@
       <button @click="handlePreviousPage">
         <svg
           viewBox="0 0 1024 1024"
-          class="icon w-10 h-8 max-md:h-5"
+          class="icon fill-black w-10 h-8 max-md:h-5 transition-all"
+          :class="initialPage === 1 && 'fill-gray-600'"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
-          fill="#000000"
+          fill="none"
         >
           <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
           <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -122,10 +133,11 @@
       <button @click="handleNextPage">
         <svg
           viewBox="0 0 1024 1024"
-          class="icon w-10 h-8 max-md:h-5"
+          class="icon fill-black w-10 h-8 max-md:h-5 transition-all"
+          :class="products.length / itemsPerPage === 0 && 'fill-gray-600'"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
-          fill="#000000"
+          fill="none"
         >
           <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
           <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>

@@ -7,26 +7,26 @@
       class="grid grid-cols-2 pt-20 px-24 max-md:px-10 max-sm:px-20 place-content-center place-items-start"
     >
       <div class="col">
-        <p class="text-small font-primary max-sm:text-smallest max-smaller:text-xSmall">INFO</p>
+        <p class="text-small font-primary max-sm:text-small max-smaller:text-xSmall">INFO</p>
         <ul class="mt-5">
           <li>
             <a
               href="#"
-              class="text-small font-text max-md:text-smaller max-sm:text-smallest hover:underline transition-all max-smaller:text-xSmall"
+              class="text-small font-text max-md:text-smaller max-sm:text-small hover:underline transition-all max-smaller:text-xSmall"
               >PRICING</a
             >
           </li>
           <li>
             <a
               href="#"
-              class="text-small font-text max-md:text-smaller max-sm:text-smallest hover:underline transition-all max-smaller:text-xSmall"
+              class="text-small font-text max-md:text-smaller max-sm:text-small hover:underline transition-all max-smaller:text-xSmall"
               >ABOUT</a
             >
           </li>
           <li>
             <a
               href="#"
-              class="text-small font-text max-md:text-smaller max-sm:text-smallest hover:underline transition-all max-smaller:text-xSmall"
+              class="text-small font-text max-md:text-smaller max-sm:text-small hover:underline transition-all max-smaller:text-xSmall"
               >CONTACT</a
             >
           </li>
@@ -36,29 +36,29 @@
           <li>
             <a
               href="#"
-              class="text-small max-md:text-smaller max-sm:text-smallest hover:underline transition-all max-smaller:text-xSmall"
+              class="text-small max-md:text-smaller max-sm:text-small hover:underline transition-all max-smaller:text-xSmall"
               >ENG</a
             >
           </li>
           <li>
             <a
               href="#"
-              class="text-small font-text max-md:text-smaller max-sm:text-smallest hover:underline transition-all max-smaller:text-xSmall"
+              class="text-small font-text max-md:text-smaller max-sm:text-small hover:underline transition-all max-smaller:text-xSmall"
               >ESP</a
             >
           </li>
           <li>
             <a
               href="#"
-              class="text-small font-text max-md:text-smaller max-sm:text-smallest hover:underline transition-all max-smaller:text-xSmall"
+              class="text-small font-text max-md:text-smaller max-sm:text-small hover:underline transition-all max-smaller:text-xSmall"
               >SVE</a
             >
           </li>
         </ul>
       </div>
       <div class="col">
-        <p class="text-small max-md:text-smallest font-primary">TECHNOLOGIES</p>
-        <div class="mt-10">
+        <p class="text-small max-md:text-small font-primary">TECHNOLOGIES</p>
+        <div class="mt-5 flex justify-start">
           <Logo />
         </div>
         <div class="flex items-start justify-center gap-2">

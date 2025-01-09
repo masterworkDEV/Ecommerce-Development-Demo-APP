@@ -32,8 +32,8 @@
               <svg
                 class="w-full h-6 translate-x-10 transition-all"
                 fill="#000000"
-                height="none"
-                width="none"
+                height="300"
+                width="250"
                 version="1.1"
                 id="Layer_1"
                 xmlns="http://www.w3.org/2000/svg"

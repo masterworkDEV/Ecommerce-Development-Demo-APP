@@ -98,12 +98,13 @@
               <div
                 class="cart-icon relative border-[.4rem] border-black w-[50px] h-[50px] max-xl:h-[45px] max-xl:w-[45px] rounded-full flex items-center justify-center text-center max-md:border-[.3rem]"
               >
-                <p
-                  class="cart-count top-2 left-0 absolute w-4 h-2 bg-red-500 rounded-full flex items-center justify-center text-white p-3"
-                  v-if="cartCount"
-                >
-                  {{ cartCount }}
-                </p>
+                <div class="cart-count top-2 right-1 absolute rounded-full" v-if="cartCount">
+                  <p
+                    class="flex items-center text-center justify-center w-4 rounded-full bg-red-600 text-white text-smallest"
+                  >
+                    {{ cartCount }}
+                  </p>
+                </div>
                 <svg
                   viewBox="0 0 24 24"
                   class="fill-black w-2/4 h-2/4"
@@ -150,7 +151,7 @@
 
             <div
               v-if="checkUser"
-              class="user-state bg-bgColorPrimary w-[200px] h-[120px] p-5 absolute top-16 right-0 rounded-sm shadow-2xl border border-[#fafafa]"
+              class="user-state bg-bgColorPrimary w-60 h-32 p-5 absolute top-16 right-0 rounded-sm shadow-2xl border border-[#fafafa] max-md:w-40 max-md:h-30"
             >
               <div class="verified" v-if="useStore.verifiedUser">
                 <p>{{ useStore.displayVerifiedUser.email }}</p>
@@ -164,11 +165,11 @@
               </div>
               <div class="unverified" v-else>
                 <div class="login">
-                  <a href="/auth/login">
+                  <router-link :to="{ name: 'login' }">
                     <button class="bg-bgColorSecondary text-textPrimaryTwo w-full p-2 rounded">
                       Login
                     </button>
-                  </a>
+                  </router-link>
                 </div>
                 <div class="sign-up mt-3">
                   <router-link :to="{ name: 'sign-up' }">

@@ -99,12 +99,37 @@
       </div>
     </div>
   </article>
+  <div
+    v-if="useStore.cartNotification || useStore.existedInCart"
+    class="fixed w-full h-full bg-transparentBLK right-0 left-0 top-0 bottom-0 z-30"
+  ></div>
+  <transition name="cart-notification">
+    <div
+      v-if="useStore.cartNotification"
+      class="fixed w-2/4 top-20 right-0 left-[50%] translate-x-[-50%] rounded-2xl cart-notification bg-black p-4 z-40"
+    >
+      <p class="text-white text-center">
+        <b>{{ useStore.productTitle }}</b> has been added to cart!
+      </p>
+    </div>
+  </transition>
+  <transition name="cart-notification">
+    <div
+      v-if="useStore.existedInCart"
+      class="fixed w-2/4 top-20 right-0 left-[50%] translate-x-[-50%] rounded-2xl cart-notification bg-black p-4 z-40"
+    >
+      <p class="text-red-600 text-center">
+        <b class="text-white">{{ useStore.productTitle }}</b> is already in cart!
+      </p>
+    </div>
+  </transition>
 </template>
 
 <script setup>
 import { useDraggable } from '@vueuse/core'
 import { ref, onMounted } from 'vue'
 import { piniaStore } from '@/stores/store'
+
 const useStore = piniaStore()
 defineProps({
   slideIndex: Number
@@ -112,4 +137,13 @@ defineProps({
 </script>
 
 <style>
+.cart-notification-enter-active,
+.cart-notification-leave-active {
+  transition: all 0.3s ease;
+}
+.cart-notification-enter-from,
+.cart-notification-leave-to {
+  top: -10%;
+  opacity: 0;
+}
 </style>

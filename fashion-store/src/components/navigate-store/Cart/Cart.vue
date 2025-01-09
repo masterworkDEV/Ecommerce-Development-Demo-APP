@@ -1,23 +1,44 @@
 <template>
-  <main class="pages px-14 max-md:px-5">
-    <h3 v-if="!Object.values(useStore.cart).length" class="text-h4 text-center max-md:text-h5 m-10">
+  <main class="pages px-14 max-md:px-5 pb-10">
+    <h3
+      v-if="!Object.values(useStore.cart).length"
+      class="text-h5 text-center max-md:text-normal m-10"
+    >
       There is no product in cart!!
     </h3>
-    <div
-      v-else
-      class="w-full flex justify-center items-start gap-12 max-md:grid max-md:grid-cols-1 max-md:place-content-center p-5"
-    >
+    <template v-else>
       <div
-        class="grid grid-cols-2 place-content-center place-items-center gap-10 max-md:grid-cols-1 text-center"
+        class="cart-row w-full flex justify-center gap-20 items-start max-md:justify-start max-md:flex-col"
       >
-        <div class="w-full max-md:w-full" v-for="product in useStore.cart" :key="product.id">
-          <div class="w-full flex items-start justify-center text-center gap-5 relative">
-            <img
-              :src="product.images"
-              :alt="product.title"
-              class="w-full h-[350px] border-2 border-primary"
-            />
-            <div class="preview-side w-10">
+        <div class="prod-row w-3/4 grid grid-cols-2 gap-20 max-md:grid-cols-1 max-md:w-full">
+          <div
+            class="w-full h-[400px] flex items-start justify-start gap-5 max-md:gap-3"
+            v-for="product in useStore.cart"
+            :key="product.id"
+          >
+            <div class="prod-card w-[90%] h-full">
+              <img
+                :src="product.images"
+                :alt="product.title"
+                class="w-full h-full border-2 border-primary"
+              />
+              <div class="flex justify-between items-end text-start">
+                <div>
+                  <p class="mb-2 mt-2 font-text text-small text-gray-600 max-md:text-smaller">
+                    {{ product.category.name }}
+                  </p>
+                  <h6 class="text-sm font-text max-md:text-small">
+                    <b> {{ product.title }}</b>
+                  </h6>
+                </div>
+                <div class="price text-sm font-text max-md:text-small">
+                  <h4>
+                    <b>${{ product.price.toFixed(2) * product.quantity }} </b>
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="preview-side w-[10%]">
               <button
                 @click="useStore.useDelProductFromCart(product.id)"
                 class="delete flex justify-start items-center text-center"
@@ -25,6 +46,7 @@
                 <svg
                   viewBox="0 0 64 64"
                   xmlns="http://www.w3.org/2000/svg"
+                  class="w-8 h-8 max-md:w-6 max-md:h-6"
                   stroke-width="2"
                   stroke="#000000"
                   fill="none"
@@ -104,63 +126,49 @@
               </div>
             </div>
           </div>
-          <div class="flex justify-between items-end text-start">
-            <div>
-              <p class="mb-2 mt-2 text-p font-text max-md:text-smaller">
-                {{ product.category.name }}
-              </p>
-              <h6 class="text-sm font-text max-md:text-p">
-                <b> {{ product.title }}</b>
-              </h6>
-            </div>
-            <div class="price font-text max-md:text-smaller">
-              <h6 class="mr-14">
-                <b>${{ product.price * product.quantity }} </b>
-              </h6>
-            </div>
+        </div>
+        <!-- row-ends -->
+        <div class="border border-primary p-10 max-md:p-5">
+          <h3 class="pt-5 pb-5 text-h5 max-md:text-normal text-center font-secondary">
+            <b>ORDER SUMMARY</b>
+          </h3>
+          <div class="subtotal flex justify-between mb-2">
+            <p class="font-secondary text-normal max-md:text-small"><b> Subtotal</b></p>
+            <p class="font-secondary max-md:text-small">
+              <b>${{ subtotal }}</b>
+            </p>
           </div>
-        </div>
-      </div>
+          <div class="shopping flex justify-between border-b-2 border-[#ddd] mb-5 pb-6">
+            <p class="font-secondary max-md:text-small"><b>Shipping</b></p>
+            <p class="font-secondary max-md:text-small">
+              <b>${{ shippingTotal ? shippingTotal : 0 }}</b>
+            </p>
+          </div>
+          <div class="shopping flex justify-between mb-7 mt-7">
+            <h3 class="flex items-center">
+              <b class="font-secondary text-sm max-md:text-small">TOTAL</b>
+              <p class="font-secondary text-sm max-md:text-small">(TAX INCL)</p>
+            </h3>
+            <h3>
+              $<b class="font-secondary text-sm max-md:text-small">{{ totalAmount }}</b>
+            </h3>
+          </div>
 
-      <!-- row-ends -->
-      <div class="col border border-[#999] p-10 max-md:p-5">
-        <h3 class="pt-5 pb-5 text-h5 max-md:text-normal font-secondary"><b>ORDER SUMMARY</b></h3>
-        <div class="subtotal flex justify-between mb-2">
-          <p class="font-secondary text-normal max-md:text-small"><b> Subtotal</b></p>
-          <p class="font-secondary max-md:text-small">
-            <b>${{ subtotal }}</b>
-          </p>
-        </div>
-        <div class="shopping flex justify-between border-b-2 border-[#ddd] mb-5 pb-6">
-          <p class="font-secondary max-md:text-small"><b>Shipping</b></p>
-          <p class="font-secondary max-md:text-small">
-            <b>${{ shippingTotal ? shippingTotal : 0 }}</b>
-          </p>
-        </div>
-        <div class="shopping flex justify-between mb-7 mt-7">
-          <h3>
-            <b class="font-secondary max-md:text-small">TOTAL</b>
-            <p class="font-secondary max-md:text-small">(TAX INCL)</p>
-          </h3>
-          <h3>
-            $<b class="font-secondary max-md:text-small">{{ totalAmount }}</b>
-          </h3>
-        </div>
-
-        <div class="actions w-full">
           <div class="action flex justify-center items-center gap-2 w-full">
             <input
               type="checkbox"
               name="checkbox"
               class="w-7 h-7 max-md:w-5 max-md:h-5"
               v-model="agreeToTermAndConditions"
+              :checked="agreeToTermAndConditions"
+              @change="updateChange"
             />
-            <label class="font-secondary text-small max-md:text-smaller"
+            <label class="font-secondary w-full text-small"
               >I agree to the Terms and Condition</label
             >
           </div>
           <button
-            class="action w-full flex justify-center text-center bg-inputBg p-3 mt-3 text-sm font-secondary"
+            class="action w-full flex justify-center text-center bg-inputBg p-3 mt-7 text-sm font-secondary"
             :class="
               agreeToTermAndConditions
                 ? 'checked text-textPrimaryTwo cursor-default'
@@ -172,7 +180,7 @@
           </button>
         </div>
       </div>
-    </div>
+    </template>
     <div
       v-if="agreementModal"
       class="not-agreeing-to-our-terms-modal fixed top-10 left-[50%] right-0 translate-x-[-50%] w-80 bg-transparentBLK text-white text-center z-30 p-2 rounded-full"
@@ -192,7 +200,6 @@ const useStore = piniaStore()
 const router = useRouter()
 const agreeToTermAndConditions = ref(false)
 const agreementModal = ref(false)
-
 // states
 const subtotal = ref(null)
 const shippingTotal = ref(null)
@@ -240,6 +247,9 @@ const calculateTotalAmount = computed(() => {
 totalAmount.value = computed(() => calculateTotalAmount.value)
 
 // checkout funcion
+const updateChange = () => {
+  return agreeToTermAndConditions.value
+}
 const checkOutNow = () => {
   if (!agreeToTermAndConditions.value) {
     agreementModal.value = true

@@ -98,18 +98,18 @@ const scrollPrevious = () => {
   productLists.scrollBy({ left: setCarousel, behavior: 'smooth' })
 }
 
-const watchScrollPosition = () => {
-  const productLists = document.querySelector('.carousel')
-  const scrollBtns = document.querySelectorAll('.btn')
-  const scrollMax = productLists.scrollWidth * productLists.scrollLeft
-  scrollBtns[0].style.background = productLists.scrollLeft <= 0 ? '#f1f1f1' : '#ddd'
-  scrollBtns[1].style.background = scrollMax >= 0 ? '#f1f1f1' : '#ddd'
-}
+// const watchScrollPosition = () => {
+//   const productLists = document.querySelector('.carousel')
+//   const scrollBtns = document.querySelectorAll('.btn')
+//   const scrollMax = productLists.scrollWidth * productLists.scrollLeft
+//   scrollBtns[0].style.background = productLists.scrollLeft <= 0 ? '#f1f1f1' : '#ddd'
+//   scrollBtns[1].style.background = scrollMax >= 0 ? '#f1f1f1' : '#ddd'
+// }
 
-onMounted(() => {
-  const productLists = document.querySelector('.carousel')
-  productLists.addEventListener('scroll', watchScrollPosition)
-})
+// onMounted(() => {
+//   const productLists = document.querySelector('.carousel')
+//   productLists.addEventListener('scroll', watchScrollPosition)
+// })
 </script>
 
 <style>

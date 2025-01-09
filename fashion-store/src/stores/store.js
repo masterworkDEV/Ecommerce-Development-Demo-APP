@@ -45,14 +45,30 @@ export const piniaStore = defineStore('counter', () => {
 
   // state
   const cart = ref([])
+  const cartNotification = ref(false)
+  const existedInCart = ref(false)
+  const productTitle = ref('')
 
   const useAddToCart = (product) => {
     let checkAvailablity = cart.value.find((item) => item.title === product.title)
     if (checkAvailablity) {
-      alert('Product is already in cart')
-      return checkAvailablity.quantity++
+      productTitle.value = product.title
+      existedInCart.value = true
+      checkAvailablity.quantity++
+
+      setTimeout(() => {
+        existedInCart.value = false
+        productTitle.value = ''
+      }, 2000)
     } else {
       cart.value.push({ ...product, quantity: 1 })
+      cartNotification.value = true
+      productTitle.value = product.title
+
+      setTimeout(() => {
+        cartNotification.value = false
+        productTitle.value = ''
+      }, 2000)
     }
   }
 
@@ -84,9 +100,12 @@ export const piniaStore = defineStore('counter', () => {
     isLoading,
     products,
     isReady,
-    useAddToCart,
     cart,
+    useAddToCart,
     useDelProductFromCart,
+    cartNotification,
+    existedInCart,
+    productTitle,
     favourite,
     useAddToFavourite
   }
