@@ -1,5 +1,5 @@
 <template>
-  <main class="pages px-14 max-md:px-5 pb-10">
+  <main class="pages mx-10 max-md:mx-0 pb-10">
     <span class="justify-center items-center text-center hidden max-md:flex">
       <router-link class="font-text text-small" :to="{ name: 'home' }"> Home </router-link>
       /
@@ -7,12 +7,15 @@
         products
       </router-link>
     </span>
-    <h2 class="flex justify-start text-h2 max-xl:text-h3 max-md:text-normal max-md:justify-center">
+    <h2
+      class="flex justify-start ml-5 max-md:ml-5 text-h2 max-xl:text-h3 max-md:text-normal max-md:justify-center"
+    >
       <b> PRODUCTS </b>
     </h2>
-    <SearchItem :search-value="search" @setChange="updateSearchValue" />
-
-    <div class="filter mt-5 mb-2 cursor-pointer flex items-center w-32">
+    <form class="px-5">
+      <SearchItem :search-value="search" @setChange="updateSearchValue" />
+    </form>
+    <div class="filter mt-5 ml-5 mb-2 cursor-pointer flex items-center w-32">
       <b class="text-normal max-md:text-sm">Filters</b>
       <svg
         class="w-8 h-8 max-md:w-6 max-md:h-6 transition-all"
@@ -32,60 +35,50 @@
         </g>
       </svg>
     </div>
-    <div class="flex flex-wrap gap-2 overflow-x-auto">
-      <div class="btn flex text-center gap-2">
-        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
-          NEW
-        </button>
-        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
-          SHIRTS
-        </button>
-        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
-          POLO SHIRTS
-        </button>
-        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
-          SHOES
-        </button>
-        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
-          CAPS
-        </button>
-        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
-          BAGS
+    <div class="filter-container flex flex-wrap gap-2 overflow-x-auto pl-5">
+      <div class="flex text-center gap-2">
+        <button
+          @click="handleFilter(button)"
+          class="button border font-text uppercase border-gray-400 text-gray-600 w-52 max-md:w-32 p-3 max-xl:p-2 max-md:h-10 max-md:p-0 text-sm"
+          :class="button.clicked && 'active'"
+          v-for="button in buttonList.slice(0, 6)"
+          :key="button.id"
+        >
+          {{ button.name }}
         </button>
       </div>
-      <div class="btn flex text-center gap-2">
-        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
-          BEST SELLERS
-        </button>
-        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
-          T-SHIRTS
-        </button>
-        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
-          JEANS
-        </button>
-        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
-          HOODIES
-        </button>
-        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
-          GLASSES
-        </button>
-        <button class="border border-gray-500 w-52 max-md:w-32 p-2 max-md:p-1 max-md:text-sm">
-          FURNITURE
+      <div class="flex text-center gap-2">
+        <button
+          @click="handleFilter(button)"
+          class="button border font-text uppercase border-gray-400 text-gray-600 w-52 max-md:w-32 p-3 max-xl:p-2 max-md:h-10 max-md:p-0 text-sm"
+          :class="button.clicked && 'active'"
+          v-for="button in buttonList.slice(6, 11)"
+          :key="button.id"
+        >
+          {{ button.name }}
         </button>
       </div>
     </div>
-    <div class="loading" v-if="useStore.isLoading">
+    <div class="loading min-h-96 flex items-center justify-center" v-if="useStore.isLoading">
       <p>Loading please wait....</p>
     </div>
 
     <template v-else>
       <div
         v-if="useStore.isReady"
-        class="row mt-14 max-md:mt-5 grid grid-cols-3 place-items-center place-content-center gap-10 max-md:grid-cols-2 max-md:gap-5"
+        class="relative min-h-96 mt-14 max-md:mt-5 grid grid-cols-3 place-items-center place-content-center gap-10 max-md:grid-cols-2 max-md:gap-5 px-5"
       >
+        <div
+          v-if="!products.length && search"
+          class="absolute left-[50%] translate-x-[-50%] top-[50%] text-center"
+        >
+          <h3>Product not available in store, kindly reload</h3>
+          <a href="/collections" class="text-blue-600">please reload</a>
+        </div>
         <article
+          v-else
           class="w-full max-md:h-[275px] max-lg:h-[375px] max-xl:h-[395px]"
-          v-for="(product, index) in products"
+          v-for="product in products"
           :key="product.id"
         >
           <router-link :to="{ name: 'product-details', params: { productID: product.id } }">
@@ -107,9 +100,7 @@
       </div>
     </template>
     <template v-for="page in totalPages" :key="page">
-      <button @click="initialPage = page" :class="{ active: initialPage === page }">
-        {{ page }}
-      </button>
+      <span>{{ page }}</span>
     </template>
     <div class="flex justify-center gap-5 pt-10">
       <button @click="handlePreviousPage">
@@ -151,13 +142,14 @@
 </template>
 
 <script setup>
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, ref, computed, watch } from 'vue'
 import { piniaStore } from '@/stores/store'
 import SearchItem from '@/components/Hero/SearchItem.vue'
+import router from '@/router/router'
 
 const useStore = piniaStore()
 const search = ref('')
-const filter = ref('')
+const couldNotFindProduct = ref(false)
 
 const updateSearchValue = (value) => {
   search.value = value
@@ -178,25 +170,35 @@ const buttonList = ref([
   { name: 'shoes', clicked: false, id: 11 }
 ])
 
-const handleFilter = (id) => {
-  return buttonList.value.map((item) => {
-    if (item.id !== id) {
-      item.clicked = false
+const handleFilter = (button) => {
+  const filterByName = buttonList.value.filter((btn) => {
+    if (btn.id === button.id) {
+      btn.clicked = true
+      search.value = button.name
     } else {
-      item.clicked = true
-      filter.value = item.name
+      btn.clicked = false
     }
   })
+
+  return filterByName
 }
 
 // display data per page ****pagination****
+
 const initialPage = ref(1)
 const itemsPerPage = ref(10)
 const products = computed(() => {
   const startFrom = (initialPage.value - 1) * itemsPerPage.value
   const endAt = startFrom + itemsPerPage.value
   return useStore.products
-    .filter((item) => item.title.toLowerCase().includes(search.value.toLowerCase()))
+    .filter((item) => {
+      if (item) {
+        return (
+          item.title.toLowerCase().includes(search.value.toLowerCase()) ||
+          item.category.name.toLowerCase().includes(search.value.toLowerCase())
+        )
+      }
+    })
     .slice(startFrom, endAt)
 })
 const totalPages = computed(() => {
@@ -205,20 +207,26 @@ const totalPages = computed(() => {
 
 const handlePreviousPage = () => {
   if (initialPage.value === 1) {
-    alert('this is the start if the start of the page')
     return false
   } else {
-    return initialPage.value--
+    initialPage.value--
+    scrollTo({ behavior: 'smooth', top: 10 })
   }
 }
 const handleNextPage = () => {
   if (Math.ceil(products.value.length / itemsPerPage.value === 0)) {
-    alert("you've gotten to the end of the page")
     return false
   } else {
-    return initialPage.value++
+    initialPage.value++
+    scrollTo({ behavior: 'instant', top: 10 })
   }
 }
+
+watch(products, (newProducts) => {
+  if (!newProducts && search) {
+    search = ''
+  }
+})
 </script>
 
 <style scoped>
@@ -227,5 +235,14 @@ const handleNextPage = () => {
 }
 .filter:hover > svg {
   transform: translateX(10px);
+}
+
+.filter-container::-webkit-scrollbar {
+  width: 0px;
+}
+
+.button.active {
+  color: black;
+  border-color: black;
 }
 </style>

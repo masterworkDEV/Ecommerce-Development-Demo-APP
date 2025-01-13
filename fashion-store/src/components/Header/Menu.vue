@@ -8,7 +8,7 @@
       <div class="menu" :class="props.menuState ? 'active' : 'leave-active'">
         <header class="flex justify-between border-b-2 border-primary p-3 px-5 pt-5">
           <div class="flex items-center gap-3">
-            <button @click="emits('closeMenu')">
+            <button @click="emits('closeMenu')" class="border border-black">
               <svg
                 class="w-10 h-10 max-md:w-7 max-md:h-7"
                 viewBox="0 0 512 512"
@@ -32,14 +32,31 @@
                 </g>
               </svg>
             </button>
-            <h2 class="logo">
+            <h2 class="logo text-h4 max-md:text-normal">
               <b>XIV</b>
             </h2>
           </div>
-          <nav class="nav-icons flex items-center">
-            <router-link :to="{ name: 'collections' }" @click="emits('closeMenu')"
-              >Search</router-link
-            >
+          <nav class="nav-icons flex items-center gap-5">
+            <router-link :to="{ name: 'collections' }" @click="emits('closeMenu')">
+              <svg
+                viewBox="0 0 24 24"
+                class="w-10 h-10 max-md:w-7 max-md:h-7"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M16.6725 16.6412L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
+                    stroke="#000000"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </g>
+              </svg>
+            </router-link>
             <router-link :to="{ name: 'cart' }" @click="emits('closeMenu')">
               <svg
                 viewBox="0 0 24 24"
@@ -60,48 +77,77 @@
             </router-link>
           </nav>
         </header>
-        <nav class="nav-links max-md:mt-10 max-md:mx-5">
+        <nav class="nav-links max-md:mt-10 mx-5">
           <ul>
             <li>
-              <router-link :to="{ name: 'home' }" @click="emits('closeMenu')">Home</router-link>
+              <router-link
+                :to="{ name: 'home' }"
+                @click="emits('closeMenu')"
+                class="font-text hover:underline transition-all"
+                >Home</router-link
+              >
             </li>
             <li>
-              <router-link :to="{ name: 'about' }" @click="emits('closeMenu')">About</router-link>
+              <router-link
+                :to="{ name: 'about' }"
+                @click="emits('closeMenu')"
+                class="font-text hover:underline transition-all"
+                >About</router-link
+              >
             </li>
             <li>
-              <router-link :to="{ name: 'contact' }" @click="emits('closeMenu')"
+              <router-link
+                class="font-text hover:underline transition-all"
+                :to="{ name: 'contact' }"
+                @click="emits('closeMenu')"
                 >Contact</router-link
               >
             </li>
             <li>
               <router-link
                 :to="{ name: 'collections' }"
-                class="collections relative"
+                class="collections font-text hover:underline transition-all"
                 @click="emits('closeMenu')"
               >
-                <span> Collections <span class="right-angle">></span> </span>
-                <div class="collections-child absolute top-5 right-0 left-0 bg-black hidden">
-                  <ul class="text-white">
-                    <li>shoes</li>
-                    <li>shoes</li>
-                    <li>shoes</li>
-                    <li>shoes</li>
-                    <li>shoes</li>
-                  </ul>
-                </div>
+                Collections
               </router-link>
             </li>
           </ul>
         </nav>
-        <div class="mt-14 max-md:mx-5">
+        <div class="mt-20 mx-5">
           <router-link :to="{ name: 'login' }" @click="emits('closeMenu')">
             <button
               :to="{ name: 'login' }"
-              class="w-2/4 p-2 rounded-md bg-black text-white text-sm"
+              class="w-1/4 max-md:w-[40%] p-3 rounded-md bg-black text-white text-sm font-text"
             >
               Login
             </button>
           </router-link>
+          <p class="mt-5 flex items-center text-normal font-text text-gray-500">
+            No account yet?
+            <router-link
+              to="/auth/sign-up"
+              class="text-sm text-textPrimary underline"
+              @click="emits('closeMenu')"
+              >Create account</router-link
+            >
+          </p>
+          <div class="mt-10 pt-5 flex justify-between items-center border-t border-primary">
+            <form>
+              <select name="locations" class="p-3 bg-[#ddd] rounded-md">
+                <option value="CA">CA</option>
+                <option value="NY">NY</option>
+                <option value="NG">NG</option>
+              </select>
+            </form>
+            <form>
+              <select name="languages" class="p-3 bg-[#ddd] rounded-md">
+                <option value="EN">EN</option>
+                <option value="SP">SP</option>
+                <option value="FR">FR</option>
+              </select>
+            </form>
+          </div>
         </div>
       </div>
     </transition>
@@ -124,7 +170,7 @@ const props = defineProps({
   width: 100%;
   height: 20%;
   background: #f1f1f1;
-  box-shadow: 0px 2px 3px #fafafa;
+  box-shadow: 0px 2px 3px #9999;
   top: -20%;
   opacity: 0;
   left: 0;
@@ -135,7 +181,7 @@ const props = defineProps({
 }
 
 .menu.active {
-  height: 70%;
+  height: 90%;
   top: 0;
   opacity: 1;
   transform: translateX(0px);
@@ -143,6 +189,12 @@ const props = defineProps({
 .menu.leave-active {
   transition: all 1s;
   opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .menu.active {
+    height: 70%;
+  }
 }
 
 .nav-links > ul > li {

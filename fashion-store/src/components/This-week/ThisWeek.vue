@@ -161,6 +161,7 @@ const scrollPrevious = () => {
 .card-preview:hover .favourite {
   display: block;
   animation: fave-animated 0.3s ease;
+  z-index: 5;
 }
 
 @keyframes fave-animated {

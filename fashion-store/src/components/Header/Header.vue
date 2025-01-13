@@ -61,8 +61,9 @@
           </RouterLink>
         </div>
       </nav>
-      <Logo />
-
+      <div class="max-md:ml-14">
+        <Logo />
+      </div>
       <nav>
         <div class="flex justify-center items-center text-center gap-10 max-md:gap-2">
           <router-link :to="{ name: 'favourite' }">
@@ -98,13 +99,10 @@
               <div
                 class="cart-icon relative border-[.4rem] border-black w-[50px] h-[50px] max-xl:h-[45px] max-xl:w-[45px] rounded-full flex items-center justify-center text-center max-md:border-[.3rem]"
               >
-                <div class="cart-count top-2 right-1 absolute rounded-full" v-if="cartCount">
-                  <p
-                    class="flex items-center text-center justify-center w-4 rounded-full bg-red-600 text-white text-smallest"
-                  >
-                    {{ cartCount }}
-                  </p>
-                </div>
+                <div
+                  class="cart-count top-2 right-2 absolute rounded-full w-2 h-2 bg-red-600"
+                  v-if="cartCount"
+                ></div>
                 <svg
                   viewBox="0 0 24 24"
                   class="fill-black w-2/4 h-2/4"

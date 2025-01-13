@@ -133,6 +133,9 @@ const props = defineProps({
 const inputValue = ref(props.searchValue)
 </script>
 <style>
+.shop {
+  transition: ease 0.5s;
+}
 .shop:hover {
   background: #ccc;
 }

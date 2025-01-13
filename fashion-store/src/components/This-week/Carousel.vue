@@ -6,6 +6,43 @@
       }"
       class="card-preview relative"
     >
+      <router-link
+        :to="{ name: 'product-details', params: { productID: product.id } }"
+        class="eyes-view absolute top-3 right-3"
+      >
+        <svg
+          viewBox="0 0 64 64"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          aria-hidden="true"
+          role="img"
+          class="iconify iconify--emojione-monotone"
+          preserveAspectRatio="xMidYMid meet"
+          fill="#000000"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M2 31.428C2 40.23 5.74 53 17.002 53s15-12.77 15-21.572C32.002 4.191 2 4.191 2 31.428m12.768 20.006c-9.586 0-11.969-11.785-11.969-19.346c0-26.029 23.936-26.029 23.935 0c-.001 7.56-2.38 19.346-11.966 19.346"
+              fill="#000000"
+            ></path>
+            <path
+              d="M32.002 31.428C32.002 40.23 35.739 53 47.003 53C58.264 53 62 40.23 62 31.428c0-27.237-29.998-27.237-29.998 0m12.767 20.006c-9.588 0-11.968-11.785-11.968-19.346c0-26.029 23.934-26.029 23.934 0c-.001 7.56-2.381 19.346-11.966 19.346"
+              fill="#000000"
+            ></path>
+            <path
+              d="M2.799 32.246c0 6.211 4.354 10.965 9.727 10.965c5.372 0 9.724-4.754 9.724-10.965c-.001-15.275-19.451-15.275-19.451 0"
+              fill="#000000"
+            ></path>
+            <path
+              d="M32.801 32.246c0 6.211 4.353 10.965 9.726 10.965c5.371 0 9.723-4.754 9.723-10.965c-.001-15.275-19.449-15.275-19.449 0"
+              fill="#000000"
+            ></path>
+          </g>
+        </svg>
+      </router-link>
+
       <div @click="useStore.useAddToFavourite(product.id)" class="favourite p-3">
         <svg
           v-if="product.liked"
@@ -49,6 +86,7 @@
         :alt="product.category.name"
         class="w-[325px] h-[325px] border-2 border-primary"
       />
+
       <button
         @click="useStore.useAddToCart(product)"
         class="add-to-cart p-[.6rem] flex bg-[#d9d9d9] justify-center items-center absolute bottom-0 left-[50%] translate-x-[-50%] opacity-70"
@@ -145,5 +183,41 @@ defineProps({
 .cart-notification-leave-to {
   top: -10%;
   opacity: 0;
+}
+
+.card-preview {
+  overflow: hidden;
+  transition: all 1s ease;
+}
+.card-preview:hover > img {
+  transform: translateY(-2px);
+}
+
+.eyes-view {
+  display: none;
+  width: 35px;
+  height: 35px;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  z-index: 5;
+}
+.card-preview:hover > .eyes-view {
+  display: flex;
+}
+
+@keyframes rotateEyes {
+  0% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+.eyes-view > svg {
+  width: 25px;
+  height: 25px;
+  background: white;
+  animation: rotateEyes 0.9s ease alternate;
 }
 </style>

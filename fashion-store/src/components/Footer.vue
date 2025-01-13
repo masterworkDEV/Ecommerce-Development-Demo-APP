@@ -1,10 +1,7 @@
 <template>
   <div class="footer w-full mt-56">
-    <!-- <div
-      class="row flex justify-between items-center pt-20 px-24 max-md:px-4 max-md:justify-center max-md:gap-5"
-    > -->
     <div
-      class="grid grid-cols-2 pt-20 px-24 max-md:px-10 max-sm:px-20 place-content-center place-items-start"
+      class="grid grid-cols-2 pt-20 px-24 max-md:px-10 max-sm:px-14 place-content-center place-items-start"
     >
       <div class="col">
         <p class="text-small font-primary max-sm:text-small max-smaller:text-xSmall">INFO</p>
@@ -61,12 +58,14 @@
         <div class="mt-5 flex justify-start">
           <Logo />
         </div>
-        <div class="flex items-start justify-center gap-2">
+        <div class="flex items-start justify-center gap-2 mt-2">
           <h1 class="text-8xl max-lg:text-6xl max-sm:text-h3 font-text">
             <span>VR</span>
             <b>XIV <br />QR</b>
           </h1>
-          <p class="mt-3 font-secondary text-small max-md:text-smaller max-sm:text-xSmall">
+          <p
+            class="mt-3 font-secondary text-small max-md:text-smaller max-sm:text-xSmall max-sm:hidden"
+          >
             Near-field communication
           </p>
         </div>

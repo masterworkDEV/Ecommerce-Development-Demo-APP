@@ -1,21 +1,23 @@
 <template>
-  <div class="pt-14 px-14">
+  <div class="pt-14 px-14 max-md:px-5">
     <header>
       <button>Arrow back</button>
     </header>
     <div class="title mt-20">
-      <h1 class="text-3xl"><b>CHECKOUT</b></h1>
+      <h1 class="font-text text-h3 max-md:text-h5"><b>CHECKOUT</b></h1>
     </div>
-    <nav class="flex justify-start items-center gap-10 mt-5">
-      <router-link>INFORMATION</router-link>
-      <router-link>SHIPPING</router-link>
-      <router-link>PAYMENT</router-link>
+    <nav class="flex justify-start items-center gap-10 mt-5 max-md:gap-3">
+      <h3 class="font-text max-md:text-sm">INFORMATION</h3>
+      <h3 class="font-text max-md:text-sm">SHIPPING</h3>
+      <h3 class="font-text max-md:text-sm">PAYMENT</h3>
     </nav>
-    <div class="row flex justify-between items-start gap-32">
-      <form class="form mb-10 pr-5 w-full">
+    <div
+      class="row flex justify-between items-start gap-32 max-md:flex-col max-md:gap-14 max-md:items-center"
+    >
+      <form class="form mb-10 pr-5 max-md:pr-0 w-full">
         <div class="">
           <div class="col-description mt-10 mb-2">
-            <h3>CONTACT INFO</h3>
+            <h3 class="font-text max-md:text-sm">CONTACT INFO</h3>
           </div>
           <div class="details">
             <input type="email" name="email" placeholder="Email" />
@@ -30,7 +32,7 @@
         </div>
         <div class="col">
           <div class="col-description mb-2 mt-10">
-            <h3>SHIPPING ADDRESS</h3>
+            <h3 class="font-text max-md:text-sm">SHIPPING ADDRESS</h3>
           </div>
           <div class="details">
             <input type="text" name="name" placeholder="First Name" />

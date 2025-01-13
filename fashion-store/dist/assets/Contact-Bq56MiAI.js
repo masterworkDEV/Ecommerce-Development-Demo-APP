@@ -1,0 +1,1 @@
+import{_ as e,c as o,d as n,o as s}from"./index-Bol1dAEX.js";const a={};function r(c,t,l,p,d,_){return s(),o("div",null,t[0]||(t[0]=[n("h1",null,"Contact me",-1)]))}const u=e(a,[["render",r]]);export{u as default};

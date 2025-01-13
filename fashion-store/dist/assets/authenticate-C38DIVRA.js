@@ -1,0 +1,1 @@
+import{_ as r,f as e,w as t,b as c,o as n,h as _,y as i,T as m}from"./index-Bol1dAEX.js";const f={};function l(u,p){const o=c("RouterView");return n(),e(o,null,{default:t(({Component:a,route:s})=>[_(m,{name:s.meta.transition},{default:t(()=>[(n(),e(i(a)))]),_:2},1032,["name"])]),_:1})}const h=r(f,[["render",l]]);export{h as default};

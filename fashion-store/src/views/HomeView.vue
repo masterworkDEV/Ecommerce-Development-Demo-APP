@@ -8,7 +8,6 @@
       <OurMission />
       <NewDesigns />
     </main>
-
     <Footer />
   </div>
 </template>

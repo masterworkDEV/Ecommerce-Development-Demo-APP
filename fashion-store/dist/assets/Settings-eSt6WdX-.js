@@ -1,0 +1,1 @@
+import{_ as s,c as t,d as n,o}from"./index-Bol1dAEX.js";const c={},r={class:"pages"};function a(_,e){return o(),t("div",r,e[0]||(e[0]=[n("h1",null,"Settings",-1)]))}const i=s(c,[["render",a]]);export{i as default};

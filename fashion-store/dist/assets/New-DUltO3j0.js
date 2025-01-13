@@ -1,0 +1,1 @@
+import{_ as o,c as s,d as t,o as n}from"./index-Bol1dAEX.js";const c={},a={class:"pages"};function r(l,e){return n(),s("main",a,e[0]||(e[0]=[t("h1",null,"New Collection",-1)]))}const d=o(c,[["render",r]]);export{d as default};
