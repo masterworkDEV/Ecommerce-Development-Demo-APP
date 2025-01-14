@@ -1,8 +1,14 @@
 <template>
   <ul>
-    <li class="max-xl:text-sm text-textPrimary font-text max-sm:text-small">MEN</li>
-    <li class="max-xl:text-sm text-textPrimary font-text max-sm:text-small">WOMEN</li>
-    <li class="max-xl:text-sm text-textPrimary font-text max-sm:text-small">KIDS</li>
+    <li class="max-xl:text-sm text-textPrimary font-text max-sm:text-small">
+      <b>MEN</b>
+    </li>
+    <li class="max-xl:text-sm text-textPrimary font-text max-sm:text-small">
+      <b> WOMEN </b>
+    </li>
+    <li class="max-xl:text-sm text-textPrimary font-text max-sm:text-small">
+      <b> KIDS </b>
+    </li>
   </ul>
   <SearchItem :search-value="searchValue" @setChange="updateSearchValue" />
   <NewCollection :products="products" :search-value="searchValue" />

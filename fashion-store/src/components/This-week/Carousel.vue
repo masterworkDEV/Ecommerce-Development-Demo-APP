@@ -84,7 +84,7 @@
         @dblclick="useStore.useAddToFavourite(product.id)"
         :src="product.images"
         :alt="product.category.name"
-        class="w-[325px] h-[325px] border-2 border-primary"
+        class="w-[325px] h-[325px] border-2 border-primary hover:opacity-90"
       />
 
       <button

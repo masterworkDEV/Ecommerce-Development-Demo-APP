@@ -55,11 +55,8 @@
               <div
                 class="cart-icon relative border-[.4rem] border-black w-[50px] h-[50px] max-xl:h-[45px] max-xl:w-[45px] rounded-full flex items-center justify-center text-center max-md:border-[.3rem]"
               >
-                <p
-                  class="cart-count top-2 left-0 absolute w-4 h-2 bg-red-500 rounded-full flex items-center justify-center text-white p-3"
-                >
-                  {{ 0 }}
-                </p>
+                <CartNotification :cart-notification="updateCartNotification" />
+
                 <svg
                   viewBox="0 0 24 24"
                   class="fill-black w-2/4 h-2/4"
@@ -158,8 +155,9 @@
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { piniaStore } from '@/stores/store'
+import CartNotification from './navigate-store/Cart/CartNotification.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -193,6 +191,12 @@ onMounted(() => {
 const backToCollections = () => {
   useStore.navState = true
 }
+
+const updateCartNotification = computed(() => {
+  return Object.values(useStore.cart).reduce((acc, currenValue) => {
+    return acc + currenValue.quantity
+  }, 0)
+})
 </script>
 
 <style scoped>

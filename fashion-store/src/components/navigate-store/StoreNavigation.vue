@@ -1,6 +1,6 @@
 <template>
   <div
-    class="title mt-48 pb-2 mx-14 max-md:mx-7 flex justify-start items-center gap-7 border-b border-primary w-[65%] max-md:w-full max-md:border-none"
+    class="title mt-40 pb-2 mx-14 max-md:mx-5 flex justify-start items-center gap-7 border-b border-primary w-[65%] max-md:w-[80%] max-md:border-none"
   >
     <router-link :to="{ name: 'cart' }" class="text-sm max-md:text-smaller font-text">
       SHOPPING BAG
@@ -39,6 +39,6 @@
 <style scoped>
 .router-link-active {
   font-weight: 700;
-  font-size: larger;
+  font-size: large;
 }
 </style>

@@ -8,20 +8,18 @@
     <div v-else>
       <div
         v-if="useStore.isReady"
-        class="row flex justify-center gap-5 w-full max-lg:gap-3 max-md:flex-col-reverse max-md:gap-1"
+        class="flex justify-center gap-5 w-full max-lg:gap-3 max-md:flex-col-reverse max-md:gap-1"
       >
-        <div class="col relative">
+        <div class="relative">
           <h1 class="text-6xl max-xl:text-h1 max-md:hidden font-text">
             <b>
               NEW <br />
               COLLECTION
             </b>
           </h1>
-          <p class="max-md:hidden">Summer <br />2024</p>
+          <p class="font-text text-sm max-md:hidden">Summer <br />2024</p>
 
-          <div
-            class="absolute right-0 left-0 bottom-0 flex items-center gap-2 max-md:translate-y-[50px]"
-          >
+          <div class="absolute bottom-0 max-md:top-7 w-full flex justify-center items-center gap-2">
             <router-link
               :to="{ name: 'collections' }"
               class="shop flex items-center w-full bg-inputBg text-start gap-5 p-2"
@@ -30,9 +28,9 @@
                 <b>Go To Shop</b>
               </span>
               <svg
-                class="w-full h-6 translate-x-10 transition-all"
+                class="w-8 h-6 translate-x-[-20px] transition-all"
                 fill="#000000"
-                height="300"
+                height="200"
                 width="250"
                 version="1.1"
                 id="Layer_1"
@@ -140,6 +138,6 @@ const inputValue = ref(props.searchValue)
   background: #ccc;
 }
 .shop:hover svg {
-  transform: translateX(60px);
+  transform: translateX(10px);
 }
 </style>

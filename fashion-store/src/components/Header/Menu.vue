@@ -193,7 +193,7 @@ const props = defineProps({
 
 @media (max-width: 768px) {
   .menu.active {
-    height: 70%;
+    height: 80%;
   }
 }
 

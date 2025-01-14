@@ -4,7 +4,7 @@
     :class="isScrolling ? 'nav-active' : ''"
   >
     <header
-      class="w-full flex justify-between items-center text-center pt-7 pb-7 px-14 max-xl:px-12 max-lg:px-10 max-md:px-5 max-md:pt-4"
+      class="flex w-full justify-between items-center text-center pt-7 pb-7 px-14 max-xl:px-12 max-lg:px-10 max-md:px-5 max-md:pt-4"
     >
       <!-- menu svg-->
       <nav class="flex justify-center gap-10 items-center text-center max-lg:gap-5">
@@ -99,10 +99,11 @@
               <div
                 class="cart-icon relative border-[.4rem] border-black w-[50px] h-[50px] max-xl:h-[45px] max-xl:w-[45px] rounded-full flex items-center justify-center text-center max-md:border-[.3rem]"
               >
-                <div
+                <CartNotification :cart-notification="updateCartNotification" />
+                <!-- <div
                   class="cart-count top-2 right-2 absolute rounded-full w-2 h-2 bg-red-600"
                   v-if="cartCount"
-                ></div>
+                ></div> -->
                 <svg
                   viewBox="0 0 24 24"
                   class="fill-black w-2/4 h-2/4"
@@ -190,21 +191,15 @@
 import { computed, onMounted, ref } from 'vue'
 import Logo from '../Logo.vue'
 import Menu from './Menu.vue'
+import CartNotification from '../navigate-store/Cart/CartNotification.vue'
 import { useRouter } from 'vue-router'
 
 import { piniaStore } from '@/stores/store'
 import { getAuth, signOut } from 'firebase/auth'
-import { object } from 'yup'
 
 const useStore = piniaStore()
 const checkUser = ref(null)
 const router = useRouter()
-
-const cartCount = computed(() => {
-  return Object.values(useStore.cart).reduce((acc, currenValue) => {
-    return acc + currenValue.quantity
-  }, 0)
-})
 
 const isScrolling = ref(false)
 window.addEventListener('scroll', () => {
@@ -230,6 +225,12 @@ const toggleMenu = () => {
 const updateMenuState = () => {
   menuState.value = false
 }
+
+const updateCartNotification = computed(() => {
+  return Object.values(useStore.cart).reduce((acc, currenValue) => {
+    return acc + currenValue.quantity
+  }, 0)
+})
 
 // logout
 const logoutUser = async () => {

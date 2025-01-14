@@ -12,15 +12,15 @@
       >
         <div class="prod-row w-3/4 grid grid-cols-2 gap-20 max-md:grid-cols-1 max-md:w-full">
           <div
-            class="w-full h-[400px] flex items-start justify-start gap-5 max-md:gap-3"
+            class="prod-card w-full h-[350px] flex items-start justify-start gap-5 max-md:gap-3 hover:mt-1 hover:opacity-90 transition-all"
             v-for="product in useStore.cart"
             :key="product.id"
           >
-            <div class="prod-card w-[90%] h-full">
+            <div class="w-[90%] h-full">
               <img
                 :src="product.images"
                 :alt="product.title"
-                class="w-full h-full border-2 border-primary"
+                class="w-full h-full max-md:h-[90%] border-2 border-primary"
               />
               <div class="flex justify-between items-end text-start">
                 <div>
