@@ -1,5 +1,9 @@
 <template>
-  <RouterView v-slot="{ Component }">
+  <RouterView
+    v-slot="{ Component }"
+    :welcomeMessage="welcomeMessage"
+    :welcomeNotification="welcomeNotification"
+  >
     <Transition name="slide">
       <component :is="Component" />
     </Transition>
@@ -8,6 +12,14 @@
       
 
 <script setup>
+const props = defineProps({
+  welcomeMessage: {
+    type: String
+  },
+  welcomeNotification: {
+    type: Boolean
+  }
+})
 </script>
 
 <style>

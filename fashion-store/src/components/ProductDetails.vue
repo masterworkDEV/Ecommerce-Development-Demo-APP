@@ -1,5 +1,11 @@
 <template>
   <div>
+    <div
+      v-if="useStore.cartNotification || useStore.existedInCart"
+      class="fixed w-full h-full bg-transparentBLK right-0 left-0 top-0 bottom-0 z-30"
+    ></div>
+    <CartNotificationModal />
+    <ExistedInCartModal />
     <header class="mx-14 max-md:mx-5 fixed top-5 right-0 left-0">
       <nav class="flex justify-between items-center">
         <router-link @click="backToCollections" :to="{ name: 'collections' }">
@@ -45,7 +51,7 @@
         </router-link>
 
         <div class="flex items-center gap-1">
-          <router-link :to="{ name: 'cart' }">
+          <router-link :to="{ name: 'cart' }" @click="useStore.navState = true">
             <div class="flex items-center justify-end text-center">
               <span
                 class="cart-text text-center flex justify-center items-center text-textPrimaryTwo bg-bgColorSecondary w-[90px] h-[50px] max-xl:h-[40px] max-xl:w-[70px] rounded-[1.5rem] translate-x-1 max-md:hidden"
@@ -128,7 +134,7 @@
         </div>
       </nav>
     </header>
-    <main class="pages px-14 max-md:px-0">
+    <main class="pages px-14 max-md:px-0 max-md:pb-20">
       <p v-if="isLoading">Loading please wait...</p>
       <pre v-else-if="isError">{{ isError }}</pre>
       <div v-else class="max-md:h-full max-md:w-full">
@@ -137,7 +143,9 @@
           :alt="product.title"
           class="h-full w-full object-cover"
         />
-        <div class="mt-10 w-full h-full flex justify-start pl-5 gap-5 overflow-x-auto">
+        <div
+          class="images-prev mt-10 w-full h-full flex justify-start max-md:pl-5 gap-5 overflow-x-auto"
+        >
           <img
             v-for="(image, index) in product.images"
             :key="image"
@@ -148,6 +156,43 @@
             @click="handleImageClicks(index)"
           />
         </div>
+        <span class="max-md:px-5 mt-10 flex justify-between items-center">
+          <h3 class="font-text text-h4 max-xl:text-h5 max-md:text-normal uppercase">
+            <b>
+              {{ product.title }}
+            </b>
+          </h3>
+          <button>Like</button>
+        </span>
+        <span class="max-md:px-5 mt-5 flex justify-between items-center">
+          <h3 class="font-text text-h5 max-md:text-normal max-sm:text-sm text-gray-400">
+            <b> MRP incl. of all taxes </b>
+          </h3>
+          <h3 class="text-h5 max-md:text-normal font-text">
+            <b> ${{ product.price }} </b>
+          </h3>
+        </span>
+        <span class="max-md:px-5 mt-5 flex justify-start items-center">
+          <h3
+            class="font-text text-normal max-md:text-sm max-sm:text-small leading-8 tracking-widest"
+          >
+            <b> {{ product.description }} </b>
+          </h3></span
+        >
+        <span class="max-md:px-5 mt-5 flex justify-start items-center">
+          <h3 class="font-text text-h5 max-md:text-normal text-gray-400">Color</h3></span
+        >
+        <button
+          @click="addProdToCart(product)"
+          class="max-md:w-full max-md:h-14 font-text fixed bottom-0 right-0 left-0 font-bold bg-bgColorSecondary text-white text-normal"
+          :class="simulatedButton ? 'opacity-95 cursor-not-allowed' : 'opacity-100 cursor-default'"
+        >
+          <div v-if="simulatedButton" class="flex justify-center items-center gap-5">
+            <div class="loader"></div>
+            <span>ADDING</span>
+          </div>
+          <span v-else>ADD</span>
+        </button>
       </div>
     </main>
   </div>
@@ -158,6 +203,8 @@ import { useRoute, useRouter } from 'vue-router'
 import { ref, onMounted, computed } from 'vue'
 import { piniaStore } from '@/stores/store'
 import CartNotification from './navigate-store/Cart/CartNotification.vue'
+import CartNotificationModal from './navigate-store/Cart/CartNotificationModal.vue'
+import ExistedInCartModal from './navigate-store/Cart/ExistedInCartModal.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -167,6 +214,7 @@ const product = ref({})
 const isLoading = ref(true)
 const isError = ref(false)
 const currentImage = ref(0)
+const simulatedButton = ref(false)
 const handleImageClicks = (image) => {
   currentImage.value = image
 }
@@ -176,7 +224,7 @@ onMounted(() => {
   const fetchData = async () => {
     try {
       const res = await fetch(`${API_URL}/${route.params.productID}`)
-      if (!res.ok) throw Error('Error cannot find this product')
+      if (!res.ok) throw Error('Error cannot find this product. Reload')
       const data = await res.json()
       product.value = data
     } catch (error) {
@@ -192,6 +240,14 @@ const backToCollections = () => {
   useStore.navState = true
 }
 
+const addProdToCart = (product) => {
+  simulatedButton.value = true
+  setTimeout(() => {
+    useStore.useAddToCart(product)
+    simulatedButton.value = false
+  }, 1500)
+}
+
 const updateCartNotification = computed(() => {
   return Object.values(useStore.cart).reduce((acc, currenValue) => {
     return acc + currenValue.quantity
@@ -203,9 +259,34 @@ const updateCartNotification = computed(() => {
 .image-row {
   width: 30%;
   height: 40%;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 .image-row.active {
   opacity: 1;
+}
+
+.images-prev::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 40px;
+  padding: 6px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #d7d7d7;
+  --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+  mask: var(--_m);
+  -webkit-mask-composite: source-out;
+  mask-composite: subtract;
+  animation: l3 1s infinite linear;
+}
+@keyframes l3 {
+  to {
+    transform: rotate(1turn);
+  }
 }
 </style>

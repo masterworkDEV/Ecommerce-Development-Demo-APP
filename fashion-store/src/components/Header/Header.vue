@@ -1,10 +1,10 @@
 <template>
   <div
-    class="nav-bar fixed right-0 left-0 top-0 w-full z-10"
+    class="nav-bar fixed right-0 left-0 top-[-1%] w-full z-10"
     :class="isScrolling ? 'nav-active' : ''"
   >
     <header
-      class="flex w-full justify-between items-center text-center pt-7 pb-7 px-14 max-xl:px-12 max-lg:px-10 max-md:px-5 max-md:pt-4"
+      class="flex w-full justify-between items-center text-center pt-10 pb-10 px-14 max-xl:px-12 max-lg:px-10 max-md:px-5 max-md:pt-5 max-md:pb-5"
     >
       <!-- menu svg-->
       <nav class="flex justify-center gap-10 items-center text-center max-lg:gap-5">
@@ -100,10 +100,7 @@
                 class="cart-icon relative border-[.4rem] border-black w-[50px] h-[50px] max-xl:h-[45px] max-xl:w-[45px] rounded-full flex items-center justify-center text-center max-md:border-[.3rem]"
               >
                 <CartNotification :cart-notification="updateCartNotification" />
-                <!-- <div
-                  class="cart-count top-2 right-2 absolute rounded-full w-2 h-2 bg-red-600"
-                  v-if="cartCount"
-                ></div> -->
+
                 <svg
                   viewBox="0 0 24 24"
                   class="fill-black w-2/4 h-2/4"

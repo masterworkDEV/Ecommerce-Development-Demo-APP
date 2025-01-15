@@ -42,8 +42,16 @@
           </div>
           <p class="underline text-sm font-text">Forgot your password?</p>
           <div class="details-action mt-5">
+            <div
+              v-if="isLoading"
+              class="fixed w-full h-full bg-transparentBLK right-0 left-0 top-0 bottom-0 z-30"
+            ></div>
             <button class="p-3 bg-bgColorSecondary rounded text-white max-sm:w-full">
-              {{ isLoading ? 'Loading...' : 'Sign In' }}
+              <div v-if="isLoading" class="flex justify-center items-center gap-5">
+                <div class="loader"></div>
+                <span>Signing In</span>
+              </div>
+              <span v-else>Sign In</span>
             </button>
           </div>
           <p class="text-sm font-text">
@@ -69,7 +77,10 @@
 import { ref } from 'vue'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'vue-router'
+import { piniaStore } from '@/stores/store'
+import { set } from '@vueuse/core'
 
+const useStore = piniaStore()
 const router = useRouter()
 const email = ref('')
 const password = ref('')
@@ -80,12 +91,11 @@ const handleSignIn = async () => {
   const auth = await getAuth()
   signInWithEmailAndPassword(auth, email.value, password.value)
     .then((data) => {
-      isLoading.value = false
+      useStore.welcomeMessage = data.user.email
+      console.log(useStore.welcomeMessage)
       router.push('/')
-      alert(`Welcome back ${data.user.email}`)
     })
     .catch((error) => {
-      isLoading.value = false
       const errorBlock = {
         invalidEmail: 'auth/invalid-email',
         userNotFound: 'auth/user-not-found',
@@ -93,8 +103,35 @@ const handleSignIn = async () => {
       }
       console.log(error.code)
     })
+    .finally(() => {
+      isLoading.value = false
+      useStore.welcomeNotification = true
+      setTimeout(() => {
+        useStore.welcomeNotification = false
+      }, 3500)
+    })
 }
 </script>
 
 <style scoped>
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 25px;
+  height: 25px;
+  padding: 4px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #d7d7d7;
+  --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+  mask: var(--_m);
+  -webkit-mask-composite: source-out;
+  mask-composite: subtract;
+  animation: l3 0.7s infinite linear;
+}
+@keyframes l3 {
+  to {
+    transform: rotate(1turn);
+  }
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <main class="pages mx-10 max-md:mx-0 pb-10">
+  <main class="pages px-14 max-xl:px-0 max-xl:mx-5 max-md:mx-0 pb-10">
     <span class="justify-center items-center text-center hidden max-md:flex">
       <router-link class="font-text text-small" :to="{ name: 'home' }"> Home </router-link>
       /

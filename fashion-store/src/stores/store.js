@@ -8,6 +8,8 @@ import axios from 'axios'
 export const piniaStore = defineStore('counter', () => {
   const verifiedUser = ref(false)
   const displayVerifiedUser = ref(null)
+  const welcomeNotification = ref(false)
+  const welcomeMessage = ref('')
 
   const auth = ref(null)
   onMounted(() => {
@@ -96,6 +98,8 @@ export const piniaStore = defineStore('counter', () => {
     auth,
     verifiedUser,
     displayVerifiedUser,
+    welcomeMessage,
+    welcomeNotification,
     navState,
     isLoading,
     products,

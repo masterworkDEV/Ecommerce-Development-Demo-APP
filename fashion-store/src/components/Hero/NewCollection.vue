@@ -101,7 +101,11 @@
               v-for="product in props.products"
               :key="product.id"
             >
-              <img :src="product.images" :alt="product.title" class="w-full max-lg:h-full shadow" />
+              <img
+                :src="product.category.image"
+                :alt="product.title"
+                class="w-full max-lg:h-full shadow"
+              />
             </article>
           </div>
         </div>

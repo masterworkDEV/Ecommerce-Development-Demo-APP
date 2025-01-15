@@ -71,6 +71,12 @@
         </button>
       </div>
     </div>
+    <div
+      v-if="useStore.cartNotification || useStore.existedInCart"
+      class="fixed w-full h-full bg-transparentBLK right-0 left-0 top-0 bottom-0 z-30"
+    ></div>
+    <CartNotificationModal />
+    <ExistedInCartModal />
   </section>
 </template>
 
@@ -79,7 +85,8 @@ import { piniaStore } from '@/stores/store'
 import { computed, onMounted, ref } from 'vue'
 import LoadingCard from '../LoadingCard.vue'
 import Carousel from './Carousel.vue'
-
+import CartNotificationModal from '../navigate-store/Cart/CartNotificationModal.vue'
+import ExistedInCartModal from '../navigate-store/Cart/ExistedInCartModal.vue'
 const useStore = piniaStore()
 
 const slideIndex = ref(0)

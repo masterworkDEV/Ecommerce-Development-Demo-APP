@@ -5,7 +5,7 @@
       class="fixed top-0 right-0 left-0 bottom-0 h-full w-full bg-transparentBLK z-0"
     ></div>
     <transition name="slide-fade">
-      <div class="menu" :class="props.menuState ? 'active' : 'leave-active'">
+      <div v-if="props.menuState" class="menu" :class="props.menuState ? 'active' : 'leave-active'">
         <header class="flex justify-between border-b-2 border-primary p-3 px-5 pt-5">
           <div class="flex items-center gap-3">
             <button @click="emits('closeMenu')" class="border border-black">
@@ -115,15 +115,26 @@
           </ul>
         </nav>
         <div class="mt-20 mx-5">
-          <router-link :to="{ name: 'login' }" @click="emits('closeMenu')">
+          <div class="verified" v-if="useStore.verifiedUser">
             <button
-              :to="{ name: 'login' }"
-              class="w-1/4 max-md:w-[40%] p-3 rounded-md bg-black text-white text-sm font-text"
+              class="bg-bgColorSecondary text-textPrimaryTwo w-full p-2 rounded"
+              @click="logoutUser"
+            >
+              Log Out
+            </button>
+          </div>
+          <router-link :to="{ name: 'login' }" @click="emits('closeMenu')" v-else>
+            <button
+              class="w-1/4 max-md:w-[40%] p-3 rounded-md bg-bgColorSecondary text-white text-sm font-text"
             >
               Login
             </button>
           </router-link>
-          <p class="mt-5 flex items-center text-normal font-text text-gray-500">
+          <p v-if="useStore.verifiedUser" class="mt-5 font-text">
+            Welcome back: <b> {{ useStore.displayVerifiedUser.email }}</b>
+          </p>
+
+          <p v-else class="mt-5 flex items-center text-normal font-text text-gray-500">
             No account yet?
             <router-link
               to="/auth/sign-up"
@@ -155,46 +166,80 @@
 </template>
 
 <script setup>
+import { piniaStore } from '@/stores/store'
+import { getAuth, signOut } from 'firebase/auth'
+import { useRouter } from 'vue-router'
 import Logo from '../Logo.vue'
+
+const useStore = piniaStore()
+const router = useRouter()
 const emits = defineEmits(['closeMenu'])
 const props = defineProps({
   menuState: {
     type: Boolean
   }
 })
+
+const logoutUser = async () => {
+  await signOut(useStore.auth)
+    .then((data) => {
+      router.push('/auth/login')
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}
 </script>
 
 <style >
 .menu {
   position: fixed;
   width: 100%;
-  height: 20%;
+  height: 90%;
   background: #f1f1f1;
   box-shadow: 0px 2px 3px #9999;
-  top: -20%;
-  opacity: 0;
+  top: 0;
   left: 0;
   right: 0;
   z-index: 9;
-  transform: translateX(-5000px);
-  transition: height 0.2s cubic-bezier(1, 0.92, 0.65, 1);
 }
 
-.menu.active {
-  height: 90%;
-  top: 0;
-  opacity: 1;
-  transform: translateX(0px);
-}
-.menu.leave-active {
-  transition: all 1s;
-  opacity: 0.7;
-}
-
-@media (max-width: 768px) {
-  .menu.active {
-    height: 80%;
+@media (max-width: 1080px) {
+  .menu {
+    height: 50%;
   }
+}
+@media (max-width: 768px) {
+  .menu {
+    height: 70%;
+  }
+}
+
+@media (max-width: 400px) {
+  .menu {
+    height: 90%;
+  }
+}
+@media (max-width: 350px) {
+  .menu {
+    height: 70%;
+  }
+}
+
+.slide-fade-enter-active {
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.slide-fade-leave-active {
+  transition: all 0.1s ease;
+}
+
+.slide-fade-enter-from {
+  opacity: 0.5;
+  transform: translateX(-500px);
+}
+.slide-fade-leave-to {
+  opacity: 0.5;
+  transform: translateX(-500px);
 }
 
 .nav-links > ul > li {
