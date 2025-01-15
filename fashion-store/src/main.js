@@ -1,12 +1,10 @@
 import './assets/main.css'
-
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-
 import App from './App.vue'
 import router from './router/router'
+import { piniaStore } from './stores/store'
 const app = createApp(App)
-
 import { initializeApp } from 'firebase/app'
 
 // Your web app's Firebase configuration
@@ -24,6 +22,21 @@ const firebaseConfig = {
 // Initialize Firebase
 initializeApp(firebaseConfig)
 app.use(createPinia())
+
+const useStore = piniaStore()
+router
+  .isReady()
+  .then(() => {
+    useStore.routerLoading = false
+  })
+  .catch((err) => {
+    console.log(err.message)
+    useStore.routerLoading = false
+  })
+  .finally(() => {
+    useStore.routerLoading = false
+    console.log('resolved')
+  })
 app.use(router)
 
 app.mount('#app')

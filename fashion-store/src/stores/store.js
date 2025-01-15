@@ -6,6 +6,8 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import axios from 'axios'
 
 export const piniaStore = defineStore('counter', () => {
+  const routerLoading = ref(true)
+
   const verifiedUser = ref(false)
   const displayVerifiedUser = ref(null)
   const welcomeNotification = ref(false)
@@ -95,6 +97,7 @@ export const piniaStore = defineStore('counter', () => {
   }
 
   return {
+    routerLoading,
     auth,
     verifiedUser,
     displayVerifiedUser,
