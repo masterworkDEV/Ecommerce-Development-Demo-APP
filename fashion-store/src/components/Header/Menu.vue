@@ -184,6 +184,7 @@ const logoutUser = async () => {
   await signOut(useStore.auth)
     .then((data) => {
       router.push('/auth/login')
+      emits('closeMenu')
     })
     .catch((error) => {
       console.log(error)
