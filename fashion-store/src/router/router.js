@@ -5,13 +5,23 @@ const router = createRouter({
 
   routes: [
     {
-      path: '/guest-user',
+      path: '/',
       component: () => import('../components/GuestUser.vue'),
       children: [
         {
           path: '/',
           name: 'home',
           component: () => import('../views/HomeView.vue')
+        },
+        {
+          path: '/about',
+          name: 'about',
+          component: () => import('../views/About.vue')
+        },
+        {
+          path: '/contact',
+          name: 'contact',
+          component: () => import('../views/Contact.vue')
         },
         {
           path: '/collections',
@@ -69,73 +79,13 @@ const router = createRouter({
                 transition: 'right'
               },
               component: () => import('../components/navigate-store/Favourite/Favourites.vue')
-            }
-          ]
-        }
-      ]
-    },
-
-    //  logged in Users only
-    {
-      path: '/user-dashboard',
-      component: () => import('../components/UserDashboard.vue'),
-      children: [
-        {
-          path: '/',
-          name: 'home',
-          component: () => import('../views/HomeView.vue')
-        },
-        {
-          path: '/about',
-          name: 'about',
-          component: () => import('../views/About.vue')
-        },
-        {
-          path: '/contact',
-          name: 'contact',
-          component: () => import('../views/Contact.vue')
-        },
-        {
-          path: '/collections',
-          name: 'collections',
-          component: () => import('../views/Collections.vue')
-        },
-        {
-          path: '/deals',
-          name: 'deals',
-          component: () => import('../views/Deals.vue')
-        },
-        {
-          path: '/store/',
-          component: () => import('../components/navigate-store/Store.vue'),
-          children: [
-            {
-              path: 'cart',
-              name: 'cart',
-              meta: {
-                transition: 'left'
-              },
-              component: () => import('../components/navigate-store/Cart/Cart.vue')
             },
             {
-              path: 'favourite',
-              name: 'favourite',
-              meta: {
-                transition: 'right'
-              },
-              component: () => import('../components/navigate-store/Favourite/Favourites.vue')
+              path: '/settings',
+              name: 'settings',
+              component: () => import('../components/Settings.vue')
             }
           ]
-        },
-        {
-          path: '/settings',
-          name: 'settings',
-          component: () => import('../components/Settings.vue')
-        },
-        {
-          path: '/check-out',
-          name: 'check-out',
-          component: () => import('../components/navigate-store/Cart/CheckOutPage.vue')
         }
       ]
     }

@@ -2,7 +2,6 @@
 <template>
   <div class="home">
     <WelcomeNotification />
-
     <main class="pages px-14 max-md:px-5">
       <Hero />
       <ThisWeek />
@@ -23,5 +22,4 @@ import NewDesigns from '@/components/NewDesigns.vue'
 import OurMission from '@/components/OurMission.vue'
 import Footer from '@/components/Footer.vue'
 import WelcomeNotification from '@/components/Authentication/WelcomeNotification.vue'
-const useStore = piniaStore()
 </script>

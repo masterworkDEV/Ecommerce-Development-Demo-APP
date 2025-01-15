@@ -1,15 +1,7 @@
 <template>
   <div>
-    <div
-      class="w-full h-full fixed bg-[#f2f8f855] top-0 bottom-0 right-0 left-0 z-50 flex items-center justify-center gap-2"
-      v-if="useStore.routerLoading"
-    >
-      <div class="loader"></div>
-      <span>Loading...</span>
-    </div>
     <Header v-if="useStore.navState" />
-    <VerifiedUser v-if="useStore.verifiedUser" />
-    <GuestUser v-else />
+    <GuestUser />
   </div>
 </template>
 
@@ -17,7 +9,6 @@
 <script setup>
 import { piniaStore } from './stores/store'
 import Header from './components/Header/Header.vue'
-import VerifiedUser from './components/UserDashboard.vue'
 import GuestUser from './components/GuestUser.vue'
 
 const useStore = piniaStore()

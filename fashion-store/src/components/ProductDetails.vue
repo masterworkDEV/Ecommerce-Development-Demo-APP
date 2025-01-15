@@ -245,7 +245,7 @@ const addProdToCart = (product) => {
   setTimeout(() => {
     useStore.useAddToCart(product)
     simulatedButton.value = false
-  }, 1500)
+  }, 1200)
 }
 
 const updateCartNotification = computed(() => {
@@ -272,8 +272,8 @@ const updateCartNotification = computed(() => {
 
 /* HTML: <div class="loader"></div> */
 .loader {
-  width: 40px;
-  padding: 6px;
+  width: 34px;
+  padding: 4px;
   aspect-ratio: 1;
   border-radius: 50%;
   background: #d7d7d7;
@@ -282,7 +282,7 @@ const updateCartNotification = computed(() => {
   mask: var(--_m);
   -webkit-mask-composite: source-out;
   mask-composite: subtract;
-  animation: l3 1s infinite linear;
+  animation: l3 0.5s infinite linear;
 }
 @keyframes l3 {
   to {

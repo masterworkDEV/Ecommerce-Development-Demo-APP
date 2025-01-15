@@ -23,20 +23,6 @@ const firebaseConfig = {
 initializeApp(firebaseConfig)
 app.use(createPinia())
 
-const useStore = piniaStore()
-router
-  .isReady()
-  .then(() => {
-    useStore.routerLoading = false
-  })
-  .catch((err) => {
-    console.log(err.message)
-    useStore.routerLoading = false
-  })
-  .finally(() => {
-    useStore.routerLoading = false
-    console.log('resolved')
-  })
 app.use(router)
 
 app.mount('#app')

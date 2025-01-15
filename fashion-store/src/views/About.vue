@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <h1>ABout</h1>
-  </div>
+  <main class="pages">
+    <h1>Coming soon</h1>
+  </main>
 </template>
 
 <script setup>

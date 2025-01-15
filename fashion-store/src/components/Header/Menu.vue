@@ -205,23 +205,44 @@ const logoutUser = async () => {
   z-index: 9;
 }
 
-@media (max-width: 1080px) {
+@media (min-width: 1080px) {
+  .menu {
+    height: 80%;
+  }
+}
+@media (max-width: 1024px) {
   .menu {
     height: 50%;
   }
 }
+
+@media (max-width: 836px) {
+  .menu {
+    height: 60%;
+  }
+}
 @media (max-width: 768px) {
   .menu {
-    height: 70%;
+    height: 90%;
+  }
+}
+@media (max-width: 600px) {
+  .menu {
+    height: 85%;
+  }
+}
+@media (max-width: 536px) {
+  .menu {
+    height: 75%;
   }
 }
 
 @media (max-width: 400px) {
   .menu {
-    height: 90%;
+    height: 100%;
   }
 }
-@media (max-width: 350px) {
+@media (max-width: 375px) {
   .menu {
     height: 70%;
   }

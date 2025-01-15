@@ -99,9 +99,7 @@
         <p>Something went wrong</p>
       </div>
     </template>
-    <template v-for="page in totalPages" :key="page">
-      <span>{{ page }}</span>
-    </template>
+
     <div class="flex justify-center gap-5 pt-10">
       <button @click="handlePreviousPage">
         <svg
@@ -201,9 +199,6 @@ const products = computed(() => {
     })
     .slice(startFrom, endAt)
 })
-const totalPages = computed(() => {
-  return Math.ceil(products.value.length / itemsPerPage.value)
-})
 
 const handlePreviousPage = () => {
   if (initialPage.value === 1) {
@@ -221,12 +216,6 @@ const handleNextPage = () => {
     scrollTo({ behavior: 'instant', top: 10 })
   }
 }
-
-watch(products, (newProducts) => {
-  if (!newProducts && search) {
-    search = ''
-  }
-})
 </script>
 
 <style scoped>
