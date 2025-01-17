@@ -1,10 +1,10 @@
 <template>
-  <article v-for="(product, index) in useStore.products.slice(2, 14)" :key="index" class="card">
+  <article v-for="(product, index) in products" :key="index" class="card">
     <div
       :style="{
-        transform: `translateX(-${slideIndex * 100}%)`
+        transform: `translateX(-${props.slideIndex * 100}%)`
       }"
-      class="card-preview relative"
+      class="relative card-preview"
     >
       <router-link
         :to="{ name: 'product-details', params: { productID: product.id } }"
@@ -140,13 +140,17 @@
 </template>
 
 <script setup>
-import { useDraggable } from '@vueuse/core'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
+
 import { piniaStore } from '@/stores/store'
 
 const useStore = piniaStore()
-defineProps({
+const props = defineProps({
   slideIndex: Number
+})
+
+const products = computed(() => {
+  return useStore.products.slice(2, 14)
 })
 </script>
 

@@ -10,7 +10,6 @@
 import { piniaStore } from './stores/store'
 import Header from './components/Header/Header.vue'
 import GuestUser from './components/GuestUser.vue'
-
 const useStore = piniaStore()
 </script>
 

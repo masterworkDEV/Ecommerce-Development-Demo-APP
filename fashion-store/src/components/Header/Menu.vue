@@ -36,8 +36,8 @@
               <b>XIV</b>
             </h2>
           </div>
-          <nav class="nav-icons flex items-center gap-5">
-            <router-link :to="{ name: 'collections' }" @click="emits('closeMenu')">
+          <nav class="nav-icons flex items-center gap-10">
+            <router-link :to="{ name: 'search' }" @click="emits('closeMenu')">
               <svg
                 viewBox="0 0 24 24"
                 class="w-10 h-10 max-md:w-7 max-md:h-7"
@@ -77,7 +77,7 @@
             </router-link>
           </nav>
         </header>
-        <nav class="nav-links max-md:mt-10 mx-5">
+        <nav class="flex items-start justify-start gap-10 nav-links max-md:mt-10 mx-5">
           <ul>
             <li>
               <router-link
@@ -110,6 +110,44 @@
                 @click="emits('closeMenu')"
               >
                 Collections
+              </router-link>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <router-link
+                :to="{ name: 'home' }"
+                class="collections font-text hover:underline transition-all"
+                @click="emits('closeMenu')"
+              >
+                Category
+              </router-link>
+            </li>
+            <li>
+              <router-link
+                :to="{ name: 'favourite' }"
+                class="collections font-text hover:underline transition-all"
+                @click="emits('closeMenu')"
+              >
+                Favourite
+              </router-link>
+            </li>
+            <li>
+              <router-link
+                :to="{ name: 'collections' }"
+                class="collections font-text hover:underline transition-all"
+                @click="emits('closeMenu')"
+              >
+                New Arrivals
+              </router-link>
+            </li>
+            <li>
+              <router-link
+                :to="{ name: 'collections' }"
+                class="collections font-text hover:underline transition-all"
+                @click="emits('closeMenu')"
+              >
+                Admin dashboard
               </router-link>
             </li>
           </ul>
@@ -196,7 +234,6 @@ const logoutUser = async () => {
 .menu {
   position: fixed;
   width: 100%;
-  height: 90%;
   background: #f1f1f1;
   box-shadow: 0px 2px 3px #9999;
   top: 0;
@@ -207,7 +244,7 @@ const logoutUser = async () => {
 
 @media (min-width: 1080px) {
   .menu {
-    height: 80%;
+    height: 90%;
   }
 }
 @media (max-width: 1024px) {
@@ -242,7 +279,7 @@ const logoutUser = async () => {
     height: 100%;
   }
 }
-@media (max-width: 375px) {
+@media (max-width: 350px) {
   .menu {
     height: 70%;
   }
