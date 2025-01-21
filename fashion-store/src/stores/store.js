@@ -78,7 +78,7 @@ export const piniaStore = defineStore('counter', () => {
   }
 
   const useDelProductFromCart = (id) => {
-    cart.value = cart.value.filter((item) => item.id !== id)
+    return (cart.value = cart.value.filter((item) => item.id !== id))
   }
 
   // function favourite
@@ -111,6 +111,7 @@ export const piniaStore = defineStore('counter', () => {
     cart,
     useAddToCart,
     useDelProductFromCart,
+
     cartNotification,
     existedInCart,
     productTitle,

@@ -1,6 +1,6 @@
 <template>
-  <section class="collections w-full">
-    <h1 class="text-h1 max-md:text-h3 font-text">
+  <section class="collections mx-14 max-md:mx-5">
+    <h1 class="text-6xl max-xl:text-h1 max-md:text-h3">
       <b>
         XIV <br />
         COLLECTIONS
@@ -35,19 +35,19 @@
         </div>
         <div v-else>
           <div
-            class="w-full grid grid-cols-3 items-center gap-10 max-lg:gap-5 max-md:gap-3"
+            class="flex justify-center items-center gap-10 max-lg:gap-5 max-md:flex-col"
             v-if="useStore.isReady"
           >
             <article
-              v-for="product in useStore.products?.slice(30, 33)"
-              :key="product.id"
-              class="w-full"
+              v-for="(product, index) in useStore.products?.slice(30, 33)"
+              :key="index"
+              class="w-full h-full"
             >
-              <div class="card-preview relative hover:shadow-2xl transition-all">
+              <div class="card-display relative hover:shadow-2xl transition-all">
                 <img
                   :src="product.images"
                   :alt="product.title"
-                  class="w-[400px] h-[400px] border border-[#d9d9d9] max-lg:w-[220px] max-lg:h-[300px] max-md:w-[200px] max-md:h-[300px] max-sm:w-[110px] ma-smx:h-[200px]"
+                  class="w-full h-full border border-[#d9d9d9]"
                 />
                 <button
                   @click="useStore.useAddToCart(product)"
@@ -81,23 +81,23 @@
                 <div class="row flex justify-between items-end">
                   <div class="spec">
                     <div class="category-spread flex text-center items-centert mb-1 mt-3 gap-2">
-                      <p class="text-sm capitalize text-[#5e5e5e] max-sm:text-[.6rem]">
+                      <p class="text-sm capitalize text-[#5e5e5e] max-md:text-small">
                         {{ product.category.name }}
                       </p>
-                      <form class="flex items-center">
-                        <input type="checkbox" class="w-3 h-3 max-sm:hidden" />
-                        <small class="max-md:hidden">{{ product.id }}</small>
+                      <form class="flex items-center gap-1">
+                        <input type="text" class="w-3 h-3" />
+                        <label class="text-sm text-gray-500">{{ product.id }}</label>
                       </form>
                     </div>
                     <div class="title">
-                      <h3 class="max-sm:text-[.7rem]">
+                      <h3>
                         <b>
-                          {{ product.title.substring(7, 35) }}
+                          {{ product.title }}
                         </b>
                       </h3>
                     </div>
                   </div>
-                  <div class="price max-md:hidden">
+                  <div class="price">
                     <h3>
                       <b> ${{ product.price.toFixed(2) }} </b>
                     </h3>
@@ -136,6 +136,7 @@
 <script setup>
 import { piniaStore } from '@/stores/store'
 import LoadingCard from './LoadingCard.vue'
+import Cart from './navigate-store/Cart/Cart.vue'
 const useStore = piniaStore()
 </script>
 

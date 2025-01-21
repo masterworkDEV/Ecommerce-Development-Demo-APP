@@ -1,6 +1,6 @@
 <template>
   <section class="our-mission">
-    <h1 class="text-h1 text-center max-md:text-h3 font-text">
+    <h1 class="text-6xl max-xl:text-h1 max-md:text-h3 text-center">
       <b> OUR APPROACH TO FASHION DESIGN </b>
     </h1>
     <p

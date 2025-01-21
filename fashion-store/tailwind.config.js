@@ -33,7 +33,7 @@ export default {
       backgroundColor: {
         white: '#fff',
         bgColorPrimary: '#f1f1f1',
-        transparentBLK: 'rgba(0,0,0,0.3)',
+        transparentBLK: 'rgba(0,0,0,0.1)',
         bgColorSecondary: '#1e1e1e',
         otherBgOne: '#5e5e5e',
         otherBgTwo: '#8a8a8a',

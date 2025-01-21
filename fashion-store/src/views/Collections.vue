@@ -1,6 +1,6 @@
 <template>
   <main class="pages px-14 max-xl:px-0 max-xl:mx-5 max-md:mx-0 pb-10">
-    <span class="justify-center items-center text-center hidden max-md:flex">
+    <span class="justify-center items-center text-center hidden max-md:flex gap-1">
       <router-link class="font-text text-small" :to="{ name: 'home' }"> Home </router-link>
       /
       <router-link class="font-text text-small" :to="{ name: 'collections' }">
@@ -15,10 +15,10 @@
     <form class="px-5">
       <SearchItem :search-value="search" @setChange="updateSearchValue" />
     </form>
-    <div class="filter mt-5 ml-5 mb-2 cursor-pointer flex items-center w-32">
-      <b class="text-normal max-md:text-sm">Filters</b>
+    <div class="filter mt-5 ml-5 mb-5 cursor-pointer flex justify-start items-center w-32">
+      <b class="text-normal">Filters</b>
       <svg
-        class="w-8 h-8 max-md:w-6 max-md:h-6 transition-all"
+        class="w-8 h-8 transition-all"
         viewBox="0 0 32 32"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
@@ -205,7 +205,7 @@ const handlePreviousPage = () => {
     return false
   } else {
     initialPage.value--
-    scrollTo({ behavior: 'smooth', top: 10 })
+    scrollTo({ behavior: 'instant', top: 10, left: 10 })
   }
 }
 const handleNextPage = () => {
@@ -213,7 +213,7 @@ const handleNextPage = () => {
     return false
   } else {
     initialPage.value++
-    scrollTo({ behavior: 'instant', top: 10 })
+    scrollTo({ behavior: 'instant', top: 10, left: 0 })
   }
 }
 </script>

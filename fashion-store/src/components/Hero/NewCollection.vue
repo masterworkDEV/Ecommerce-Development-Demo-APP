@@ -1,5 +1,5 @@
 <template>
-  <section class="new-collection mt-24">
+  <div class="new-collection mt-24">
     <div v-if="useStore.isLoading" class="w-full">
       <div class="row grid grid-cols-3 gap-10 w-full">
         <LoadingCard v-for="card in Array(3)" :key="card" class="max-md:hidden" />
@@ -11,7 +11,7 @@
         class="flex justify-center gap-5 w-full max-lg:gap-3 max-md:flex-col-reverse max-md:gap-1"
       >
         <div class="relative">
-          <h1 class="text-6xl max-xl:text-h1 max-md:hidden font-text">
+          <h1 class="text-6xl max-xl:text-h1 max-md:hidden">
             <b>
               NEW <br />
               COLLECTION
@@ -115,7 +115,7 @@
       </div>
       <!-- isready ends -->
     </div>
-  </section>
+  </div>
 </template>
 <script setup>
 import { computed, ref } from 'vue'

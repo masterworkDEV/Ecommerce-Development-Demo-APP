@@ -6,7 +6,7 @@
     >
       There is no product in cart!!
     </h3>
-    <template v-else>
+    <div v-else>
       <div
         class="cart-row w-full flex justify-center gap-20 items-start max-md:justify-start max-md:flex-col"
       >
@@ -16,7 +16,7 @@
             v-for="product in useStore.cart"
             :key="product.id"
           >
-            <div class="w-[90%] h-full">
+            <div class="h-full">
               <img
                 :src="product.images"
                 :alt="product.title"
@@ -38,7 +38,30 @@
                 </div>
               </div>
             </div>
-            <div class="preview-side w-[10%]">
+            <!-- <div
+              v-if="possibleDeletion"
+              class="fixed w-full h-full bg-transparentBLK bottom-0 left-0 right-0 z-10"
+            ></div> -->
+
+            <!-- <div
+              v-if="possibleDeletion"
+              class="fixed w-1/4 max-md:w-3/4 left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] bg-[#f1f1f1] p-5 rounded-sm z-50 shadow-2xl"
+            >
+              <p class="text-sm">
+                Are you sure you want to delete
+                <b>{{ product.title }} ?</b>
+              </p>
+              <div class="mt-5 flex items-center justify-end gap-10">
+                <button @click="noDeletion" class="text-green-600 uppercase">Cancel</button>
+                <button
+                  @click="useStore.useDelProductFromCart(product.id)"
+                  class="text-green-600 uppercase"
+                >
+                  Delete
+                </button>
+              </div>
+            </div> -->
+            <div class="preview-side">
               <button
                 @click="useStore.useDelProductFromCart(product.id)"
                 class="delete flex justify-start items-center text-center"
@@ -63,7 +86,7 @@
               <span class="size">
                 <h4 class="text-start pt-20 mb-3 uppercase"><b>m</b></h4>
               </span>
-              <div class="bg-cyan-400 w-8 h-8 pt-5"></div>
+              <div :class="`bg-black w-8 h-8 pt-5`"></div>
 
               <div class="flex flex-col justify-start items-start text-start pt-5">
                 <button
@@ -128,7 +151,7 @@
           </div>
         </div>
         <!-- row-ends -->
-        <div class="border border-primary p-10 max-md:p-5">
+        <div class="border max-md:w-full border-primary p-10 max-md:p-5">
           <h3 class="pt-5 pb-5 text-h5 max-md:text-normal text-center font-secondary">
             <b>ORDER SUMMARY</b>
           </h3>
@@ -180,13 +203,20 @@
           </button>
         </div>
       </div>
-    </template>
+    </div>
+
     <div
       v-if="agreementModal"
-      class="not-agreeing-to-our-terms-modal fixed top-10 left-[50%] right-0 translate-x-[-50%] w-80 bg-transparentBLK text-white text-center z-30 p-2 rounded-full"
-    >
-      <p>Agree to terms and Conditions</p>
-    </div>
+      class="fixed w-full h-full bg-transparentBLK top-0 right-0 left-0 bottom-0 z-30"
+    ></div>
+    <transition name="cart-slide-left">
+      <div
+        v-if="agreementModal"
+        class="not-agreeing-to-our-terms-modal fixed top-10 left-[50%] right-0 translate-x-[-50%] w-80 bg-[#fff] border border-red-600 text-white text-center z-40 pb-1 pt-1 rounded-md"
+      >
+        <p class="text-sm text-red-600">Please agree to terms our and conditions.</p>
+      </div>
+    </transition>
   </main>
 </template>
 
@@ -200,10 +230,24 @@ const useStore = piniaStore()
 const router = useRouter()
 const agreeToTermAndConditions = ref(false)
 const agreementModal = ref(false)
+const possibleDeletion = ref(false)
+
 // states
 const subtotal = ref(null)
 const shippingTotal = ref(null)
 const totalAmount = ref(0)
+
+const noDeletion = () => {
+  possibleDeletion.value = false
+}
+const checkPossibleDeletion = (id) => {
+  return useStore.cart.find((item) => {
+    if (item.id === id) {
+      possibleDeletion.value = true
+    }
+  })
+  console.log(id)
+}
 
 // methods
 

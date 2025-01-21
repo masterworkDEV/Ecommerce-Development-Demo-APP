@@ -59,7 +59,7 @@
           <Logo />
         </div>
         <div class="flex items-start justify-center gap-2 mt-2">
-          <h1 class="text-8xl max-lg:text-6xl max-sm:text-h3 font-text">
+          <h1 class="text-8xl max-lg:text-6xl max-sm:text-h3">
             <span>VR</span>
             <b>XIV <br />QR</b>
           </h1>

@@ -147,7 +147,7 @@
                 class="collections font-text hover:underline transition-all"
                 @click="emits('closeMenu')"
               >
-                Admin dashboard
+                Dashboard
               </router-link>
             </li>
           </ul>

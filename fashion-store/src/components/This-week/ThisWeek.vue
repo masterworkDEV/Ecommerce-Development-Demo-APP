@@ -1,13 +1,15 @@
 <template>
-  <section>
+  <section class="ml-14 max-md:ml-5">
     <span class="flex justify-between items-center text-start">
-      <h1 class="text-h1 max-md:text-h3 font-text">
+      <h1 class="text-6xl max-xl:text-h1 max-md:text-h3">
         <b>
           NEW <br />
           THIS WEEK
         </b>
       </h1>
-      <router-link :to="{ name: 'collections' }" class="font-text text-sm max-sm:text-small mt-14"
+      <router-link
+        :to="{ name: 'collections' }"
+        class="mr-5 font-text text-sm max-sm:text-small mt-14"
         >See All</router-link
       >
     </span>
@@ -71,13 +73,13 @@
         </button>
       </div>
     </div>
-    <div
-      v-if="useStore.cartNotification || useStore.existedInCart"
-      class="fixed w-full h-full bg-transparentBLK right-0 left-0 top-0 bottom-0 z-30"
-    ></div>
-    <CartNotificationModal />
-    <ExistedInCartModal />
   </section>
+  <div
+    v-if="useStore.cartNotification || useStore.existedInCart"
+    class="fixed w-full h-full bg-transparentBLK right-0 left-0 top-0 bottom-0 z-30"
+  ></div>
+  <CartNotificationModal />
+  <ExistedInCartModal />
 </template>
 
 <script setup>
@@ -112,11 +114,6 @@ const scrollPrevious = () => {
 //   scrollBtns[0].style.background = productLists.scrollLeft <= 0 ? '#f1f1f1' : '#ddd'
 //   scrollBtns[1].style.background = scrollMax >= 0 ? '#f1f1f1' : '#ddd'
 // }
-
-// onMounted(() => {
-//   const productLists = document.querySelector('.carousel')
-//   productLists.addEventListener('scroll', watchScrollPosition)
-// })
 </script>
 
 <style>

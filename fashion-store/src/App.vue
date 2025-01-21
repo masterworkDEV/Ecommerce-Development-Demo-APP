@@ -1,7 +1,11 @@
 <template>
   <div>
     <Header v-if="useStore.navState" />
-    <GuestUser />
+    <RouterView v-slot="{ Component }">
+      <Transition name="fade">
+        <component :is="Component" />
+      </Transition>
+    </RouterView>
   </div>
 </template>
 
@@ -16,36 +20,19 @@ const useStore = piniaStore()
 
 <style>
 body {
-  background: url(../src//assets/images/body.png);
   width: 100vw;
   height: 100vh;
+  background-color: #f1f1f1;
   z-index: 0;
 }
 .pages {
   margin-top: 8rem;
 }
-body {
-  font-family: 'Geostar Fill', serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  letter-spacing: 1.5px;
-  line-height: 1.5;
-  color: #1e1e1e;
-}
-section {
-  margin-top: 10rem;
-}
-
 @media (max-width: 768px) {
   .pages {
     margin-top: 5rem;
   }
-  section {
-    margin-top: 6rem;
-  }
 }
-
 /* HTML: <div class="loader"></div> */
 
 .loader {
@@ -75,5 +62,15 @@ section {
   100% {
     transform: rotate(1turn);
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s ease-in-out;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
 }
 </style>
