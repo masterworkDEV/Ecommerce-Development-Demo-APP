@@ -2,6 +2,13 @@
   <main class="pages mx-14 max-md:mx-5">
     <!-- transition -->
 
+    <h3
+      v-if="!Object.values(useStore.favourite).length"
+      class="text-h5 text-center max-md:text-normal m-10"
+    >
+      You haven't liked any product!
+    </h3>
+
     <div class="flex justify-start">
       <div class="prod-row w-full grid grid-cols-2 gap-20 max-md:grid-cols-1 max-md:w-full">
         <div
