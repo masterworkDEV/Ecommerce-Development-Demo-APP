@@ -1,6 +1,6 @@
 <template>
   <section class="ml-14 max-md:ml-5">
-    <div class="row grid grid-cols-4 gap-5 overflow-x-auto">
+    <div class="row grid grid-cols-4 gap-5 max-md:grid-cols-2 overflow-x-auto">
       <article class="grid-card w-full h-96 shadow">
         <img
           src="https://img.freepik.com/free-photo/portrait-male-wearing-cap-sitting_23-2148854463.jpg?t=st=1730341412~exp=1730345012~hmac=131fffda28fbfbeddcffb28d9032d8a3b85dc5ab12c58becd14f2df11ae06e6e&w=740"

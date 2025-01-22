@@ -42,9 +42,9 @@
               v-if="possibleDeletion"
               class="fixed w-full h-full bg-transparentBLK bottom-0 left-0 right-0 z-10"
             ></div> -->
-
-            <!-- <div
-              v-if="possibleDeletion"
+            <!-- 
+            <div
+              v-if="deleteItem !== null"
               class="fixed w-1/4 max-md:w-3/4 left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%] bg-[#f1f1f1] p-5 rounded-sm z-50 shadow-2xl"
             >
               <p class="text-sm">
@@ -54,16 +54,17 @@
               <div class="mt-5 flex items-center justify-end gap-10">
                 <button @click="noDeletion" class="text-green-600 uppercase">Cancel</button>
                 <button
-                  @click="useStore.useDelProductFromCart(product.id)"
+                  @click="useStore.useDelProductFromCart(deleteItem)"
                   class="text-green-600 uppercase"
                 >
                   Delete
                 </button>
               </div>
             </div> -->
+            <!--  -->
             <div class="preview-side">
               <button
-                @click="useStore.useDelProductFromCart(product.id)"
+                @click="confirmDelete(product)"
                 class="delete flex justify-start items-center text-center"
               >
                 <svg
@@ -230,23 +231,14 @@ const useStore = piniaStore()
 const router = useRouter()
 const agreeToTermAndConditions = ref(false)
 const agreementModal = ref(false)
-const possibleDeletion = ref(false)
 
 // states
 const subtotal = ref(null)
 const shippingTotal = ref(null)
 const totalAmount = ref(0)
 
-const noDeletion = () => {
-  possibleDeletion.value = false
-}
-const checkPossibleDeletion = (id) => {
-  return useStore.cart.find((item) => {
-    if (item.id === id) {
-      possibleDeletion.value = true
-    }
-  })
-  console.log(id)
+const confirmDelete = (product) => {
+  return useStore.useDelProductFromCart(product.id)
 }
 
 // methods

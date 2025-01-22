@@ -14,3 +14,14 @@
 import { piniaStore } from '@/stores/store'
 const useStore = piniaStore()
 </script>
+<style>
+.cart-notification-enter-active,
+.cart-notification-leave-active {
+  transition: all 0.3s ease;
+}
+.cart-notification-enter-from,
+.cart-notification-leave-to {
+  top: -10%;
+  opacity: 0;
+}
+</style>

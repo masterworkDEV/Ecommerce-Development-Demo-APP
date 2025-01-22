@@ -69,8 +69,8 @@ computed(() => {})
 <style>
 section {
   margin-top: 10rem;
-  opacity: 0.2;
-  transition: 1s ease-in-out;
+  opacity: 0;
+  transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 @media (max-width: 768px) {
@@ -81,7 +81,7 @@ section {
 
 .isIntersecting {
   opacity: 1;
-  transform: translateY(-100px);
+  transform: translateY(-60px);
 }
 
 .card-display {

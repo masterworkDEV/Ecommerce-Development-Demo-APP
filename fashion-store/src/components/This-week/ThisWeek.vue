@@ -1,5 +1,5 @@
 <template>
-  <section class="ml-14 max-md:ml-5">
+  <div class="mt-20 ml-14 max-md:ml-5">
     <span class="flex justify-between items-center text-start">
       <h1 class="text-6xl max-xl:text-h1 max-md:text-h3">
         <b>
@@ -73,7 +73,7 @@
         </button>
       </div>
     </div>
-  </section>
+  </div>
   <div
     v-if="useStore.cartNotification || useStore.existedInCart"
     class="fixed w-full h-full bg-transparentBLK right-0 left-0 top-0 bottom-0 z-30"

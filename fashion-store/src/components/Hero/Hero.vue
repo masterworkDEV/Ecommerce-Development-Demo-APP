@@ -1,14 +1,16 @@
 <template>
   <div class="mx-14 max-md:mx-5">
     <ul>
-      <li class="max-xl:text-sm text-textPrimary font-text max-sm:text-small">
-        <b>MEN</b>
-      </li>
-      <li class="max-xl:text-sm text-textPrimary font-text max-sm:text-small">
-        <b> WOMEN </b>
-      </li>
-      <li class="max-xl:text-sm text-textPrimary font-text max-sm:text-small">
-        <b> KIDS </b>
+      <li
+        class="max-xl:text-sm mt-2 mb-3 text-textPrimary font-text 2 uppercase max-sm:text-small max-sm:mb-2"
+        v-for="category in categories"
+        :key="category"
+      >
+        <b>
+          <router-link :to="{ name: 'category', params: { categoryType: category } }">
+            {{ category }}
+          </router-link>
+        </b>
       </li>
     </ul>
     <SearchItem :search-value="searchValue" @setChange="updateSearchValue" />
@@ -36,6 +38,8 @@ const clearInput = () => {
 const updateSearchValue = (value) => {
   searchValue.value = value
 }
+
+const categories = ref(['men', 'women', 'jewelery'])
 </script>
 
 <style >
