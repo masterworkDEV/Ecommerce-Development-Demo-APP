@@ -1,6 +1,6 @@
 <template>
-  <section class="collections mx-14 max-md:mx-5">
-    <h1 class="text-6xl max-xl:text-h1 max-md:text-h3">
+  <section class="collections mx-14 max-xl:mx-10 max-md:mx-5">
+    <h1 class="text-6xl max-xl:text-h2 max-md:text-h3">
       <b>
         XIV <br />
         COLLECTIONS

@@ -1,8 +1,8 @@
 <template>
-  <div class="mx-14 max-md:mx-5">
+  <div class="mx-14 max-xl:mx-10 max-md:mx-5">
     <ul>
       <li
-        class="max-xl:text-sm mt-2 mb-3 text-textPrimary font-text 2 uppercase max-sm:text-small max-sm:mb-2"
+        class="text-sm mt-2 mb-3 text-textPrimary font-text 2 uppercase max-sm:text-small max-sm:mb-2"
         v-for="category in categories"
         :key="category"
       >
@@ -13,7 +13,9 @@
         </b>
       </li>
     </ul>
-    <SearchItem :search-value="searchValue" @setChange="updateSearchValue" />
+    <form @submit.prevent="handlSubmit">
+      <SearchItem :search-value="searchValue" @setChange="updateSearchValue" />
+    </form>
     <NewCollection :products="products" :search-value="searchValue" />
   </div>
 </template>

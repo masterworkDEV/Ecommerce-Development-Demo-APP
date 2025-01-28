@@ -8,7 +8,6 @@
     <OurMission />
     <NewDesigns />
   </main>
-  <Footer />
 </template>
 
 <script setup>
@@ -26,29 +25,26 @@ import { computed, onBeforeMount, onMounted, ref } from 'vue'
 const sections = ref([])
 const cards = ref([])
 const observer = ref(null)
+const cardObserver = ref(null)
 onMounted(() => {
   sections.value = document.querySelectorAll('section')
   observer.value = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('isIntersecting')
-      } else {
-        entry.target.classList.remove('isIntersecting')
       }
     })
   })
   sections.value.forEach((section) => {
     if (section) {
       observer.value.observe(section)
-    } else {
-      observer.value.unobserve(section)
     }
   })
 
   // cards
 
   cards.value = document.querySelectorAll('.card-display')
-  observer.value = new IntersectionObserver((entries) => {
+  cardObserver.value = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('cardDisplay')
@@ -59,7 +55,7 @@ onMounted(() => {
   })
   cards.value.forEach((card) => {
     if (card) {
-      observer.value.observe(card)
+      cardObserver.value.observe(card)
     }
   })
 })

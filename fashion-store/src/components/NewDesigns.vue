@@ -1,5 +1,5 @@
 <template>
-  <section class="ml-14 max-md:ml-5">
+  <section class="ml-14 max-xl:ml-10 max-md:ml-5">
     <div class="row grid grid-cols-4 gap-5 max-md:grid-cols-2 overflow-x-auto">
       <article class="grid-card w-full h-96 shadow">
         <img

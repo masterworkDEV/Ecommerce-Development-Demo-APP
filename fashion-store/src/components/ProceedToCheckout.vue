@@ -347,24 +347,24 @@
     </div>
   </div>
 </template>
-
-
-
-
-
-
-<script setup>
+  
+  
+  
+  
+  
+  
+  <script setup>
 import { onMounted, ref } from 'vue'
 import { piniaStore } from '@/stores/store'
 
 const useStore = piniaStore()
 </script>
-
-
   
-
-
-<style scoped>
+  
+    
+  
+  
+  <style scoped>
 .details {
   width: 100%;
 }
@@ -387,5 +387,5 @@ const useStore = piniaStore()
   outline-color: #919090;
 }
 </style>
-
-   
+  
+     

@@ -1,11 +1,10 @@
 <template>
   <main class="pages px-14 max-md:px-5 pb-10">
-    <h3
-      v-if="!Object.values(useStore.cart).length"
-      class="text-h5 text-center max-md:text-normal m-10"
-    >
-      There is no product in cart!!
-    </h3>
+    <div v-if="!Object.values(useStore.cart).length" class="text-center">
+      <p class="text-h5 max-md:text-normal m-10">There is no product in cart!!</p>
+      <a href="/" class="text-blue-600">Go back home</a>
+    </div>
+
     <div v-else>
       <div
         class="cart-row w-full flex justify-center gap-20 items-start max-md:justify-start max-md:flex-col"

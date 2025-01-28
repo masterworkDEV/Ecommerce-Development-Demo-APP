@@ -6,7 +6,7 @@
     ></div>
     <transition name="slide-fade">
       <div v-if="props.menuState" class="menu" :class="props.menuState ? 'active' : 'leave-active'">
-        <header class="flex justify-between border-b-2 border-primary p-3 px-5 pt-5">
+        <div class="flex justify-between border-b-2 border-primary p-3 px-5 pt-5">
           <div class="flex items-center gap-3">
             <button @click="emits('closeMenu')" class="border border-black">
               <svg
@@ -36,7 +36,7 @@
               <b>XIV</b>
             </h2>
           </div>
-          <nav class="nav-icons flex items-center gap-10">
+          <nav class="nav-icons flex items-center gap-5">
             <router-link :to="{ name: 'search' }" @click="emits('closeMenu')">
               <svg
                 viewBox="0 0 24 24"
@@ -76,14 +76,14 @@
               </svg>
             </router-link>
           </nav>
-        </header>
+        </div>
         <nav class="flex items-start justify-start gap-10 nav-links max-md:mt-10 mx-5">
           <ul>
             <li>
               <router-link
                 :to="{ name: 'home' }"
                 @click="emits('closeMenu')"
-                class="font-text hover:underline transition-all"
+                class="font-text hover:underline transition-all max-sm:text-sm"
                 >Home</router-link
               >
             </li>
@@ -91,13 +91,13 @@
               <router-link
                 :to="{ name: 'about' }"
                 @click="emits('closeMenu')"
-                class="font-text hover:underline transition-all"
+                class="font-text hover:underline transition-all max-sm:text-sm"
                 >About</router-link
               >
             </li>
             <li>
               <router-link
-                class="font-text hover:underline transition-all"
+                class="font-text hover:underline transition-all max-sm:text-sm"
                 :to="{ name: 'contact' }"
                 @click="emits('closeMenu')"
                 >Contact</router-link
@@ -106,7 +106,7 @@
             <li>
               <router-link
                 :to="{ name: 'collections' }"
-                class="collections font-text hover:underline transition-all"
+                class="font-text hover:underline transition-all max-sm:text-sm"
                 @click="emits('closeMenu')"
               >
                 Collections
@@ -117,7 +117,7 @@
             <li>
               <router-link
                 :to="{ name: 'home' }"
-                class="collections font-text hover:underline transition-all"
+                class="font-text hover:underline transition-all max-sm:text-sm"
                 @click="emits('closeMenu')"
               >
                 Category
@@ -126,7 +126,7 @@
             <li>
               <router-link
                 :to="{ name: 'favourite' }"
-                class="collections font-text hover:underline transition-all"
+                class="font-text hover:underline transition-all max-sm:text-sm"
                 @click="emits('closeMenu')"
               >
                 Favourite
@@ -134,17 +134,17 @@
             </li>
             <li>
               <router-link
-                :to="{ name: 'collections' }"
-                class="collections font-text hover:underline transition-all"
+                :to="{ name: 'settings' }"
+                class="font-text hover:underline transition-all max-sm:text-sm"
                 @click="emits('closeMenu')"
               >
-                New Arrivals
+                Settings
               </router-link>
             </li>
             <li>
               <router-link
                 :to="{ name: 'collections' }"
-                class="collections font-text hover:underline transition-all"
+                class="font-text hover:underline transition-all max-sm:text-sm"
                 @click="emits('closeMenu')"
               >
                 Dashboard
@@ -168,11 +168,14 @@
               Login
             </button>
           </router-link>
-          <p v-if="useStore.verifiedUser" class="mt-5 font-text">
+          <p v-if="useStore.verifiedUser" class="mt-5 font-text max-sm:text-sm">
             Welcome back: <b> {{ useStore.displayVerifiedUser.email }}</b>
           </p>
 
-          <p v-else class="mt-5 flex items-center text-normal font-text text-gray-500">
+          <p
+            v-else
+            class="mt-5 flex items-center text-normal font-text max-sm:text-sm text-gray-500"
+          >
             No account yet?
             <router-link
               to="/auth/sign-up"
@@ -230,7 +233,7 @@ const logoutUser = async () => {
 }
 </script>
 
-<style >
+<style scoped>
 .menu {
   position: fixed;
   width: 100%;
@@ -244,44 +247,49 @@ const logoutUser = async () => {
 
 @media (min-width: 1080px) {
   .menu {
-    height: 90%;
+    height: 85%;
+    overflow: auto;
   }
 }
 @media (max-width: 1024px) {
   .menu {
     height: 50%;
+    overflow: auto;
   }
 }
 
-@media (max-width: 836px) {
-  .menu {
-    height: 60%;
-  }
-}
 @media (max-width: 768px) {
   .menu {
-    height: 90%;
+    height: 60%;
+    overflow: auto;
+    padding-bottom: 20px;
   }
 }
 @media (max-width: 600px) {
   .menu {
     height: 85%;
+    overflow: auto;
   }
 }
 @media (max-width: 536px) {
   .menu {
-    height: 75%;
+    height: 80%;
+    overflow: auto;
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 414px) {
+  .menu {
+    overflow: auto;
+    height: 70%;
+  }
+}
+@media (max-width: 375px) {
   .menu {
     height: 100%;
   }
-}
-@media (max-width: 350px) {
-  .menu {
-    height: 70%;
+  .nav-icons > a > svg {
+    width: 20px;
   }
 }
 
@@ -293,7 +301,7 @@ const logoutUser = async () => {
 }
 
 .slide-fade-enter-from {
-  opacity: 0.5;
+  opacity: 0;
   transform: translateX(-500px);
 }
 .slide-fade-leave-to {

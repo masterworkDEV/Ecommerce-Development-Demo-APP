@@ -1,5 +1,5 @@
 <template>
-  <div class="pages w-full px-14 max-sm:px-7">
+  <div class="pages w-full px-14 max-xl:px-10 max-sm:px-7">
     <ul class="flex items-center gap-3">
       <li class="text-sm underline font-primary">
         <a href="/">
@@ -22,24 +22,24 @@
           journey begins here.
         </p>
         <form class="w-full mt-10 flex flex-col gap-5" @submit.prevent="handleSignIn">
-          <div class="details">
-            <input
-              v-model="email"
-              type="text"
-              name="email"
-              placeholder="E-mail"
-              class="w-full p-3 bg-inputBg text-[1rem] rounded"
-            />
-          </div>
-          <div class="details">
-            <input
-              v-model="password"
-              type="password"
-              name="password"
-              placeholder="password"
-              class="w-full p-3 bg-inputBg text-[1rem] rounded"
-            />
-          </div>
+          <input
+            v-model="email"
+            type="text"
+            name="email"
+            placeholder="E-mail"
+            required
+            class="w-full p-3 bg-inputBg text-[1rem] rounded"
+          />
+
+          <input
+            v-model="password"
+            type="password"
+            name="password"
+            placeholder="password"
+            required
+            class="w-full p-3 bg-inputBg text-[1rem] rounded"
+          />
+
           <p class="underline text-sm font-text">Forgot your password?</p>
           <div class="details-action mt-5">
             <div
@@ -74,7 +74,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'vue-router'
 import { piniaStore } from '@/stores/store'
@@ -86,6 +86,12 @@ const email = ref('')
 const password = ref('')
 const isLoading = ref(false)
 
+onMounted(() => {
+  useStore.footerState = !useStore.footerState
+})
+onUnmounted(() => {
+  useStore.footerState = true
+})
 const handleSignIn = async () => {
   isLoading.value = true
   const auth = await getAuth()

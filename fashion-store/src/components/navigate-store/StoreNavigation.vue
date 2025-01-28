@@ -2,7 +2,7 @@
   <div
     class="title mt-40 pb-2 mx-14 max-md:mx-5 flex justify-start items-center gap-7 border-b border-primary w-[65%] max-md:w-[80%] max-md:border-none"
   >
-    <router-link :to="{ name: 'cart' }" class="text-sm max-md:text-smaller font-text">
+    <router-link :to="{ name: 'cart' }" class="text-sm max-md:text-smaller font-primary">
       SHOPPING BAG
     </router-link>
 
@@ -26,7 +26,7 @@
         </svg>
       </div>
 
-      <router-link :to="{ name: 'favourite' }" class="text-sm max-md:text-smaller font-text">
+      <router-link :to="{ name: 'favourite' }" class="text-sm max-md:text-smaller">
         FAVOURITE
       </router-link>
     </div>

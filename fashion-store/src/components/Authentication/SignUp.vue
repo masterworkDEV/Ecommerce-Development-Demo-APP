@@ -28,7 +28,9 @@
               role="textbox"
               type="text"
               name="email"
+              minlength="5"
               maxlength="50"
+              required
               placeholder="E-mail"
               class="w-full p-3 bg-inputBg text-[1rem] rounded"
             />
@@ -38,7 +40,9 @@
               v-model="password"
               type="password"
               name="password"
+              minlength="8"
               maxlength="50"
+              required
               placeholder="password"
               class="w-full p-3 bg-inputBg text-[1rem] rounded"
             />
@@ -49,7 +53,9 @@
               v-model="confirmPassword"
               type="password"
               name="password"
+              minlength="8"
               maxlength="50"
+              required
               placeholder="Retype password"
               class="w-full p-3 bg-inputBg text-[1rem] rounded"
             />
@@ -83,74 +89,34 @@
 
 <script setup>
 import { ref } from 'vue'
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup
-} from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'vue-router'
-import { data } from 'autoprefixer'
 
 const router = useRouter()
 const email = ref('')
 const password = ref('')
 const confirmPassword = ref('')
-const minlength = ref(8)
-const erroMSG = ref(false)
-const isValidEmail = ref('^[^s@]+@[^s@]+.[^s@]+$')
-const message = ref('')
 
 const validateForm = () => {
-  if (email.value === '') {
-    erroMSG.value = true
-    message.value = 'Cannot leave field blank '
-  } else if (email.value.length < minlength.value) {
-    erroMSG.value = true
-    message.value = 'Your email is too short'
+  if (password.value !== confirmPassword.value) {
+    alert('password does not match')
+    return false
   }
-  if (!email.value.includes(isValidEmail)) {
-    message.value = 'Please Provide a valid '
-  } else {
-    erroMSG.value = false
-    message.value = ''
-  }
-
-  if (password.value === '') {
-    erroMSG.value = true
-    message.value = 'Cannot leave field blank '
-  } else if (password.value.length < minlength) {
-    erroMSG.value = true
-    message.value = 'Your password is too short'
-  } else {
-    erroMSG.value = false
-    message.value = ''
-  }
-  if (confirmPassword.value === '') {
-    erroMSG.value = true
-    message.value = 'Cannot leave field blank '
-  } else if (confirmPassword.value === password.value) {
-    erroMSG.value = true
-    message.value = 'Your password does not match'
-  } else {
-    erroMSG.value = false
-    message.value = ''
-  }
-  return
+  return true
 }
 
 const handleSubmit = () => {
-  erroMSG.value = false
-  message.value = ''
-  const auth = getAuth()
-  return createUserWithEmailAndPassword(auth, email.value, password.value)
-    .then((data) => {
-      console.log(data)
-      router.push('/user-dashboard')
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+  if (validateForm() === true) {
+    const auth = getAuth()
+    return createUserWithEmailAndPassword(auth, email.value, password.value)
+      .then((data) => {
+        console.log(data)
+        router.push('/')
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
 }
 </script>
 

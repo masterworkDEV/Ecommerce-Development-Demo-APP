@@ -11,7 +11,7 @@
         class="flex justify-center gap-5 w-full max-lg:gap-3 max-md:flex-col-reverse max-md:gap-1"
       >
         <div class="relative">
-          <h1 class="text-6xl max-xl:text-h1 max-md:hidden">
+          <h1 class="text-6xl max-xl:text-h2 max-md:hidden">
             <b>
               NEW <br />
               COLLECTION

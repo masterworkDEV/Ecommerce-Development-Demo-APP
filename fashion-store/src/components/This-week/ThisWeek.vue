@@ -1,7 +1,7 @@
 <template>
-  <div class="mt-20 ml-14 max-md:ml-5">
+  <div class="mt-20 ml-14 max-xl:ml-10 max-md:ml-5">
     <span class="flex justify-between items-center text-start">
-      <h1 class="text-6xl max-xl:text-h1 max-md:text-h3">
+      <h1 class="text-6xl max-xl:text-h2 max-md:text-h3">
         <b>
           NEW <br />
           THIS WEEK

@@ -33,7 +33,7 @@ export default {
       backgroundColor: {
         white: '#fff',
         bgColorPrimary: '#f1f1f1',
-        transparentBLK: 'rgba(0,0,0,0.1)',
+        transparentBLK: 'rgba(0,0,0,0.5)',
         bgColorSecondary: '#1e1e1e',
         otherBgOne: '#5e5e5e',
         otherBgTwo: '#8a8a8a',
@@ -42,7 +42,7 @@ export default {
         checkOutBlue: '#1DA1F2'
       },
       screens: {
-        smaller: '400px'
+        xSmall: '350px'
       }
     }
   },

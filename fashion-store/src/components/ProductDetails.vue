@@ -184,7 +184,7 @@
         >
         <button
           @click="addProdToCart(product)"
-          class="max-md:w-full max-md:h-14 font-text fixed bottom-0 right-0 left-0 font-bold bg-bgColorSecondary text-white text-normal"
+          class="max-md:w-full max-md:h-12 font-text fixed bottom-0 right-0 left-0 font-bold bg-bgColorSecondary text-white text-normal"
           :class="simulatedButton ? 'opacity-95 cursor-not-allowed' : 'opacity-100 cursor-default'"
         >
           <div v-if="simulatedButton" class="flex justify-center items-center gap-5">

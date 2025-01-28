@@ -2,13 +2,12 @@
   <input
     type="text"
     name="search"
-    autocorrect="on"
     role="search"
     autofocus="on"
     placeholder="Search"
     v-model="inputValue"
     @change="emit('setChange', inputValue)"
-    class="input-field bg-inputBg px-3 placeholder:pl-1 max-md:placeholder:pl-1 text-[1rem] w-[30%] max-xl:w-[40%] h-[50px] rounded max-md:w-full"
+    class="bg-inputBg text-[1rem] w-[30%] max-xl:w-[40%] max-md:w-full p-2 placeholder:pl-1 max-md:placeholder:pl-1"
   />
 </template>
 

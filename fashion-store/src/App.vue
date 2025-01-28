@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <Header v-if="useStore.navState" />
-    <RouterView v-slot="{ Component }">
-      <Transition name="fade">
-        <component :is="Component" />
-      </Transition>
-    </RouterView>
-  </div>
+  <Header v-if="useStore.navState" />
+
+  <RouterView v-slot="{ Component }">
+    <Transition name="fade">
+      <component :is="Component" />
+    </Transition>
+  </RouterView>
+  <Footer v-if="useStore.footerState" />
 </template>
 
 
@@ -14,6 +14,7 @@
 import { piniaStore } from './stores/store'
 import Header from './components/Header/Header.vue'
 import GuestUser from './components/GuestUser.vue'
+import Footer from './components/Footer.vue'
 const useStore = piniaStore()
 </script>
 

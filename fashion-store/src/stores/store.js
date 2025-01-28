@@ -7,8 +7,7 @@ import AdminReq from '../AdminRequests/AdminReq'
 import axios from 'axios'
 
 export const piniaStore = defineStore('counter', () => {
-  const routerLoading = ref(true)
-
+  const users = ref(['standard', 'admin'])
   const verifiedUser = ref(false)
   const displayVerifiedUser = ref(null)
   const welcomeNotification = ref(false)
@@ -28,8 +27,9 @@ export const piniaStore = defineStore('counter', () => {
     })
   })
 
-  // toggle header
+  // toggle header and footer
   const navState = ref(true)
+  const footerState = ref(true)
 
   // products display on page;
   const products = ref([])
@@ -100,20 +100,20 @@ export const piniaStore = defineStore('counter', () => {
   }
 
   return {
-    routerLoading,
+    users,
     auth,
     verifiedUser,
     displayVerifiedUser,
     welcomeMessage,
     welcomeNotification,
     navState,
+    footerState,
     isLoading,
     products,
     isReady,
     cart,
     useAddToCart,
     useDelProductFromCart,
-
     cartNotification,
     existedInCart,
     productTitle,
