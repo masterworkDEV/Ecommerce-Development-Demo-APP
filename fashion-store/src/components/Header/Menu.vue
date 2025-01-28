@@ -143,7 +143,7 @@
             </li>
             <li>
               <router-link
-                :to="{ name: 'collections' }"
+                :to="{ name: 'dashboard' }"
                 class="font-text hover:underline transition-all max-sm:text-sm"
                 @click="emits('closeMenu')"
               >
