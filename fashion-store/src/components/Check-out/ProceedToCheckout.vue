@@ -1,17 +1,17 @@
 <template>
-  <header>
-    <StoreNavigation />
+  <main class="pt-14 px-14 max-xl:px-10 max-md:px-5">
+    <CheckOutProgress />
     <RouterView v-slot="{ Component, route }">
       <transition :name="route.meta.transition">
         <component :is="Component" />
       </transition>
     </RouterView>
-  </header>
+  </main>
 </template>
 
 <script setup>
-import StoreNavigation from '@/components/navigate-store/StoreNavigation.vue'
 import { useRoute } from 'vue-router'
+import CheckOutProgress from './CheckOutProgress.vue'
 </script >
 
 <style >
@@ -25,15 +25,5 @@ import { useRoute } from 'vue-router'
 .left-leave-to {
   opacity: 0;
   transform: translateX(-500px);
-}
-
-.right-enter-active,
-.right-leave-active {
-  transition: all 0.9s ease;
-}
-.right-enter-from,
-.right-leave-to {
-  transform: translateX(500px);
-  opacity: 0.8;
 }
 </style>

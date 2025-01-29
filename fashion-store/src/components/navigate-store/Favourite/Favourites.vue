@@ -1,7 +1,7 @@
 <template>
   <main class="pages mx-14 max-md:mx-5">
     <div v-if="!Object.values(useStore.favourite).length" class="text-center">
-      <p class="text-h5 max-md:text-normal m-10">You haven't liked any product!</p>
+      <p class="text-h5 max-md:text-normal m-5">You haven't liked any product!</p>
       <a href="/" class="text-blue-600">Go back home</a>
     </div>
 
@@ -69,8 +69,16 @@
 
 <script setup>
 import { piniaStore } from '@/stores/store'
+import { onMounted, onUnmounted } from 'vue'
 
 const useStore = piniaStore()
+
+onMounted(() => {
+  useStore.footerState = !useStore.footerState
+})
+onUnmounted(() => {
+  useStore.footerState = true
+})
 
 const removeFromFavourite = (fave) => {
   return (useStore.favourite = useStore.favourite.filter((item) => {

@@ -1,7 +1,7 @@
 <template>
   <main class="pages px-14 max-md:px-5 pb-10">
     <div v-if="!Object.values(useStore.cart).length" class="text-center">
-      <p class="text-h5 max-md:text-normal m-10">There is no product in cart!!</p>
+      <p class="text-h5 max-md:text-normal m-5">There is no product in cart!!</p>
       <a href="/" class="text-blue-600">Go back home</a>
     </div>
 
@@ -222,11 +222,18 @@
 
 <script setup>
 import { piniaStore } from '@/stores/store'
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 // states management
 const useStore = piniaStore()
+
+onMounted(() => {
+  useStore.footerState = !useStore.footerState
+})
+onUnmounted(() => {
+  useStore.footerState = true
+})
 const router = useRouter()
 const agreeToTermAndConditions = ref(false)
 const agreementModal = ref(false)
@@ -293,7 +300,7 @@ const checkOutNow = () => {
       agreementModal.value = false
     }, 2000)
   } else {
-    router.push('/check-out')
+    router.push('/check-out/user-information')
   }
 }
 </script>

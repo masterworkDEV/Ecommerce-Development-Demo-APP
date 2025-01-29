@@ -1,11 +1,12 @@
 <template>
   <Header v-if="useStore.navState" />
-
-  <RouterView v-slot="{ Component }">
-    <Transition name="fade">
-      <component :is="Component" />
-    </Transition>
-  </RouterView>
+  <div class="app">
+    <RouterView v-slot="{ Component }">
+      <Transition name="fade">
+        <component :is="Component" />
+      </Transition>
+    </RouterView>
+  </div>
   <Footer v-if="useStore.footerState" />
 </template>
 
@@ -13,7 +14,6 @@
 <script setup>
 import { piniaStore } from './stores/store'
 import Header from './components/Header/Header.vue'
-import GuestUser from './components/GuestUser.vue'
 import Footer from './components/Footer.vue'
 const useStore = piniaStore()
 </script>
@@ -21,10 +21,17 @@ const useStore = piniaStore()
 
 <style>
 body {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  min-height: 100vh;
   background-color: #f1f1f1;
   z-index: 0;
+}
+.app {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
 }
 .pages {
   margin-top: 8rem;

@@ -109,12 +109,37 @@ const router = createRouter({
       }
     },
     {
-      path: '/check-out',
-      name: 'check-out',
-      component: () => import('../components/ProceedToCheckout.vue'),
+      path: '/check-out/',
       meta: {
         requiresAuth: true
-      }
+      },
+      component: () => import('../components/Check-out/ProceedToCheckout.vue'),
+      children: [
+        {
+          path: 'user-information',
+          name: 'information',
+          meta: {
+            transition: 'left'
+          },
+          component: () => import('../components/Check-out/Information.vue')
+        },
+        {
+          path: 'shipping',
+          name: 'shipping',
+          meta: {
+            transition: 'left'
+          },
+          component: () => import('../components/Check-out/Shipping.vue')
+        },
+        {
+          path: 'payment',
+          name: 'payment',
+          meta: {
+            transition: 'left'
+          },
+          component: () => import('../components/Check-out/Payment.vue')
+        }
+      ]
     }
   ]
 })

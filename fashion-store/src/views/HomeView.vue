@@ -1,7 +1,7 @@
 
 <template>
   <WelcomeNotification />
-  <main class="pages">
+  <main class="home pages">
     <Hero />
     <ThisWeek />
     <Collections />
@@ -40,7 +40,9 @@ onMounted(() => {
       observer.value.observe(section)
     }
   })
+})
 
+onMounted(() => {
   // cards
 
   cards.value = document.querySelectorAll('.card-display')
@@ -59,8 +61,6 @@ onMounted(() => {
     }
   })
 })
-
-computed(() => {})
 </script>
 <style>
 section {

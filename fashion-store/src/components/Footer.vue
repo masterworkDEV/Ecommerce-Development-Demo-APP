@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer mt-40 max-md:mt-20">
+  <footer class="footer relative mt-40 bottom-0 max-md:mt-20">
     <div
       class="grid grid-cols-2 pt-20 px-24 max-md:px-10 max-sm:px-14 place-content-center place-items-start"
     >
@@ -84,6 +84,6 @@ import Logo from './Logo.vue'
 .footer {
   background: url(../assets/images/footer.png);
   width: 100%;
-  height: 500px;
+  min-height: 450px;
 }
 </style>

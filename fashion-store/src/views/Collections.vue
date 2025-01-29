@@ -1,5 +1,5 @@
 <template>
-  <main class="pages mx-10 max-xl:mx-5 max-md:mx-0">
+  <main class="pages mx-14 max-xl:mx-10 max-md:mx-5">
     <span class="justify-center items-center text-center hidden max-md:flex gap-1">
       <router-link class="font-text text-small" :to="{ name: 'home' }"> Home </router-link>
       /
@@ -7,23 +7,25 @@
         products
       </router-link>
     </span>
-    <h2
-      class="flex justify-start ml-5 max-md:ml-5 text-h2 max-xl:text-h3 max-md:text-normal max-md:justify-center"
-    >
+    <h2 class="flex justify-start text-h2 max-xl:text-h3 max-md:text-normal max-md:justify-center">
       <b> PRODUCTS </b>
     </h2>
-    <form class="px-5" @submit.prevent="handleSubmit">
+    <form @submit.prevent="handleSubmit">
       <SearchItem :search-value="search" @setChange="updateSearchValue" />
     </form>
     <button
-      class="filter mt-5 ml-5 mb-5 cursor-pointer flex justify-start items-center w-2/4"
+      class="filter mt-5 mb-5 cursor-pointer flex justify-start items-center w-2/4"
       @click="toggleFilterModal"
     >
-      <span class="font-normal text-h5 max-md:text-normal hover:font-bold transition-all">
+      <span
+        class="font-normal flex justify-start text-h5 max-md:text-normal transition-all"
+        :class="filterModal && 'w-2/4 justify-between'"
+      >
         <b> Filters </b>
       </span>
       <svg
         class="w-12 h-12 max-sm:h-7 transition-all"
+        :class="filterModal && 'rotate-[-180deg]'"
         viewBox="0 0 32 32"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
@@ -46,7 +48,7 @@
           <h3>
             <b class="text-h5 max-md:text-normal"> Size </b>
           </h3>
-          <div class="mt-5 w-full flex gap-3 max-md:gap-1">
+          <div class="mt-5 w-full flex gap-2 max-md:gap-1">
             <button
               class="w-16 p-3 max-md:p-0 max-md:w-8 max-md:h-8 border border-gray-400 text-sm"
               v-for="size in sizesAvailable"
@@ -62,7 +64,8 @@
             <span> Availability </span>
             <svg
               viewBox="0 0 1024 1024"
-              class="icon w-8 h-5 max-md:w-5 max-md:h-4"
+              class="icon w-8 h-5 max-md:w-5 max-md:h-4 transition-all"
+              :class="availability && 'rotate-[90deg]'"
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
               fill="#000000"
@@ -101,17 +104,34 @@
             </li>
           </ul>
           <button
-            class="accordion mt-5 text-h5 max-md:text-normal font-bold border-dotted border-b"
+            class="accordion w-full flex justify-between items-end mt-7 text-h5 max-md:text-normal font-bold border-dotted border-b"
             @click="checkCategory"
           >
             <span> Category </span>
+            <svg
+              viewBox="0 0 1024 1024"
+              class="icon w-8 h-5 max-md:w-5 max-md:h-4 transition-all"
+              :class="category && 'rotate-[90deg]'"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="#000000"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M256 120.768L306.432 64 768 512l-461.568 448L256 903.232 659.072 512z"
+                  fill="#000000"
+                ></path>
+              </g>
+            </svg>
           </button>
           <ul
             class="h-[0rem] overflow-hidden pb-2 border-b-2 border-dotted border-b-otherTextOne transition-all"
             :class="category && 'min-h-[10rem]'"
           >
             <li
-              class="col pt-3 capitalize font-bold cursor-auto"
+              class="col pt-3 capitalize font-bold cursor-pointer hover:bg-otherBgTwo"
               v-for="(category, index) in categoryList"
               :key="index"
               @click="filterByCategory(category)"
@@ -120,10 +140,27 @@
             </li>
           </ul>
           <button
-            class="accordion mt-5 text-h5 max-md:text-normal font-bold border-dotted border-b"
+            class="accordion w-full flex justify-between items-end mt-7 text-h5 max-md:text-normal font-bold border-dotted border-b"
             @click="checkColors"
           >
             <span> Colors </span>
+            <svg
+              viewBox="0 0 1024 1024"
+              class="icon w-8 h-5 max-md:w-5 max-md:h-4 transition-all"
+              :class="colors && 'rotate-[90deg]'"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="#000000"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M256 120.768L306.432 64 768 512l-461.568 448L256 903.232 659.072 512z"
+                  fill="#000000"
+                ></path>
+              </g>
+            </svg>
           </button>
           <ul
             class="flex items-end gap-10 max-md:gap-3 h-[0rem] overflow-scroll pb-2 border-b-2 border-dotted border-b-otherTextOne transition-all"
@@ -142,10 +179,27 @@
             </li>
           </ul>
           <button
-            class="accordion mt-5 text-h5 max-md:text-normal font-bold border-dotted border-b"
+            class="accordion w-full flex justify-between items-end mt-7 text-h5 max-md:text-normal font-bold border-dotted border-b"
             @click="checkPriceRange"
           >
             <span> Price Range </span>
+            <svg
+              viewBox="0 0 1024 1024"
+              class="icon w-8 h-5 max-md:w-5 max-md:h-4 transition-all"
+              :class="priceRange && 'rotate-[90deg]'"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="#000000"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M256 120.768L306.432 64 768 512l-461.568 448L256 903.232 659.072 512z"
+                  fill="#000000"
+                ></path>
+              </g>
+            </svg>
           </button>
           <ul
             class="h-[0rem] overflow-hidden pb-2 border-b-2 border-dotted border-b-otherTextOne transition-all"
@@ -159,10 +213,27 @@
             </li>
           </ul>
           <button
-            class="accordion mt-5 text-h5 max-md:text-normal font-bold border-dotted border-b"
+            class="accordion w-full flex justify-between items-end mt-7 text-h5 max-md:text-normal font-bold border-dotted border-b"
             @click="checkCollection"
           >
             <span>Collections </span>
+            <svg
+              viewBox="0 0 1024 1024"
+              class="icon w-8 h-5 max-md:w-5 max-md:h-4 transition-all"
+              :class="collection && 'rotate-[90deg]'"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="#000000"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M256 120.768L306.432 64 768 512l-461.568 448L256 903.232 659.072 512z"
+                  fill="#000000"
+                ></path>
+              </g>
+            </svg>
           </button>
           <ul
             class="h-[0rem] overflow-hidden pb-2 border-b-2 border-dotted border-b-otherTextOne transition-all"
@@ -173,10 +244,27 @@
             </li>
           </ul>
           <button
-            class="accordion mt-5 text-h5 max-md:text-normal font-bold border-dotted border-b"
+            class="accordion w-full flex justify-between items-end mt-7 text-h5 max-md:text-normal font-bold border-dotted border-b"
             @click="checkTags"
           >
             <span> Tags </span>
+            <svg
+              viewBox="0 0 1024 1024"
+              class="icon w-8 h-5 max-md:w-5 max-md:h-4 transition-all"
+              :class="tags && 'rotate-[90deg]'"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="#000000"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M256 120.768L306.432 64 768 512l-461.568 448L256 903.232 659.072 512z"
+                  fill="#000000"
+                ></path>
+              </g>
+            </svg>
           </button>
           <ul
             class="h-[0rem] overflow-hidden pb-2 border-b-2 border-dotted border-b-otherTextOne transition-all"
@@ -186,10 +274,27 @@
             <li class="col flex items-center mb-3 mt-3 gap-5">Old</li>
           </ul>
           <button
-            class="accordion mt-5 text-h5 max-md:text-normal font-bold border-dotted border-b"
+            class="accordion w-full flex justify-between items-end mt-7 text-h5 max-md:text-normal font-bold border-dotted border-b"
             @click="checkRating"
           >
             <span> Rating </span>
+            <svg
+              viewBox="0 0 1024 1024"
+              class="icon w-8 h-5 max-md:w-5 max-md:h-4 transition-all"
+              :class="rating && 'rotate-[90deg]'"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="#000000"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M256 120.768L306.432 64 768 512l-461.568 448L256 903.232 659.072 512z"
+                  fill="#000000"
+                ></path>
+              </g>
+            </svg>
           </button>
           <ul
             class="h-[0rem] overflow-hidden pb-2 border-b-2 border-dotted border-b-otherTextOne transition-all"
@@ -202,7 +307,7 @@
         </div>
       </div>
       <div class="flex flex-grow flex-col overflow-hidden w-[40%] max-md:w-[0%]">
-        <div class="flex flex-wrap gap-2 overflow-x-auto pl-5">
+        <div class="flex flex-wrap gap-2 overflow-x-auto">
           <div class="flex text-center gap-2">
             <button
               @click="handleFilter(button)"
@@ -309,17 +414,24 @@
 </template>
 
 <script setup>
-import { onMounted, ref, computed, watch } from 'vue'
+import { onMounted, ref, computed, watch, onUnmounted } from 'vue'
 import { piniaStore } from '@/stores/store'
 import SearchItem from '@/components/Hero/SearchItem.vue'
 import router from '@/router/router'
 
 const useStore = piniaStore()
+
+onMounted(() => {
+  useStore.footerState = !useStore.footerState
+})
+onUnmounted(() => {
+  useStore.footerState = true
+})
 const search = ref('')
 const filterModal = ref(false)
 const availability = ref(false)
 const category = ref(false)
-const categoryList = ref(['shoes', 'bag', 'jewelery', 'electronics'])
+const categoryList = ref(['clothes', 'bag', 'jewelery', 'electronics'])
 const colors = ref(false)
 const colorList = ref([
   { name: 'green' },
@@ -453,10 +565,6 @@ const handleNextPage = () => {
 .router-link-active {
   font-weight: 900;
 }
-.filter:hover > svg {
-  transform: translateX(10px);
-}
-
 .filter-container::-webkit-scrollbar {
   width: 0px;
 }
@@ -476,18 +584,39 @@ const handleNextPage = () => {
 
 .filter-modal.active {
   flex-grow: 1;
-  margin-inline: 1.25rem;
+  margin-right: 1rem;
+  padding-right: 0.2rem;
+  box-shadow: 5px 2px 4px #d7d7d7;
 }
-
 .product-list {
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin-top: 5rem;
+  gap: 2.5rem;
 }
 
 .product-list.active {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
+
+
+@media (max-width: 768px) {
+  .product-list {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 2rem;
+    gap: 1.25rem;
+  }
+
+  .product-list.active {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}
+}
+
+
+
 </style>

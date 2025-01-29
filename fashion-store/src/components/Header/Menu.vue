@@ -297,15 +297,17 @@ const logoutUser = async () => {
   transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .slide-fade-leave-active {
-  transition: all 0.1s ease;
+  transition: all 0.3s ease;
+  transition-delay: 0.1s;
 }
 
 .slide-fade-enter-from {
   opacity: 0;
-  transform: translateX(-500px);
+  transform: translateY(-500px);
 }
 .slide-fade-leave-to {
-  opacity: 0.5;
+  scale: 0;
+  opacity: 0;
   transform: translateX(-500px);
 }
 

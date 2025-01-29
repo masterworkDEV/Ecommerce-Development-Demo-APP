@@ -8,7 +8,7 @@
     <ExistedInCartModal />
     <header class="mx-14 max-md:mx-5 fixed top-5 right-0 left-0">
       <nav class="flex justify-between items-center">
-        <router-link @click="backToCollections" :to="{ name: 'collections' }">
+        <router-link to="/collections">
           <svg
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +51,7 @@
         </router-link>
 
         <div class="flex items-center gap-1">
-          <router-link :to="{ name: 'cart' }" @click="useStore.navState = true">
+          <router-link :to="{ name: 'cart' }">
             <div class="flex items-center justify-end text-center">
               <span
                 class="cart-text text-center flex justify-center items-center text-textPrimaryTwo bg-bgColorSecondary w-[90px] h-[50px] max-xl:h-[40px] max-xl:w-[70px] rounded-[1.5rem] translate-x-1 max-md:hidden"
@@ -200,7 +200,7 @@
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, onUnmounted } from 'vue'
 import { piniaStore } from '@/stores/store'
 import CartNotification from './navigate-store/Cart/CartNotification.vue'
 import CartNotificationModal from './navigate-store/Cart/CartNotificationModal.vue'
@@ -209,6 +209,7 @@ import ExistedInCartModal from './navigate-store/Cart/ExistedInCartModal.vue'
 const route = useRoute()
 const router = useRouter()
 const useStore = piniaStore()
+
 const API_URL = `https://api.escuelajs.co/api/v1/products`
 const product = ref({})
 const isLoading = ref(true)
@@ -220,7 +221,8 @@ const handleImageClicks = (image) => {
 }
 
 onMounted(() => {
-  useStore.navState = false
+  useStore.navState = !useStore.navState
+  useStore.footerState = !useStore.footerState
   const fetchData = async () => {
     try {
       const res = await fetch(`${API_URL}/${route.params.productID}`)
@@ -236,9 +238,10 @@ onMounted(() => {
   }
   ;(async () => await fetchData())()
 })
-const backToCollections = () => {
+
+onUnmounted(() => {
   useStore.navState = true
-}
+})
 
 const addProdToCart = (product) => {
   simulatedButton.value = true
