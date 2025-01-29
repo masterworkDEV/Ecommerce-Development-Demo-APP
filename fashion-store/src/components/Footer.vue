@@ -84,6 +84,6 @@ import Logo from './Logo.vue'
 .footer {
   background: url(../assets/images/footer.png);
   width: 100%;
-  min-height: 450px;
+  min-height: 475px;
 }
 </style>

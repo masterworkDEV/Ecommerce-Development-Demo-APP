@@ -81,10 +81,12 @@ section {
 }
 
 .card-display {
-  scale: 0.2;
-  transition: 1s ease-in-out;
+  scale: 0.5;
+  transform: translateY(40px);
+  transition: 0.3s ease-in-out;
 }
 .cardDisplay {
+  transform: translateY(0px);
   scale: 1;
 }
 </style>

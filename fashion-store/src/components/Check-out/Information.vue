@@ -321,13 +321,14 @@
 
         <div class="details w-full flex justify-end">
           <button
-            :disabled="validate"
-            class="w-2/4 max-md:w-full h-10 flex justify-between items-center bg-inputBg p-2 px-4"
-            :class="isValid && 'bg-blue-700'"
+            :disabled="isValid"
+            class="submit-btn w-2/4 max-md:w-full h-10 flex justify-between items-center bg-inputBg p-2 px-4 cursor-not-allowed transition-all"
+            :class="isValid && 'active'"
           >
             <span> Shipping </span>
             <svg
-              class="w-[50px]"
+              class="arrow w-[50px]"
+              :class="isValid && 'active'"
               height="200px"
               width="200px"
               version="1.1"
@@ -350,20 +351,20 @@
       </div>
     </form>
     <div class="items-in-cart w-full pl-56 max-sm:pl-0 mb-10">
-      <div class="col w-full max-h-[550px] overflow-y-auto border-2 border-primary p-6">
+      <div class="col w-full min-h-96 overflow-y-auto border-2 border-primary p-6">
         <div
           v-for="product in useStore.cart"
           :key="product.id"
-          class="grid grid-cols-3 gap-3 items-start"
+          class="grid grid-cols-3 gap-3 items-start mb-5"
         >
-          <div class="image w-full h-[150px]">
+          <div class="image w-full h-[140px]">
             <img :src="product.images" :alt="product.title" class="w-full h-full object-cover" />
           </div>
           <div class="spec flex flex-col gap-3">
-            <small class="name mt-2 mb-2">{{
+            <small class="name mb-2">{{
               product.title.length < 20 ? product.title : product.title.slice(0, 25)
             }}</small>
-            <small class="name mt-2 mb-2">{{ product.category.name }}/L</small>
+            <small class="name mb-2">{{ product.category.name }}/L</small>
 
             <small class="mt-2">{{ product.quantity }}</small>
           </div>
@@ -424,7 +425,7 @@ const handleInformation = () => {
 
   // but since we're pushing to another route
   if (isValid.value) {
-    router.push('/check-out/shipping')
+    return router.push('/check-out/shipping')
   }
 }
 </script>
@@ -450,6 +451,15 @@ const handleInformation = () => {
 }
 .details > input:focus {
   outline-color: #919090;
+}
+
+.submit-btn.active {
+  background: blue;
+  color: #fff;
+  cursor: pointer;
+}
+.arrow.active {
+  fill: #fff;
 }
 </style>
     
