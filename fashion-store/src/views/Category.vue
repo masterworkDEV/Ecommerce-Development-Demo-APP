@@ -21,7 +21,7 @@ onMounted(() => {
       const res = await fetch(
         `https://fakestoreapi.com/products/category/${route.params.categoryType}`
       )
-      if (!res.ok) throw Error('Error there is product for this category')
+      if (!res.ok) throw Error('Error there is no product for this category')
       const result = await res.json()
       console.log(result)
       categoryResult.value = result

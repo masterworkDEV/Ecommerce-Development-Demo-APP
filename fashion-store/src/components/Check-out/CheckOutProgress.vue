@@ -1,7 +1,7 @@
 <template>
   <header>
     <nav>
-      <router-link :to="{ name: 'cart' }" name="home">
+      <button @click="goToPreviousPage">
         <svg
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -41,18 +41,25 @@
             </g>
           </g>
         </svg>
-      </router-link>
+      </button>
     </nav>
   </header>
   <h1 class="font-text mt-20 text-h3 max-md:text-h5"><b>CHECKOUT</b></h1>
   <div class="flex justify-start items-center gap-10 mt-5 max-md:gap-3">
-    <router-link class="font-text max-md:text-sm">INFORMATION</router-link>
-    <router-link class="font-text max-md:text-sm">SHIPPING</router-link>
-    <router-link class="font-text max-md:text-sm">PAYMENT</router-link>
+    <router-link :to="{ name: 'information' }" class="font-text max-md:text-sm"
+      >INFORMATION</router-link
+    >
+    <router-link :to="{ name: 'shipping' }" class="font-text max-md:text-sm">SHIPPING</router-link>
+    <router-link :to="{ name: 'payment' }" class="font-text max-md:text-sm">PAYMENT</router-link>
   </div>
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const goToPreviousPage = () => {
+  router.go(-1)
+}
 </script>
 
 <style>
