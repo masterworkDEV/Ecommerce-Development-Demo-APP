@@ -2,7 +2,7 @@
   <header>
     <StoreNavigation />
     <RouterView v-slot="{ Component, route }">
-      <transition :name="route.meta.transition">
+      <transition :name="route.meta.transition || 'fade'">
         <component :is="Component" />
       </transition>
     </RouterView>
@@ -29,11 +29,11 @@ import { useRoute } from 'vue-router'
 
 .right-enter-active,
 .right-leave-active {
-  transition: all 0.9s ease;
+  transition: all 0.3s ease;
 }
 .right-enter-from,
 .right-leave-to {
-  transform: translateX(500px);
+  transform: translateX(-500px);
   opacity: 0.8;
 }
 </style>

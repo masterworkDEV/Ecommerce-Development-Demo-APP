@@ -307,7 +307,7 @@ const checkOutNow = () => {
 
 <style>
 .checked {
-  background: blue;
+  background: darkblue;
 }
 .checked:hover {
   background: rgb(3, 3, 203);

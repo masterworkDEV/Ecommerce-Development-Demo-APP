@@ -87,27 +87,57 @@
       </div>
     </form>
     <div class="items-in-cart w-full pl-56 max-sm:pl-0 mb-10">
-      <div class="col w-full min-h-96 overflow-y-auto border-2 border-primary p-6">
-        <h3 class="mb-5 font-semibold">Your Order</h3>
+      <div class="col relative w-full min-h-[500px] overflow-y-auto border-2 border-primary p-6">
+        <h4
+          class="absolute top-0 right-0 bg-white text-blue-800 w-8 h-8 flex justify-center text-center items-center"
+        >
+          {{ useStore.cart.length }}
+        </h4>
+
+        <h3 class="mb-5 font-semibold text-gray-600">Your Order</h3>
 
         <div
           v-for="product in useStore.cart"
           :key="product.id"
           class="grid grid-cols-3 gap-3 items-start mb-5"
         >
-          <div class="image w-full h-[140px]">
-            <img :src="product.images" :alt="product.title" class="w-full h-full object-cover" />
+          <div class="image w-full h-[125px]">
+            <img
+              :src="product.images"
+              :alt="product.title"
+              class="w-full h-full object-cover border border-primary"
+            />
           </div>
           <div class="spec flex flex-col gap-3">
-            <small class="name mb-2">{{
+            <small class="name mb-2 font-primary">{{
               product.title.length < 20 ? product.title : product.title.slice(0, 25)
             }}</small>
-            <small class="name mb-2">{{ product.category.name }}/L</small>
+            <small class="name mb-2 font-primary">{{ product.category.name }}/L</small>
 
-            <small class="mt-2">{{ product.quantity }}</small>
+            <small class="mt-2 text-blue-800 font-primary">({{ product.quantity }})</small>
           </div>
-
-          <button class="text-sm underline font-bold max-md:text-small">Change</button>
+          <div class="flex flex-col items-end gap-3">
+            <button class="text-sm underline font-primary font-bold max-md:text-small">
+              Change
+            </button>
+            <small class="mt-5 font-primary">${{ product.price }}</small>
+          </div>
+        </div>
+        <div class="subtotal flex justify-between pt-2 border-t border-primary">
+          <small>Subtotal</small>
+          <small class="font-primary">
+            <b> ${{ subtotal.toFixed(2) }} </b>
+          </small>
+        </div>
+        <div class="subtotal flex justify-between pt-2 mb-2">
+          <small>Shipping</small>
+          <small class="text-smaller text-gray-500 font-primary">Calculated at next step</small>
+        </div>
+        <div class="total flex justify-between mt-2 pt-2 border-t border-primary">
+          <small>Total</small>
+          <small class="font-primary">
+            <b> ${{ subtotal.toFixed(2) }} </b>
+          </small>
         </div>
       </div>
     </div>
@@ -128,11 +158,13 @@ onMounted(() => {
   useStore.navState = !useStore.navState
   useStore.footerState = !useStore.footerState
   availableCountries.value = countriesJS
+  useStore.showInformationLink = true
 })
 
 onUnmounted(() => {
   useStore.navState = true
   useStore.footerState = true
+  useStore.showInformationLink = false
 })
 
 const email = ref('')
@@ -170,6 +202,13 @@ const handleInformation = () => {
     alert('all fields must be completed')
   }
 }
+
+const subtotal = computed(() => {
+  const getSubtotal = useStore.cart.reduce((acc, product) => {
+    return acc + product.price * product.quantity
+  }, 0)
+  return getSubtotal
+})
 </script>
     
  <style >
@@ -204,7 +243,7 @@ const handleInformation = () => {
 }
 
 .submit-btn.active {
-  background: blue;
+  background: darkblue;
   color: #fff;
   cursor: pointer;
 }

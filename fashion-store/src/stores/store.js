@@ -3,15 +3,19 @@ import { ref, onMounted, watch } from 'vue'
 import { useAsyncState } from '@vueuse/core'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import AdminReq from '../AdminRequests/AdminReq'
-
-import axios from 'axios'
+import axiosClient from '@/Axios-client/axiosClient'
 
 export const piniaStore = defineStore('counter', () => {
-  const users = ref(['standard', 'admin'])
-  const verifiedUser = ref(false)
-  const displayVerifiedUser = ref(null)
+  // general states
+  const routerLoading = ref(true)
   const welcomeNotification = ref(false)
   const welcomeMessage = ref('')
+
+  // .....
+  // Authenticate users
+  const verifiedUser = ref(false)
+  const displayVerifiedUser = ref(null)
+  const users = ref(['standard', 'admin'])
 
   const auth = ref(null)
   onMounted(() => {
@@ -34,11 +38,9 @@ export const piniaStore = defineStore('counter', () => {
   // products display on page;
   const products = ref([])
 
-  const API_URL = 'https://api.escuelajs.co/api/v1/products'
-
   const { state, isReady, isLoading } = useAsyncState(
-    axios
-      .get(API_URL)
+    axiosClient
+      .get('products')
       .then(({ data }) => {
         products.value = data.map((product) => ({ ...product, liked: false }))
         console.log(products.value)
@@ -99,6 +101,9 @@ export const piniaStore = defineStore('counter', () => {
     return checkAvailablity
   }
 
+  const showInformationLink = ref(false) // Initially not shown
+  const showShippingLink = ref(false)
+  const showPaymentLink = ref(false)
   return {
     users,
     auth,
@@ -118,6 +123,9 @@ export const piniaStore = defineStore('counter', () => {
     existedInCart,
     productTitle,
     favourite,
-    useAddToFavourite
+    useAddToFavourite,
+    showInformationLink,
+    showShippingLink,
+    showPaymentLink
   }
 })

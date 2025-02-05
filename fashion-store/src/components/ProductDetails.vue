@@ -136,13 +136,47 @@
     </header>
     <main class="pages px-14 max-md:px-0 max-md:pb-20">
       <p v-if="isLoading">Loading please wait...</p>
-      <pre v-else-if="isError">{{ isError }}</pre>
+      <pre v-else-if="!isLoading && isError">{{ isError }}</pre>
       <div v-else class="max-md:h-full max-md:w-full">
         <img
           :src="product.images[currentImage]"
           :alt="product.title"
           class="h-full w-full object-cover"
+          :class="
+            imageZoom && 'fixed right-10 top-10 bottom-20  max-h-[650px] w-[80%] object-fill z-20'
+          "
+          @click="handleImageZoom"
         />
+        <div
+          v-if="imageZoom"
+          class="fixed top-0 right-0 left-0 bottom-0 bg-[rgba(0,0,0,0.98)] z-10 w-full h-full"
+        >
+          <button
+            class="fixed right-2 w-6 h-6 top-2 flex justify-center items-center bg-otherBgThree"
+            @click="imageZoom = !imageZoom"
+          >
+            <svg
+              class="h-5 w-5"
+              viewBox="0 0 64 64"
+              xmlns="http://www.w3.org/2000/svg"
+              stroke-width="3"
+              stroke="#000000"
+              fill="none"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <line x1="8.06" y1="8.06" x2="55.41" y2="55.94"></line>
+                <line x1="55.94" y1="8.06" x2="8.59" y2="55.94"></line>
+              </g>
+            </svg>
+          </button>
+          <div class="prev-next h-full flex justify-between items-center">
+            <button class="text-white" @click="currentImage--">Prev</button>
+            <button class="text-white" @click="currentImage++">Next</button>
+          </div>
+          <!--  -->
+        </div>
         <div
           class="images-prev mt-10 w-full h-full flex justify-start max-md:pl-5 gap-5 overflow-x-auto"
         >
@@ -153,7 +187,7 @@
             :alt="product.title"
             class="image-row"
             :class="index === currentImage && 'active'"
-            @click="handleImageClicks(index)"
+            @click="handleImageClick(index)"
           />
         </div>
         <span class="max-md:px-5 mt-10 flex justify-between items-center">
@@ -184,7 +218,7 @@
         >
         <button
           @click="addProdToCart(product)"
-          class="max-md:w-full max-md:h-12 font-text fixed bottom-0 right-0 left-0 font-bold bg-bgColorSecondary text-white text-normal"
+          class="max-md:w-full max-md:h-10 font-text fixed bottom-0 right-0 left-0 font-bold bg-black text-white text-normal"
           :class="simulatedButton ? 'opacity-95 cursor-not-allowed' : 'opacity-100 cursor-default'"
         >
           <div v-if="simulatedButton" class="flex justify-center items-center gap-5">
@@ -205,38 +239,45 @@ import { piniaStore } from '@/stores/store'
 import CartNotification from './navigate-store/Cart/CartNotification.vue'
 import CartNotificationModal from './navigate-store/Cart/CartNotificationModal.vue'
 import ExistedInCartModal from './navigate-store/Cart/ExistedInCartModal.vue'
+import axiosClient from '@/Axios-client/axiosClient'
 
 const route = useRoute()
 const router = useRouter()
 const useStore = piniaStore()
+const imageZoom = ref(false)
 
-const API_URL = `https://api.escuelajs.co/api/v1/products`
+const handleImageZoom = () => {
+  imageZoom.value = true
+}
+
 const product = ref({})
 const isLoading = ref(true)
 const isError = ref(false)
 const currentImage = ref(0)
 const simulatedButton = ref(false)
-const handleImageClicks = (image) => {
+const handleImageClick = (image) => {
   currentImage.value = image
 }
 
 onMounted(() => {
   useStore.navState = !useStore.navState
   useStore.footerState = !useStore.footerState
-  const fetchData = async () => {
+
+  const fecthData = async () => {
     try {
-      const res = await fetch(`${API_URL}/${route.params.productID}`)
-      if (!res.ok) throw Error('Error cannot find this product. Reload')
-      const data = await res.json()
-      product.value = data
-    } catch (error) {
-      isError.value = error.message
-      console.log(error)
+      const respsonse = await axiosClient.get(`products/${route.params.productID}`)
+      product.value = respsonse.data
+    } catch (err) {
+      if (err.respsonse) {
+        console.log(err.respsonse.headers)
+      } else {
+        console.log(err.message)
+      }
     } finally {
       isLoading.value = false
     }
   }
-  ;(async () => await fetchData())()
+  fecthData()
 })
 
 onUnmounted(() => {
@@ -248,7 +289,7 @@ const addProdToCart = (product) => {
   setTimeout(() => {
     useStore.useAddToCart(product)
     simulatedButton.value = false
-  }, 1200)
+  }, 1000)
 }
 
 const updateCartNotification = computed(() => {

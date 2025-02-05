@@ -163,7 +163,7 @@
             </svg>
           </button>
           <ul
-            class="flex items-end gap-10 max-md:gap-3 h-[0rem] overflow-scroll pb-2 border-b-2 border-dotted border-b-otherTextOne transition-all"
+            class="colors flex items-end gap-10 max-md:gap-3 h-[0rem] overflow-scroll pb-2 border-b-2 border-dotted border-b-otherTextOne transition-all"
             :class="colors && 'min-h-[7rem]'"
           >
             <li v-for="color in colorList" class="col mb-3 mt-3" :key="color.name">
@@ -307,7 +307,7 @@
         </div>
       </div>
       <div class="flex flex-grow flex-col overflow-hidden w-[40%] max-md:w-[0%]">
-        <div class="flex flex-wrap gap-2 overflow-x-auto">
+        <div class="buttons flex flex-wrap gap-2 overflow-x-auto">
           <div class="flex text-center gap-2">
             <button
               @click="handleFilter(button)"
@@ -601,7 +601,6 @@ const handleNextPage = () => {
   grid-template-columns: repeat(2, 1fr);
 }
 
-
 @media (max-width: 768px) {
   .product-list {
     position: relative;
@@ -612,11 +611,17 @@ const handleNextPage = () => {
   }
 
   .product-list.active {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
+
+.colors::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
 }
-
-
-
+.buttons::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
 </style>
