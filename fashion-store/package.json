@@ -11,6 +11,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.4.1",
     "dotenv-cli": "^8.0.0",
     "firebase": "^11.1.0",
     "pinia": "^2.1.7",

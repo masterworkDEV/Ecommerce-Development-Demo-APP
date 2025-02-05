@@ -1,21 +1,29 @@
 <template>
-  <Header v-if="useStore.navState" />
-  <div class="app">
-    <RouterView v-slot="{ Component }">
-      <Transition name="fade">
-        <component :is="Component" />
-      </Transition>
-    </RouterView>
+  <div>
+    <Header v-if="useStore.navState" />
+    <div class="app">
+      <RouterView v-slot="{ Component }">
+        <Transition name="fade">
+          <component :is="Component" />
+        </Transition>
+      </RouterView>
+    </div>
+    <Footer v-if="useStore.footerState" />
   </div>
-  <Footer v-if="useStore.footerState" />
 </template>
 
 
 <script setup>
+import { ref, onMounted } from 'vue'
 import { piniaStore } from './stores/store'
 import Header from './components/Header/Header.vue'
 import Footer from './components/Footer.vue'
 const useStore = piniaStore()
+import { inject } from '@vercel/analytics'
+
+onMounted(() => {
+  inject()
+})
 </script>
 
 
