@@ -143,7 +143,8 @@
           :alt="product.title"
           class="h-full w-full object-cover"
           :class="
-            imageZoom && 'fixed right-10 top-10 bottom-20  max-h-[650px] w-[80%] object-fill z-20'
+            imageZoom &&
+            'fixed top-10 bottom-20 left-[50%] right-[50%]  translate-x-[-50%] max-h-[36rem] w-[78%] object-fill z-20'
           "
           @click="handleImageZoom"
         />
