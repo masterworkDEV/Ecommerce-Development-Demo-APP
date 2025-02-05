@@ -1,4 +1,8 @@
 {
+  "build": {
+    "publish": "dist"
+  },
+
   "rewrites": [
     {
       "source": "/(.*)",
