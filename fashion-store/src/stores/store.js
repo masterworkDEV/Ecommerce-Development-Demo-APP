@@ -43,7 +43,6 @@ export const piniaStore = defineStore('counter', () => {
       .get('products')
       .then(({ data }) => {
         products.value = data.map((product) => ({ ...product, liked: false }))
-        console.log(products.value)
       })
       .catch((error) => console.log(error))
   )

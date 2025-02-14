@@ -371,11 +371,14 @@
         </template>
 
         <div class="flex justify-center gap-5 mt-20 mb-10">
-          <button @click="handlePreviousPage">
+          <button
+            @click="handlePreviousPage"
+            class="flex items-center"
+            :class="initialPage === 1 && 'opacity-70'"
+          >
             <svg
               viewBox="0 0 1024 1024"
               class="icon fill-black w-10 h-8 max-md:h-5 transition-all"
-              :class="initialPage === 1 && 'fill-gray-600'"
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -388,12 +391,17 @@
                 ></path>
               </g>
             </svg>
+            <span>Previous</span>
           </button>
-          <button @click="handleNextPage">
+          <button
+            @click="handleNextPage"
+            class="flex items-center"
+            :class="products.length / itemsPerPage === 0 && 'opacity-70'"
+          >
+            <span>Next</span>
             <svg
               viewBox="0 0 1024 1024"
               class="icon fill-black w-10 h-8 max-md:h-5 transition-all"
-              :class="products.length / itemsPerPage === 0 && 'fill-gray-600'"
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -543,63 +551,39 @@ const products = computed(() => {
 
 // Watch for changes in searchQuery or initialPage
 
-watch([searchQuery, initialPage], ()=>{
-setUrlAccordingToSearchInput()
+watch([searchQuery, initialPage], () => {
+  setUrlAccordingToSearchInput()
 })
 
+const setUrlAccordingToSearchInput = () => {
+  {
+    const params = new URLSearchParams()
+    if (searchQuery.value) {
+      params.set('search', searchQuery.value)
+    }
+    if (initialPage.value > 1) {
+      params.set('page', initialPage.value)
+    }
 
-const setUrlAccordingToSearchInput = ()=>{{
-  const params = new URLSearchParams()
-  if(searchQuery.value){
-    params.set('search', searchQuery.value)
-  }if(initialPage.value > 1){
-    params.set('page', initialPage.value)
+    const newUrl = `${window.location.pathname}?${params.toString()}`
+    window.history.pushState(null, '', newUrl)
   }
+}
 
-  const newUrl = `${window.location.pathname}?${params.toString()}`
-  window.history.pushState(null, '', newUrl)
-}}
-
-window.addEventListener('popstate', ()=>{
+window.addEventListener('popstate', () => {
   const params = new URLSearchParams(window.location.search)
-params.get('search', searchQuery.value) || ''
-const page = parseInt(params.get('page', initialPage.value)) || 1
-initialPage.value = page
+  params.get('search', searchQuery.value) || ''
+  const page = parseInt(params.get('page', initialPage.value)) || 1
+  initialPage.value = page
 })
 
-
-onMounted(()=>{
+onMounted(() => {
   useStore.footerState = false
   const params = new URLSearchParams(window.location.search)
-params.get('search', searchQuery.value) || ''
-const page = parseInt(params.get('page', initialPage.value)) || 1
-initialPage.value = page
+  params.get('search', searchQuery.value) || ''
+  const page = parseInt(params.get('page', initialPage.value)) || 1
+  initialPage.value = page
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 onUnmounted(() => {
   useStore.footerState = true
