@@ -294,7 +294,7 @@ const logoutUser = async () => {
 }
 
 .slide-fade-enter-active {
-  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all ease 0.25s;
 }
 .slide-fade-leave-active {
   transition: all 0.3s ease;

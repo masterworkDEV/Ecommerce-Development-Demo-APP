@@ -163,7 +163,7 @@ router.beforeEach(async (to, from, next) => {
       next()
     } else {
       alert('you do not have access to this route')
-      next('/auth/login')
+      next({ path: '/auth/login', query: { redirect: to.fullPath } })
     }
   } else {
     next()

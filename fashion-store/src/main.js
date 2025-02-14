@@ -10,7 +10,7 @@ import { initializeApp } from 'firebase/app'
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: 'AIzaSyBeMrvCroZ3GwZwF3iFZTi_t_r8YxFLHu8',
+  apiKey: import.meta.env.VITE_FIREBASE_KEY,
   authDomain: 'fashion-store-df97c.firebaseapp.com',
   projectId: 'fashion-store-df97c',
   storageBucket: 'fashion-store-df97c.firebasestorage.app',

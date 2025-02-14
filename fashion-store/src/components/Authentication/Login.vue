@@ -76,12 +76,13 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { piniaStore } from '@/stores/store'
 import { set } from '@vueuse/core'
 
 const useStore = piniaStore()
 const router = useRouter()
+const route = useRoute()
 const email = ref('')
 const password = ref('')
 const isLoading = ref(false)
@@ -98,8 +99,7 @@ const handleSignIn = async () => {
   signInWithEmailAndPassword(auth, email.value, password.value)
     .then((data) => {
       useStore.welcomeMessage = data.user.email
-      console.log(useStore.welcomeMessage)
-      router.push('/')
+      router.push(route.query.redirect || '/')
     })
     .catch((error) => {
       const errorBlock = {

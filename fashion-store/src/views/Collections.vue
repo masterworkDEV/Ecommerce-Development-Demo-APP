@@ -421,12 +421,6 @@ import router from '@/router/router'
 
 const useStore = piniaStore()
 
-onMounted(() => {
-  useStore.footerState = !useStore.footerState
-})
-onUnmounted(() => {
-  useStore.footerState = true
-})
 const search = ref('')
 const filterModal = ref(false)
 const availability = ref(false)
@@ -475,8 +469,6 @@ const checkRating = () => {
 const toggleFilterModal = () => {
   filterModal.value = !filterModal.value
 }
-
-const couldNotFindProduct = ref(false)
 
 const updateSearchValue = (value) => {
   search.value = value
@@ -528,6 +520,9 @@ const filterByCategory = (category) => {
 
 const initialPage = ref(1)
 const itemsPerPage = ref(10)
+
+const searchQuery = computed(() => search.value.toLowerCase())
+
 const products = computed(() => {
   const startFrom = (initialPage.value - 1) * itemsPerPage.value
   const endAt = startFrom + itemsPerPage.value
@@ -535,12 +530,79 @@ const products = computed(() => {
     .filter((item) => {
       if (item) {
         return (
-          item.title.toLowerCase().includes(search.value.toLowerCase()) ||
-          item.category.name.toLowerCase().includes(search.value.toLowerCase())
+          item.title.toLowerCase().includes(searchQuery.value) || // Access searchQuery.value
+          (item.category &&
+            item.category.name &&
+            item.category.name.toLowerCase().includes(searchQuery.value))
         )
       }
+      return false // Important: Return false if item is null/undefined
     })
     .slice(startFrom, endAt)
+})
+
+// Watch for changes in searchQuery or initialPage
+
+watch([searchQuery, initialPage], ()=>{
+setUrlAccordingToSearchInput()
+})
+
+
+const setUrlAccordingToSearchInput = ()=>{{
+  const params = new URLSearchParams()
+  if(searchQuery.value){
+    params.set('search', searchQuery.value)
+  }if(initialPage.value > 1){
+    params.set('page', initialPage.value)
+  }
+
+  const newUrl = `${window.location.pathname}?${params.toString()}`
+  window.history.pushState(null, '', newUrl)
+}}
+
+window.addEventListener('popstate', ()=>{
+  const params = new URLSearchParams(window.location.search)
+params.get('search', searchQuery.value) || ''
+const page = parseInt(params.get('page', initialPage.value)) || 1
+initialPage.value = page
+})
+
+
+onMounted(()=>{
+  useStore.footerState = false
+  const params = new URLSearchParams(window.location.search)
+params.get('search', searchQuery.value) || ''
+const page = parseInt(params.get('page', initialPage.value)) || 1
+initialPage.value = page
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+onUnmounted(() => {
+  useStore.footerState = true
 })
 
 const handlePreviousPage = () => {

@@ -40,9 +40,7 @@ onMounted(() => {
       observer.value.observe(section)
     }
   })
-})
 
-onMounted(() => {
   // cards
 
   cards.value = document.querySelectorAll('.card-display')
