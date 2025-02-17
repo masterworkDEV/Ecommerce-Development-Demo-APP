@@ -1,4 +1,5 @@
 # fashion-store
+live URL: https://ecommerce-development-demo-app-123.vercel.app/
 
 This template should help get you started developing with Vue 3 in Vite.
 
