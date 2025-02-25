@@ -57,8 +57,7 @@ onMounted(() => {
     if (card) {
       cardObserver.value.observe(card)
     }
-  })
-})
+  })})
 </script>
 <style>
 section {

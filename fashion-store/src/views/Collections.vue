@@ -51,35 +51,17 @@
           <div class="mt-5 w-full flex gap-2 max-md:gap-1">
             <button
               class="w-16 p-3 max-md:p-0 max-md:w-8 max-md:h-8 border border-gray-400 text-sm"
-              v-for="size in sizesAvailable"
+              v-for="size in activeSizes"
               :key="size"
             >
               {{ size }}
             </button>
           </div>
-          <button
-            class="accordion w-full flex justify-between items-end mt-7 text-h5 max-md:text-normal font-bold border-dotted border-b"
-            @click="checkAvailability"
-          >
-            <span> Availability </span>
-            <svg
-              viewBox="0 0 1024 1024"
-              class="icon w-8 h-5 max-md:w-5 max-md:h-4 transition-all"
-              :class="availability && 'rotate-[90deg]'"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="#000000"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M256 120.768L306.432 64 768 512l-461.568 448L256 903.232 659.072 512z"
-                  fill="#000000"
-                ></path>
-              </g>
-            </svg>
-          </button>
+          <AccordionSection
+            :title="`Availability`"
+            :is-open="availability"
+            @toggle="availability = !availability"
+          />
           <ul
             class="h-[0rem] overflow-hidden pb-2 border-b-2 border-dotted border-b-otherTextOne transition-all"
             :class="availability && 'min-h-[7rem]'"
@@ -103,29 +85,12 @@
               </h5>
             </li>
           </ul>
-          <button
-            class="accordion w-full flex justify-between items-end mt-7 text-h5 max-md:text-normal font-bold border-dotted border-b"
-            @click="checkCategory"
-          >
-            <span> Category </span>
-            <svg
-              viewBox="0 0 1024 1024"
-              class="icon w-8 h-5 max-md:w-5 max-md:h-4 transition-all"
-              :class="category && 'rotate-[90deg]'"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="#000000"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M256 120.768L306.432 64 768 512l-461.568 448L256 903.232 659.072 512z"
-                  fill="#000000"
-                ></path>
-              </g>
-            </svg>
-          </button>
+
+          <AccordionSection
+            :title="`Category`"
+            :is-open="category"
+            @toggle="category = !category"
+          />
           <ul
             class="h-[0rem] overflow-hidden pb-2 border-b-2 border-dotted border-b-otherTextOne transition-all"
             :class="category && 'min-h-[10rem]'"
@@ -134,34 +99,12 @@
               class="col pt-3 capitalize font-bold cursor-pointer hover:bg-otherBgTwo"
               v-for="(category, index) in categoryList"
               :key="index"
-              @click="filterByCategory(category)"
+              @click="toggleCategory(category)"
             >
               {{ category }}
             </li>
           </ul>
-          <button
-            class="accordion w-full flex justify-between items-end mt-7 text-h5 max-md:text-normal font-bold border-dotted border-b"
-            @click="checkColors"
-          >
-            <span> Colors </span>
-            <svg
-              viewBox="0 0 1024 1024"
-              class="icon w-8 h-5 max-md:w-5 max-md:h-4 transition-all"
-              :class="colors && 'rotate-[90deg]'"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="#000000"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M256 120.768L306.432 64 768 512l-461.568 448L256 903.232 659.072 512z"
-                  fill="#000000"
-                ></path>
-              </g>
-            </svg>
-          </button>
+          <AccordionSection :title="`Colors`" :is-open="colors" @toggle="colors = !colors" />
           <ul
             class="colors flex items-end gap-10 max-md:gap-3 h-[0rem] overflow-scroll pb-2 border-b-2 border-dotted border-b-otherTextOne transition-all"
             :class="colors && 'min-h-[7rem]'"
@@ -178,63 +121,47 @@
               </span>
             </li>
           </ul>
-          <button
-            class="accordion w-full flex justify-between items-end mt-7 text-h5 max-md:text-normal font-bold border-dotted border-b"
-            @click="checkPriceRange"
-          >
-            <span> Price Range </span>
-            <svg
-              viewBox="0 0 1024 1024"
-              class="icon w-8 h-5 max-md:w-5 max-md:h-4 transition-all"
-              :class="priceRange && 'rotate-[90deg]'"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="#000000"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M256 120.768L306.432 64 768 512l-461.568 448L256 903.232 659.072 512z"
-                  fill="#000000"
-                ></path>
-              </g>
-            </svg>
-          </button>
+          <AccordionSection
+            :title="`Price Range`"
+            :is-open="priceRange"
+            @toggle="priceRange = !priceRange"
+          />
+
           <ul
             class="h-[0rem] overflow-hidden pb-2 border-b-2 border-dotted border-b-otherTextOne transition-all"
             :class="priceRange && 'min-h-[7rem]'"
           >
             <li class="w-full col flex items-center mb-3 mt-3 gap-5">
-              <form class="mr-5 w-full">
-                <label for="price">Min-Max</label>
-                <input name="range" type="range" class="w-full" />
+              <form class="mr-5 w-full flex gap-3" @submit.prevent="">
+                <div>
+                  <label for="minPrice">Min:</label>
+                  <input
+                    type="number"
+                    id="minPrice"
+                    v-model="minPrice"
+                    class="border p-2 w-14"
+                    @change="handelPriceChange"
+                  />
+                </div>
+                <div>
+                  <label for="maxPrice">Max:</label>
+                  <input
+                    type="number"
+                    id="maxPrice"
+                    v-model="maxPrice"
+                    class="border p-2 w-14"
+                    @change="handelPriceChange"
+                  />
+                </div>
               </form>
             </li>
           </ul>
-          <button
-            class="accordion w-full flex justify-between items-end mt-7 text-h5 max-md:text-normal font-bold border-dotted border-b"
-            @click="checkCollection"
-          >
-            <span>Collections </span>
-            <svg
-              viewBox="0 0 1024 1024"
-              class="icon w-8 h-5 max-md:w-5 max-md:h-4 transition-all"
-              :class="collection && 'rotate-[90deg]'"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="#000000"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M256 120.768L306.432 64 768 512l-461.568 448L256 903.232 659.072 512z"
-                  fill="#000000"
-                ></path>
-              </g>
-            </svg>
-          </button>
+
+          <AccordionSection
+            :title="`Collections`"
+            :is-open="collection"
+            @toggle="collection = !collection"
+          />
           <ul
             class="h-[0rem] overflow-hidden pb-2 border-b-2 border-dotted border-b-otherTextOne transition-all"
             :class="collection && 'min-h-[7rem]'"
@@ -243,29 +170,9 @@
               <router-link> Jewelery </router-link>
             </li>
           </ul>
-          <button
-            class="accordion w-full flex justify-between items-end mt-7 text-h5 max-md:text-normal font-bold border-dotted border-b"
-            @click="checkTags"
-          >
-            <span> Tags </span>
-            <svg
-              viewBox="0 0 1024 1024"
-              class="icon w-8 h-5 max-md:w-5 max-md:h-4 transition-all"
-              :class="tags && 'rotate-[90deg]'"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="#000000"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M256 120.768L306.432 64 768 512l-461.568 448L256 903.232 659.072 512z"
-                  fill="#000000"
-                ></path>
-              </g>
-            </svg>
-          </button>
+          <AccordionSection :title="`Tags`" :is-open="tags" @toggle="tags = !tags" />
+          <span> Tags </span>
+
           <ul
             class="h-[0rem] overflow-hidden pb-2 border-b-2 border-dotted border-b-otherTextOne transition-all"
             :class="tags && 'min-h-[7rem]'"
@@ -273,29 +180,7 @@
             <li class="col flex items-center mb-3 mt-3 gap-5">New</li>
             <li class="col flex items-center mb-3 mt-3 gap-5">Old</li>
           </ul>
-          <button
-            class="accordion w-full flex justify-between items-end mt-7 text-h5 max-md:text-normal font-bold border-dotted border-b"
-            @click="checkRating"
-          >
-            <span> Rating </span>
-            <svg
-              viewBox="0 0 1024 1024"
-              class="icon w-8 h-5 max-md:w-5 max-md:h-4 transition-all"
-              :class="rating && 'rotate-[90deg]'"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="#000000"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M256 120.768L306.432 64 768 512l-461.568 448L256 903.232 659.072 512z"
-                  fill="#000000"
-                ></path>
-              </g>
-            </svg>
-          </button>
+          <AccordionSection :title="`Rating`" :is-open="rating" @toggle="rating = !rating" />
           <ul
             class="h-[0rem] overflow-hidden pb-2 border-b-2 border-dotted border-b-otherTextOne transition-all"
             :class="rating && 'min-h-[7rem]'"
@@ -424,11 +309,9 @@
 <script setup>
 import { onMounted, ref, computed, watch, onUnmounted } from 'vue'
 import { piniaStore } from '@/stores/store'
-import SearchItem from '@/components/Hero/SearchItem.vue'
-import router from '@/router/router'
+import AccordionSection from '@/components/Collections/AccordionSection.vue'
 
 const useStore = piniaStore()
-
 const search = ref('')
 const filterModal = ref(false)
 const availability = ref(false)
@@ -445,43 +328,14 @@ const colorList = ref([
   { name: 'purple' },
   { name: 'white' }
 ])
-
 const priceRange = ref(false)
 const collection = ref(false)
 const tags = ref(false)
 const rating = ref(false)
+const initialPage = ref(1)
+const itemsPerPage = ref(10)
 
-const checkAvailability = () => {
-  availability.value = !availability.value
-}
-
-const checkCategory = () => {
-  category.value = !category.value
-}
-const checkColors = () => {
-  colors.value = !colors.value
-}
-const checkPriceRange = () => {
-  priceRange.value = !priceRange.value
-}
-const checkCollection = () => {
-  collection.value = !collection.value
-}
-const checkTags = () => {
-  tags.value = !tags.value
-}
-const checkRating = () => {
-  rating.value = !rating.value
-}
-
-const toggleFilterModal = () => {
-  filterModal.value = !filterModal.value
-}
-
-const updateSearchValue = (value) => {
-  search.value = value
-}
-
+const searchQuery = computed(() => search.value.toLowerCase())
 const filterType = ref([
   { name: 'new', clicked: false, id: 0 },
   { name: 'jeans', clicked: false, id: 1 },
@@ -496,120 +350,124 @@ const filterType = ref([
   { name: 'bag', clicked: false, id: 10 },
   { name: 'shoes', clicked: false, id: 11 }
 ])
+const activeSizes = ref(['XS', 'S', 'M', 'L', 'XL', '2XL'])
 
-const sizesAvailable = ref(['XS', 'S', 'M', 'L', 'XL', '2XL'])
+const toggleFilterModal = () => {
+  filterModal.value = !filterModal.value
+}
+
+const updateSearchValue = (value) => {
+  search.value = value
+}
 
 const handleFilter = (button) => {
-  const filterByName = filterType.value.filter((btn) => {
-    if (btn.id === button.id) {
-      btn.clicked = true
-      search.value = button.name
-    } else {
-      btn.clicked = false
-    }
+  filterType.value.forEach((btn) => {
+    btn.clicked = btn.id === button.id
   })
-
-  return filterByName
+  search.value = button.clicked ? button.name : ''
 }
-
-const filterByCategory = (category) => {
-  const filterByCategory = categoryList.value.some((item) => {
-    if (item == category) {
-      search.value = category
-    } else {
-      search.value
-    }
-  })
-  filterModal.value = false
-  return filterByCategory
-}
-
-// display data per page ****pagination****
-
-const initialPage = ref(1)
-const itemsPerPage = ref(10)
-
-const searchQuery = computed(() => search.value.toLowerCase())
 
 const products = computed(() => {
   const startFrom = (initialPage.value - 1) * itemsPerPage.value
   const endAt = startFrom + itemsPerPage.value
   return useStore.products
-    .filter((item) => {
-      if (item) {
-        return (
-          item.title.toLowerCase().includes(searchQuery.value) || // Access searchQuery.value
+    .filter(
+      (item) =>
+        item &&
+        (item.title.toLowerCase().includes(searchQuery.value) ||
           (item.category &&
             item.category.name &&
-            item.category.name.toLowerCase().includes(searchQuery.value))
-        )
-      }
-      return false // Important: Return false if item is null/undefined
-    })
+            item.category.name.toLowerCase().includes(searchQuery.value)))
+    )
     .slice(startFrom, endAt)
 })
 
-// Watch for changes in searchQuery or initialPage
-
-watch([searchQuery, initialPage], () => {
-  setUrlAccordingToSearchInput()
-})
-
 const setUrlAccordingToSearchInput = () => {
-  {
-    const params = new URLSearchParams()
-    if (searchQuery.value) {
-      params.set('search', searchQuery.value)
-    }
-    if (initialPage.value > 1) {
-      params.set('page', initialPage.value)
-    }
-
-    const newUrl = `${window.location.pathname}?${params.toString()}`
-    window.history.pushState(null, '', newUrl)
-  }
+  const params = new URLSearchParams()
+  if (searchQuery.value) params.set('search', searchQuery.value)
+  if (initialPage.value > 1) params.set('page', initialPage.value)
+  const newUrl = `${window.location.pathname}?${params.toString()}`
+  window.history.pushState(null, '', newUrl)
 }
 
-window.addEventListener('popstate', () => {
+watch([searchQuery, initialPage], setUrlAccordingToSearchInput)
+
+const handlePopstate = () => {
   const params = new URLSearchParams(window.location.search)
-  params.get('search', searchQuery.value) || ''
-  const page = parseInt(params.get('page', initialPage.value)) || 1
-  initialPage.value = page
-})
+  search.value = params.get('search') || ''
+  initialPage.value = parseInt(params.get('page')) || 1
+}
+
+window.addEventListener('popstate', handlePopstate)
 
 onMounted(() => {
   useStore.footerState = false
-  const params = new URLSearchParams(window.location.search)
-  params.get('search', searchQuery.value) || ''
-  const page = parseInt(params.get('page', initialPage.value)) || 1
-  initialPage.value = page
+  handlePopstate()
 })
 
 onUnmounted(() => {
   useStore.footerState = true
+  window.removeEventListener('popstate', handlePopstate)
 })
 
 const handlePreviousPage = () => {
-  if (initialPage.value === 1) {
-    return false
-  } else {
+  if (initialPage.value > 1) {
     initialPage.value--
     scrollTo({ behavior: 'instant', top: 10, left: 10 })
   }
 }
+
 const handleNextPage = () => {
-  if (Math.ceil(products.value.length / itemsPerPage.value === 0)) {
-    return false
-  } else {
+  if (products.value.length / itemsPerPage.value > 0) {
     initialPage.value++
     scrollTo({ behavior: 'instant', top: 10, left: 0 })
   }
 }
+
+// filter functions
+
+const toggleCategory = (category) => {
+  if (categoryList.value.includes(category)) {
+    categoryList.value = categoryList.value.filter((c) => c !== category)
+    filterModal.value = false
+  } else {
+    categoryList.value.push(category)
+  }
+}
+
+if (categoryList.value.length) {
+  products.value = products.value.filter(
+    (item) => item.category && categoryList.value.includes(item.category.name)
+  )
+}
+
+const toggleSize = (size) => {
+  if (activeSizes.value.includes(size)) {
+    activeSizes.value = activeSizes.value.filter((s) => s !== size)
+  } else {
+    activeSizes.value.push(size)
+  }
+}
+
+if (activeSizes.value.length) {
+}
+
+const minPrice = ref(null)
+const maxPrice = ref(null)
+
+const handelPriceChange = computed(() => {
+  if (minPrice.value !== null) {
+    useStore.products = useStore.products.filter((product) => product.price >= minPrice.value)
+  }
+  if (maxPrice.value !== null) {
+    useStore.products = useStore.products.filter((product) => product.price <= maxPrice.value)
+  }
+})
 </script>
 
 <style scoped>
 .router-link-active {
-  font-weight: 900;
+  font-weight: 600;
 }
 .filter-container::-webkit-scrollbar {
   width: 0px;
@@ -671,3 +529,5 @@ const handleNextPage = () => {
   height: 0px;
 }
 </style>
+
+

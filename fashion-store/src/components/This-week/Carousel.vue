@@ -84,7 +84,7 @@
         @dblclick="useStore.useAddToFavourite(product.id)"
         :src="product.images"
         :alt="product.category.name"
-        class="w-[325px] h-[325px] border-2 border-primary hover:opacity-90"
+        class="w-80 h-80 border-2 border-primary hover:opacity-90"
       />
 
       <button
@@ -165,8 +165,8 @@ const products = computed(() => {
 
 .eyes-view {
   display: none;
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   justify-content: center;
   align-items: center;
   background: white;
@@ -185,8 +185,8 @@ const products = computed(() => {
   }
 }
 .eyes-view > svg {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   background: white;
   animation: rotateEyes 0.9s ease alternate;
 }

@@ -98,6 +98,8 @@ const scrollNext = () => {
   const buttonDirection = slideIndex.value + 1
   const setCarousel = buttonDirection * productLists.clientWidth
   productLists.scrollBy({ left: setCarousel, behavior: 'smooth' })
+
+
 }
 
 const scrollPrevious = () => {
@@ -106,14 +108,6 @@ const scrollPrevious = () => {
   const setCarousel = buttonDirection * productLists.clientWidth
   productLists.scrollBy({ left: setCarousel, behavior: 'smooth' })
 }
-
-// const watchScrollPosition = () => {
-//   const productLists = document.querySelector('.carousel')
-//   const scrollBtns = document.querySelectorAll('.btn')
-//   const scrollMax = productLists.scrollWidth * productLists.scrollLeft
-//   scrollBtns[0].style.background = productLists.scrollLeft <= 0 ? '#f1f1f1' : '#ddd'
-//   scrollBtns[1].style.background = scrollMax >= 0 ? '#f1f1f1' : '#ddd'
-// }
 </script>
 
 <style>

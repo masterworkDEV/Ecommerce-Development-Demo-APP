@@ -3,6 +3,7 @@
     <div v-if="useStore.isLoading" class="w-full">
       <div class="row grid grid-cols-3 gap-10 w-full">
         <LoadingCard v-for="card in Array(3)" :key="card" class="max-md:hidden" />
+        <LoadingCard v-for="card in Array(1)" :key="card" class="min-[768px]:hidden" />
       </div>
     </div>
     <div v-else>
@@ -97,7 +98,7 @@
         <div class="col">
           <div class="flex items-center justify-center gap-10 max-lg:gap-5">
             <article
-              class="w-full max-sm:h-60 max-md:h-[300px] max-lg:h-[375px] max-xl:h-[395px]"
+              class="w-full max-sm:h-60 max-md:h-80 max-xl:h-96"
               v-for="product in props.products"
               :key="product.id"
             >
@@ -110,10 +111,10 @@
           </div>
         </div>
       </div>
-      <div v-else class="row flex justify-center gap-5 w-full">
-        <h1>error cannot display data</h1>
+      <div v-else class="row flex text-center justify-center gap-5 w-full">
+        <p>Oops No Product Found!!</p>
+        <a href="/">Kindly reload</a>
       </div>
-      <!-- isready ends -->
     </div>
   </div>
 </template>

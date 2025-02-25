@@ -1,3 +1,5 @@
+import { h } from 'vue'
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,vue,jsx,tsx}'],
@@ -7,8 +9,9 @@ export default {
       primary: ' "Ubuntu", serif',
       secondary: '"Noto Sans", serif',
       poppings: 'Poppins", serif',
-      text: '"Domine", serif'
+      text: '"Poppins", serif'
     },
+
     extend: {
       fontSize: {
         h1: '3rem',
